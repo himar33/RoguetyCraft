@@ -6,15 +6,16 @@ namespace RoguetyCraft.Controllers
 {
     public class PlayerController : MonoBehaviour
     {
-        public Vector3 Velocity;
-        public float HorizontalInput { get; private set; }
-        public float VerticalInput { get; private set; }
+        public Vector3 pVelocity;
+        public float pHorizontalInput { get; private set; }
+        public float pVerticalInput { get; private set; }
+        public Collider2D pCollider { get; private set; }
         public bool IsJumping { get; private set; }
         public bool IsGrounded => _isGrounded;
 
         [Header("Collision")]
         [SerializeField] private LayerMask _groundLayer;
-        private bool _isGrounded;
+        [SerializeField] private float _collisionOffset = 0.01f;
 
         [Header("Movement")]
         [SerializeField] private float _acceleration = 90f;
@@ -28,34 +29,64 @@ namespace RoguetyCraft.Controllers
         [Header("Jump")]
         [SerializeField] private float _jumpForce;
 
+        private bool _isGrounded;
+        private bool _colUp, _colDown, _colLeft, _colRight;
+
+        private void Awake()
+        {
+            pCollider = GetComponentInChildren<Collider2D>();
+        }
+
         private void Update()
         {
             GatherInput();
+            CheckCollisions();
+
             CalculateMovement();
+            CalculateGravity();
+
             Move();
         }
 
         private void GatherInput()
         {
             IsJumping = Input.GetButtonDown("Jump");
-            HorizontalInput = Input.GetAxisRaw("Horizontal");
+            pHorizontalInput = Input.GetAxisRaw("Horizontal");
+        }
+
+        private void CheckCollisions()
+        {
+            Bounds pBounds = pCollider.bounds;
+
+            _isGrounded = Physics2D.Raycast(pBounds.center, Vector2.down, pBounds.size.y / 2 + _collisionOffset, _groundLayer);
+
+            _colDown = _isGrounded;
+            _colUp = Physics2D.Raycast(pBounds.center, Vector2.up, pBounds.size.y / 2 + _collisionOffset, _groundLayer);
+            _colLeft = Physics2D.Raycast(pBounds.center, Vector2.left, pBounds.size.x / 2 + _collisionOffset, _groundLayer);
+            _colRight = Physics2D.Raycast(pBounds.center, Vector2.right, pBounds.size.x / 2 + _collisionOffset, _groundLayer);
         }
 
         private void CalculateMovement()
         {
-            if (HorizontalInput != 0)
+            if (pHorizontalInput != 0)
             {
-                Velocity.x = Mathf.MoveTowards(Velocity.x, _moveSpeed * HorizontalInput, _acceleration * Time.deltaTime);
+                pVelocity.x += pHorizontalInput * _acceleration * Time.deltaTime;
+                pVelocity.x = Mathf.Clamp(pVelocity.x, -_moveSpeed, _moveSpeed);
             }
             else
             {
-                Velocity.x = Mathf.MoveTowards(Velocity.x, 0, _deAcceleration * Time.deltaTime);
+                pVelocity.x = Mathf.MoveTowards(pVelocity.x, 0, _deAcceleration * Time.deltaTime);
             }
+        }
+
+        private void CalculateGravity()
+        {
+
         }
 
         private void Move()
         {
-            transform.Translate(Velocity * Time.deltaTime);
+            transform.Translate(pVelocity * Time.deltaTime);
         }
     }
 }
