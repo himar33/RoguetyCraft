@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5788820501106456497}
-  - component: {fileID: 6208535173395812089}
+  - component: {fileID: 2907287518571134958}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 2229989052069778830}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &6208535173395812089
+--- !u!61 &2907287518571134958
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,10 +151,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2229989052069778830}
+  - component: {fileID: 2924695124669130315}
   - component: {fileID: 175356328925220316}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,6 +177,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &2924695124669130315
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8430956484077258817}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 5
+  m_Material: {fileID: 0}
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &175356328925220316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,12 +210,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b54ab265fc2a680479af80ade5aa58b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Velocity: {x: 0, y: 0, z: 0}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  _acceleration: 90
-  _moveSpeed: 13
-  _deAcceleration: 60
-  _gravityModifier: 0
-  _jumpForce: 0
+  _collisionOffset: 0.15
+  _moveSpeed: 10
+  _acceleration: 80
+  _deAcceleration: 50
+  _jumpForce: 25
+  _coyoteTimeLimit: 0.2
+  _jumpBuffer: 0.1
+  _gravityModifier: 8
+  _maxFallingSpeed: -20
