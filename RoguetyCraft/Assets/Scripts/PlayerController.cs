@@ -8,6 +8,7 @@ namespace RoguetyCraft.Controllers
     public class PlayerController : MonoBehaviour
     {
         public Vector3 PVelocity => _rb.velocity;
+        public float PHorizontalRawInput { get; private set; }
         public float PHorizontalInput { get; private set; }
         public bool PJumpDown { get; private set; }
         public bool PJumpUp { get; private set; }
@@ -84,7 +85,8 @@ namespace RoguetyCraft.Controllers
         {
             PJumpDown = Input.GetKeyDown(KeyCode.Space);
             PJumpUp = Input.GetKeyUp(KeyCode.Space);
-            PHorizontalInput = Input.GetAxisRaw("Horizontal");
+            PHorizontalRawInput = Input.GetAxisRaw("Horizontal");
+            PHorizontalInput = Input.GetAxis("Horizontal");
 
             if (PJumpDown)
             {
@@ -114,9 +116,9 @@ namespace RoguetyCraft.Controllers
 
         private void CalculateMovement()
         {
-            if (PHorizontalInput != 0)
+            if (PHorizontalRawInput != 0)
             {
-                _currHorizontalSpeed += PHorizontalInput * _acceleration * Time.deltaTime;
+                _currHorizontalSpeed += PHorizontalRawInput * _acceleration * Time.deltaTime;
                 _currHorizontalSpeed = Mathf.Clamp(_currHorizontalSpeed, -_moveSpeed, _moveSpeed);
             }
             else _currHorizontalSpeed = Mathf.MoveTowards(_currHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
