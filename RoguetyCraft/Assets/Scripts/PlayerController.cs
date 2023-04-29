@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RoguetyCraft.Controllers
+namespace RoguetyCraft.Player.Controller
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerController : MonoBehaviour
@@ -75,10 +75,10 @@ namespace RoguetyCraft.Controllers
             Bounds pBounds = GetComponentInChildren<Collider2D>().bounds;
 
             Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(new Vector2(pBounds.center.x, pBounds.min.y), new Vector2(pBounds.size.x, _collisionOffset));
-            Gizmos.DrawWireCube(new Vector2(pBounds.center.x, pBounds.max.y), new Vector2(pBounds.size.x, _collisionOffset));
-            Gizmos.DrawWireCube(new Vector2(pBounds.min.x, pBounds.center.y), new Vector2(_collisionOffset, pBounds.size.y));
-            Gizmos.DrawWireCube(new Vector2(pBounds.max.x, pBounds.center.y), new Vector2(_collisionOffset, pBounds.size.y));
+            Gizmos.DrawWireCube(new(pBounds.center.x, pBounds.min.y), new(pBounds.size.x, _collisionOffset));
+            Gizmos.DrawWireCube(new(pBounds.center.x, pBounds.max.y), new(pBounds.size.x, _collisionOffset));
+            Gizmos.DrawWireCube(new(pBounds.min.x, pBounds.center.y), new(_collisionOffset, pBounds.size.y));
+            Gizmos.DrawWireCube(new(pBounds.max.x, pBounds.center.y), new(_collisionOffset, pBounds.size.y));
         }
 
         private void GatherInput()
@@ -101,17 +101,17 @@ namespace RoguetyCraft.Controllers
             _colMin = PCollider.bounds.min;
             _colMax = PCollider.bounds.max;
 
-            var groundCheck = Physics2D.BoxCast(new Vector2(_colCenter.x, _colMin.y), new Vector2(_colSize.x, _collisionOffset), 0, Vector2.down, _collisionOffset, _groundLayer);
+            var groundCheck = Physics2D.BoxCast(new(_colCenter.x, _colMin.y), new(_colSize.x, _collisionOffset), 0, Vector2.down, _collisionOffset, _groundLayer);
             if (_colDown && !groundCheck) _timeGrounded = Time.time;
             else if (!_colDown && groundCheck)
             {
                 _coyoteActive = true;
             }
 
-            _colDown = Physics2D.BoxCast(new Vector2(_colCenter.x, _colMin.y), new Vector2(_colSize.x, _collisionOffset), 0, Vector2.down, _collisionOffset, _groundLayer);
-            _colUp = Physics2D.BoxCast(new Vector2(_colCenter.x, _colMax.y), new Vector2(_colSize.x, _collisionOffset), 0, Vector2.up, _collisionOffset, _groundLayer);
-            _colLeft = Physics2D.BoxCast(new Vector2(_colMin.x, _colCenter.y), new Vector2(_collisionOffset, _colSize.y), 0, Vector2.left, _collisionOffset, _groundLayer);
-            _colRight = Physics2D.BoxCast(new Vector2(_colMax.x, _colCenter.y), new Vector2(_collisionOffset, _colSize.y), 0, Vector2.right, _collisionOffset, _groundLayer);
+            _colDown = Physics2D.BoxCast(new(_colCenter.x, _colMin.y), new(_colSize.x, _collisionOffset), 0, Vector2.down, _collisionOffset, _groundLayer);
+            _colUp = Physics2D.BoxCast(new(_colCenter.x, _colMax.y), new(_colSize.x, _collisionOffset), 0, Vector2.up, _collisionOffset, _groundLayer);
+            _colLeft = Physics2D.BoxCast(new(_colMin.x, _colCenter.y), new(_collisionOffset, _colSize.y), 0, Vector2.left, _collisionOffset, _groundLayer);
+            _colRight = Physics2D.BoxCast(new(_colMax.x, _colCenter.y), new(_collisionOffset, _colSize.y), 0, Vector2.right, _collisionOffset, _groundLayer);
         }
 
         private void CalculateMovement()
@@ -164,7 +164,7 @@ namespace RoguetyCraft.Controllers
 
         private void Move()
         {
-            Vector2 currVelocity = new Vector2(_currHorizontalSpeed, _currVerticalSpeed);
+            Vector2 currVelocity = new(_currHorizontalSpeed, _currVerticalSpeed);
             _rb.velocity = currVelocity;
         }
     }

@@ -1,9 +1,9 @@
-using RoguetyCraft.Controllers;
+using RoguetyCraft.Player.Controller;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RoguetyCraft.Demo
+namespace RoguetyCraft.Player.Demo
 {
     public class PlayerAnimator : MonoBehaviour
     {
