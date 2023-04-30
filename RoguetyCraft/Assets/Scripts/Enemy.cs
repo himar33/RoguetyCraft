@@ -21,4 +21,12 @@ namespace RoguetyCraft.Enemy.Generic
             MoveSpeed = _moveSpeed;
         }
     }
+    public enum EnemyStates
+    {
+        IDLE,
+        PATROL,
+        CHASE,
+        ATTACK,
+        DEAD
+    }
 }

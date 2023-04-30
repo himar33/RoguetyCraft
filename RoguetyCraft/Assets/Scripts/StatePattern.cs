@@ -6,36 +6,46 @@ namespace RoguetyCraft.DesignPatterns.State
 {
     public class StateBehaviour
     {
-        public State State => _state;
-        protected State _state = null;
-        public StateBehaviour(State state)
+        public State State => _currState;
+
+        protected Dictionary<int, State> _states = new Dictionary<int, State>();
+        protected State _currState = null;
+        public StateBehaviour() { }
+        public void Add(int key, State state)
         {
-            Set(state);
+            _states.Add(key, state);
+        }
+        public State GetState(int key)
+        {
+            return _states[key];
         }
         public void Set(State state)
         {
-            _state?.OnExit();
-
-            _state = state;
-
-            _state.SetBehaviour(this);
-            _state.OnEnter();
+            _currState?.OnExit();
+            _currState = state;
+            _currState?.OnEnter();
         }
         public void Update()
         {
-            _state.Handle();
+            _currState?.Update();
+        }
+        public void FixedUpdate()
+        {
+            _currState?.FixedUpdate();
         }
     }
 
-    public abstract class State
+    public class State
     {
         protected StateBehaviour _stateBehaviour;
-        public void SetBehaviour(StateBehaviour stateBehaviour)
+        public State(StateBehaviour stateBehaviour)
         {
             _stateBehaviour = stateBehaviour;
         }
-        public abstract void Handle();
-        public abstract void OnEnter();
-        public abstract void OnExit();
+        public State() { }
+        public virtual void Update() { }
+        public virtual void FixedUpdate() { }
+        public virtual void OnEnter() { }
+        public virtual void OnExit() { }
     }
 }
