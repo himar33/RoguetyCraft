@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3356603524198257278}
   - component: {fileID: 3356603524198257279}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 3356603525371859691}
   - component: {fileID: 3356603525371859693}
   - component: {fileID: 3356603525371859688}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 1
+  m_GravityScale: 6
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -157,7 +157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3356603525649640550}
   - component: {fileID: 3356603525649640551}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SpriteRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

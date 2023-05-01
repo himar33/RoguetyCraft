@@ -54,6 +54,8 @@ namespace RoguetyCraft.Enemy.States
         public EnemyPatrol(EnemyController enemy) : base(enemy) { _id = EnemyStates.PATROL; }
         public override void Update()
         {
+            if (_enemy.EMovement.CanSeeTarget) _enemy.EStateMachine.Set(EnemyStates.CHASE);
+            
             if ((!_enemy.EMovement.OnEdge || _enemy.EMovement.OnWall) && _enemy.EMovement.IsGrounded)
             {
                 _enemy.EMovement.ChangeDirection();
@@ -67,6 +69,19 @@ namespace RoguetyCraft.Enemy.States
     public class EnemyChase : EnemyState
     {
         public EnemyChase(EnemyController enemy) : base(enemy) { _id = EnemyStates.CHASE; }
+        public override void Update()
+        {
+            if (!_enemy.EMovement.CanSeeTarget) _enemy.EStateMachine.Set(EnemyStates.PATROL);
+
+            if ((!_enemy.EMovement.OnEdge || _enemy.EMovement.OnWall) && _enemy.EMovement.IsGrounded)
+            {
+                _enemy.EMovement.ChangeDirection();
+            }
+        }
+        public override void FixedUpdate()
+        {
+            _enemy.EMovement.SetVelocity(_enemy.EMovement.Direction.x * _enemy.EStats.ChaseMoveSpeed);
+        }
     }
     public class EnemyAttack : EnemyState
     {
