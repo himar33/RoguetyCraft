@@ -9,38 +9,44 @@ namespace RoguetyCraft.Enemy.Controller
 {
     public class EnemyController : MonoBehaviour
     {
-        public EnemyStats Stats { get; private set; }
-        public EnemyStateMachine StateMachine { get; private set; }
+        public EnemyStats EStats { get; private set; }
+        public EnemyMovement EMovement { get; private set; }
+        public EnemyStateMachine EStateMachine { get; private set; }
 
         [SerializeField] private float _health;
         [SerializeField] private float _attackDamage;
         [SerializeField] private float _attackSpeed;
         [SerializeField] private float _moveSpeed;
 
+        private void Awake()
+        {
+            EMovement = GetComponent<EnemyMovement>();
+        }
+
         private void Start()
         {
             EnemyStats _stats = new(_health, _attackDamage, _attackSpeed, _moveSpeed);
-            Stats = _stats;
+            EStats = _stats;
 
-            StateMachine = new EnemyStateMachine();
+            EStateMachine = new EnemyStateMachine();
 
-            StateMachine.Add(new EnemyIdle(this));
-            StateMachine.Add(new EnemyPatrol(this));
-            StateMachine.Add(new EnemyChase(this));
-            StateMachine.Add(new EnemyAttack(this));
-            StateMachine.Add(new EnemyDead(this));
+            EStateMachine.Add(new EnemyIdle(this));
+            EStateMachine.Add(new EnemyPatrol(this));
+            EStateMachine.Add(new EnemyChase(this));
+            EStateMachine.Add(new EnemyAttack(this));
+            EStateMachine.Add(new EnemyDead(this));
 
-            StateMachine.Set(EnemyStates.IDLE);
+            EStateMachine.Set(EnemyStates.PATROL);
         }
 
         private void Update()
         {
-            StateMachine.Update();
+            EStateMachine.Update();
         }
 
         private void FixedUpdate()
         {
-            StateMachine.FixedUpdate();
+            EStateMachine.FixedUpdate();
         }
     }
 }
