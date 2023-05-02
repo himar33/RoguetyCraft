@@ -331,10 +331,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 563710147468718589, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 2229989052069778830, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -379,33 +375,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5064693602806187353, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
-      propertyPath: _fallClip
-      value: 
-      objectReference: {fileID: 7400000, guid: 90634b3b031b26448a288855d23476fd, type: 2}
-    - target: {fileID: 5064693602806187353, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
-      propertyPath: _idleClip
-      value: 
-      objectReference: {fileID: 7400000, guid: a24c7477611504546ad10623fb40d939, type: 2}
-    - target: {fileID: 5064693602806187353, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
-      propertyPath: _jumpClip
-      value: 
-      objectReference: {fileID: 7400000, guid: 3ac44df90aec1694088477fd24ac2d11, type: 2}
-    - target: {fileID: 5064693602806187353, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
-      propertyPath: _runningClip
-      value: 
-      objectReference: {fileID: 7400000, guid: e2114194de826b742af9a4e197f3abfe, type: 2}
-    - target: {fileID: 5118031208748016900, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 8430956484077258817, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8430956484077258817, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
@@ -1049,18 +1021,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3356603525371859688, guid: f92133fbc4624c64f8061f6de406d7a9, type: 3}
-      propertyPath: _distance
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3356603525371859688, guid: f92133fbc4624c64f8061f6de406d7a9, type: 3}
-      propertyPath: _targetDistance
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3356603525371859688, guid: f92133fbc4624c64f8061f6de406d7a9, type: 3}
-      propertyPath: _targetLayer.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
     - target: {fileID: 3356603525371859690, guid: f92133fbc4624c64f8061f6de406d7a9, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1108,10 +1068,6 @@ PrefabInstance:
     - target: {fileID: 3356603525371859692, guid: f92133fbc4624c64f8061f6de406d7a9, type: 3}
       propertyPath: m_Name
       value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 3356603525371859693, guid: f92133fbc4624c64f8061f6de406d7a9, type: 3}
-      propertyPath: _chaseMoveSpeed
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f92133fbc4624c64f8061f6de406d7a9, type: 3}

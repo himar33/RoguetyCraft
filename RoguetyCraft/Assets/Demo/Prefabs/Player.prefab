@@ -177,10 +177,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c63429c80c561d48b7cea91e1796602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _idleClip: {fileID: 7400000, guid: a24c7477611504546ad10623fb40d939, type: 2}
-  _runningClip: {fileID: 7400000, guid: e2114194de826b742af9a4e197f3abfe, type: 2}
-  _jumpClip: {fileID: 7400000, guid: 3ac44df90aec1694088477fd24ac2d11, type: 2}
-  _fallClip: {fileID: 7400000, guid: 90634b3b031b26448a288855d23476fd, type: 2}
+  _clips:
+  - KeyName: player_idle_anim
+    ValueClip: {fileID: 7400000, guid: a24c7477611504546ad10623fb40d939, type: 2}
+  - KeyName: player_run_anim
+    ValueClip: {fileID: 7400000, guid: e2114194de826b742af9a4e197f3abfe, type: 2}
+  - KeyName: player_jump_anim
+    ValueClip: {fileID: 7400000, guid: 3ac44df90aec1694088477fd24ac2d11, type: 2}
+  - KeyName: player_fall_anim
+    ValueClip: {fileID: 7400000, guid: 90634b3b031b26448a288855d23476fd, type: 2}
 --- !u!1 &8430956484077258817
 GameObject:
   m_ObjectHideFlags: 0
