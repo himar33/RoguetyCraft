@@ -379,6 +379,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5064693602806187353, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
+      propertyPath: _fallClip
+      value: 
+      objectReference: {fileID: 7400000, guid: 90634b3b031b26448a288855d23476fd, type: 2}
+    - target: {fileID: 5064693602806187353, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
+      propertyPath: _idleClip
+      value: 
+      objectReference: {fileID: 7400000, guid: a24c7477611504546ad10623fb40d939, type: 2}
+    - target: {fileID: 5064693602806187353, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
+      propertyPath: _jumpClip
+      value: 
+      objectReference: {fileID: 7400000, guid: 3ac44df90aec1694088477fd24ac2d11, type: 2}
+    - target: {fileID: 5064693602806187353, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
+      propertyPath: _runningClip
+      value: 
+      objectReference: {fileID: 7400000, guid: e2114194de826b742af9a4e197f3abfe, type: 2}
     - target: {fileID: 5118031208748016900, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
       propertyPath: m_Layer
       value: 6

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5788820501106456497}
   - component: {fileID: 2907287518571134958}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 8343870796799105264}
   - component: {fileID: 6694105790926196895}
   - component: {fileID: 5064693602806187353}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpriteRender
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,6 +177,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c63429c80c561d48b7cea91e1796602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _idleClip: {fileID: 7400000, guid: a24c7477611504546ad10623fb40d939, type: 2}
+  _runningClip: {fileID: 7400000, guid: e2114194de826b742af9a4e197f3abfe, type: 2}
+  _jumpClip: {fileID: 7400000, guid: 3ac44df90aec1694088477fd24ac2d11, type: 2}
+  _fallClip: {fileID: 7400000, guid: 90634b3b031b26448a288855d23476fd, type: 2}
 --- !u!1 &8430956484077258817
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +192,7 @@ GameObject:
   - component: {fileID: 2229989052069778830}
   - component: {fileID: 2924695124669130315}
   - component: {fileID: 175356328925220316}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
