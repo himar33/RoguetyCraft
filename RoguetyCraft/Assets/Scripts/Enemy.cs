@@ -11,16 +11,12 @@ namespace RoguetyCraft.Enemy.Generic
         public float Health;
         public float AttackDamage;
         public float AttackSpeed;
-        public float MoveSpeed;
-        public float ChaseMoveSpeed;
 
-        public EnemyStats(float _health, float _attackDamage, float _attackSpeed, float _moveSpeed, float _chaseMoveSpeed)
+        public EnemyStats(float _health, float _attackDamage, float _attackSpeed)
         {
             Health = _health;
             AttackDamage = _attackDamage;
             AttackSpeed = _attackSpeed;
-            MoveSpeed = _moveSpeed;
-            ChaseMoveSpeed = _chaseMoveSpeed;
         }
     }
     public enum EnemyStates

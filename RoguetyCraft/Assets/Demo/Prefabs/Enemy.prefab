@@ -130,8 +130,6 @@ MonoBehaviour:
   _health: 0
   _attackDamage: 0
   _attackSpeed: 0
-  _moveSpeed: 3
-  _chaseMoveSpeed: 6
 --- !u!114 &3356603525371859688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,11 +142,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80bc3b2c968903d4d9eb4a446f3cc216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveSpeed: 3
+  _chaseMoveSpeed: 6
   _distance: 0.2
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  _targetTag: Player
   _targetDistance: 6
+  _attackDistance: 1
   _targetLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -229,7 +231,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 130033825, guid: bc8ee2bd69f82f24a851315a98f4ac02, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}

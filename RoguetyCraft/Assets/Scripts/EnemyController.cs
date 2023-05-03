@@ -14,11 +14,9 @@ namespace RoguetyCraft.Enemy.Controller
         public EnemyStateMachine EStateMachine { get; private set; }
 
         [Header("Enemy Stats")]
-        [SerializeField] private float _health;
-        [SerializeField] private float _attackDamage;
-        [SerializeField] private float _attackSpeed;
-        [SerializeField] private float _moveSpeed;
-        [SerializeField] private float _chaseMoveSpeed;
+        [SerializeField] private float _health = 20f;
+        [SerializeField] private float _attackDamage = 5f;
+        [SerializeField] private float _attackSpeed = 1f;
 
         private void Awake()
         {
@@ -27,7 +25,7 @@ namespace RoguetyCraft.Enemy.Controller
 
         private void Start()
         {
-            EnemyStats _stats = new(_health, _attackDamage, _attackSpeed, _moveSpeed, _chaseMoveSpeed);
+            EnemyStats _stats = new(_health, _attackDamage, _attackSpeed);
             EStats = _stats;
 
             EStateMachine = new EnemyStateMachine();

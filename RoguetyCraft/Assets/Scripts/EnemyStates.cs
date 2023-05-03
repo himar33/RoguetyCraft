@@ -1,6 +1,7 @@
 using RoguetyCraft.DesignPatterns.State;
 using RoguetyCraft.Enemy.Controller;
 using RoguetyCraft.Enemy.Generic;
+using System.Collections;
 using UnityEngine;
 
 namespace RoguetyCraft.Enemy.States
@@ -63,7 +64,7 @@ namespace RoguetyCraft.Enemy.States
         }
         public override void FixedUpdate()
         {
-            _enemy.EMovement.SetVelocity(_enemy.EMovement.Direction.x * _enemy.EStats.MoveSpeed);
+            _enemy.EMovement.SetVelocity(_enemy.EMovement.Direction.x * _enemy.EMovement.MoveSpeed);
         }
     }
     public class EnemyChase : EnemyState
@@ -73,19 +74,28 @@ namespace RoguetyCraft.Enemy.States
         {
             if (!_enemy.EMovement.CanSeeTarget) _enemy.EStateMachine.Set(EnemyStates.PATROL);
 
-            if ((!_enemy.EMovement.OnEdge || _enemy.EMovement.OnWall) && _enemy.EMovement.IsGrounded)
+            if (_enemy.EMovement.CanAttack)
             {
-                _enemy.EMovement.ChangeDirection();
+                Debug.Log(_enemy.EMovement.GetTargetDistance());
+                _enemy.EStateMachine.Set(EnemyStates.ATTACK);
             }
         }
         public override void FixedUpdate()
         {
-            _enemy.EMovement.SetVelocity(_enemy.EMovement.Direction.x * _enemy.EStats.ChaseMoveSpeed);
+            _enemy.EMovement.SetVelocity(_enemy.EMovement.Direction.x * _enemy.EMovement.ChaseSpeed);
         }
     }
     public class EnemyAttack : EnemyState
     {
         public EnemyAttack(EnemyController enemy) : base(enemy) { _id = EnemyStates.ATTACK; }
+        public override void OnEnter()
+        {
+            _enemy.EMovement.SetVelocity(0f);
+        }
+        private IEnumerator AttackCoroutine()
+        {
+            yield return new WaitForSeconds(2f);
+        }
     }
     public class EnemyDead : EnemyState
     {
