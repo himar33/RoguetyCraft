@@ -5,6 +5,7 @@ using UnityEngine;
 using MyBox;
 using System.Linq;
 using RoguetyCraft.Generic.Animation;
+using System.Numerics;
 
 namespace RoguetyCraft.Player.Animation
 {
@@ -12,28 +13,27 @@ namespace RoguetyCraft.Player.Animation
     public class PlayerAnimator : SpriteAnimator
     {
         private SpriteRenderer _sprite;
-        private PlayerController _playerController;
+        private PlayerController _player;
 
         protected override void Awake()
         {
             _sprite = GetComponent<SpriteRenderer>();
-            _playerController = GetComponentInParent<PlayerController>();
+            _player = GetComponentInParent<PlayerController>();
 
             base.Awake();
         }
 
         private void Update()
         {
-            if (_playerController.PHorizontalRawInput != 0)
+            if (_player.PHorizontalRawInput != 0)
             {
-                _sprite.flipX = (_playerController.PHorizontalRawInput > 0) ? false : true;
-                _animator.speed = Mathf.Clamp(0.25f, 1f, Mathf.Abs(_playerController.PHorizontalInput));
+                _sprite.flipX = (_player.PHorizontalRawInput > 0) ? false : true;
             }
             else _animator.speed = 1;
 
-            _animator.SetFloat("hSpeed", _playerController.PVelocity.x);
-            _animator.SetFloat("vSpeed", _playerController.PVelocity.y);
-            _animator.SetBool("isGrounded", _playerController.IsGrounded);
+            _animator.SetFloat("hSpeed", _player.PVelocity.x);
+            _animator.SetFloat("vSpeed", _player.PVelocity.y);
+            _animator.SetBool("isGrounded", _player.IsGrounded);
         }
     }
 }

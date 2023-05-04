@@ -144,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 3
   _chaseMoveSpeed: 6
+  _changeStopTime: 1.5
   _distance: 0.2
   _groundLayer:
     serializedVersion: 2
@@ -165,7 +166,7 @@ GameObject:
   - component: {fileID: 3356603525649640550}
   - component: {fileID: 3356603525649640551}
   - component: {fileID: 1071549426262936163}
-  - component: {fileID: 8309957864122297255}
+  - component: {fileID: 6276080426706981545}
   m_Layer: 7
   m_Name: SpriteRenderer
   m_TagString: Untagged
@@ -261,7 +262,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8309957864122297255
+--- !u!114 &6276080426706981545
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,7 +271,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3356603525649640553}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1895e292b3060640a6c9e04177ebac5, type: 3}
+  m_Script: {fileID: 11500000, guid: 69af0cffa85008a4d82c319201c77d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clips: []
+  _clips:
+  - KeyName: skeleton_idle
+    ValueClip: {fileID: 7400000, guid: 7f06d28c63372aa46bec0cefcd59f7c5, type: 2}
+  - KeyName: skeleton_walk
+    ValueClip: {fileID: 7400000, guid: 746946e8ed20ea249a342d0760699df5, type: 2}

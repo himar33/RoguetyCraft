@@ -1,5 +1,6 @@
 using RoguetyCraft.DesignPatterns.State;
 using RoguetyCraft.Enemy.Generic;
+using RoguetyCraft.Enemy.Movement;
 using RoguetyCraft.Enemy.States;
 using System.Collections;
 using System.Collections.Generic;
