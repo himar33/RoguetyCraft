@@ -34,6 +34,7 @@ namespace RoguetyCraft.Player.Animation
             _animator.SetFloat("hSpeed", _player.PVelocity.x);
             _animator.SetFloat("vSpeed", _player.PVelocity.y);
             _animator.SetBool("isGrounded", _player.IsGrounded);
+            //_animator.SetBool("isShooting", _player.PGun.IsShooting);
         }
     }
 }

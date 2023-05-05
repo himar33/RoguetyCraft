@@ -1,3 +1,4 @@
+using MyBox;
 using RoguetyCraft.DesignPatterns.State;
 using RoguetyCraft.Enemy.Generic;
 using RoguetyCraft.Enemy.Movement;
@@ -14,7 +15,7 @@ namespace RoguetyCraft.Enemy.Controller
         public EnemyMovement EMovement { get; private set; }
         public EnemyStateMachine EStateMachine { get; private set; }
 
-        [Header("Enemy Stats")]
+        [Separator("Enemy Stats")]
         [SerializeField] private float _health = 20f;
         [SerializeField] private float _attackDamage = 5f;
         [SerializeField] private float _attackSpeed = 1f;

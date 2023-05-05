@@ -18,16 +18,16 @@ namespace RoguetyCraft.Enemy.Movement
         public bool IsGrounded => GroundCheck();
         public Vector2 Direction => _direction;
 
-        [Header("Movement")]
+        [Separator("Movement")]
         [SerializeField] private float _moveSpeed = 3f;
         [SerializeField] private float _chaseMoveSpeed = 6f;
         [SerializeField] private float _changeStopTime = 2f;
 
-        [Header("Gound Collision")]
+        [Separator("Gound Collision")]
         [SerializeField, Range(0, 1)] private float _distance = 0.2f;
         [SerializeField] private LayerMask _groundLayer;
 
-        [Header("Target")]
+        [Separator("Target")]
         [SerializeField, Tag] private string _targetTag;
         [SerializeField, Range(0, 20)] private float _targetDistance = 4f;
         [SerializeField, Range(0, 5)] private float _attackDistance = 1f;

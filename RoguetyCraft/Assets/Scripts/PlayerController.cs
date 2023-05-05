@@ -1,31 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyBox;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace RoguetyCraft.Player.Controller
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerController : MonoBehaviour
     {
+        public PlayerGun PGun { get; private set; }
         public Vector3 PVelocity => _rb.velocity;
         public float PHorizontalRawInput { get; private set; }
         public float PHorizontalInput { get; private set; }
         public bool PJumpDown { get; private set; }
         public bool PJumpUp { get; private set; }
         public Collider2D PCollider { get; private set; }
+        public Vector2 PDirection { get; private set; }
+
         public bool IsJumping { get; private set; }
         public bool IsGrounded => _colDown;
 
-        [Header("Collision")]
+        [Separator("Collision")]
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private float _collisionOffset = 0.01f;
 
-        [Header("Movement")]
+        [Separator("Movement")]
         [SerializeField] private float _moveSpeed = 10f;
         [SerializeField] private float _acceleration = 80f;
         [SerializeField] private float _deAcceleration = 50f;
 
-        [Header("Jump")]
+        [Separator("Jump")]
         [SerializeField] private float _jumpForce = 25f;
         [SerializeField] private float _coyoteTimeLimit = 0.1f;
         [SerializeField] private float _jumpBuffer = 0.1f;
@@ -50,6 +55,7 @@ namespace RoguetyCraft.Player.Controller
         private void Awake()
         {
             PCollider = GetComponentInChildren<Collider2D>();
+            PGun = GetComponentInChildren<PlayerGun>();
 
             _rb = GetComponentInChildren<Rigidbody2D>();
             _rb.gravityScale = _gravityModifier;
@@ -87,6 +93,11 @@ namespace RoguetyCraft.Player.Controller
             PJumpUp = Input.GetKeyUp(KeyCode.Space);
             PHorizontalRawInput = Input.GetAxisRaw("Horizontal");
             PHorizontalInput = Input.GetAxis("Horizontal");
+
+            if (PHorizontalRawInput != 0)
+            {
+                PDirection = (PHorizontalRawInput > 0) ? Vector2.right : Vector2.left;
+            }
 
             if (PJumpDown)
             {
