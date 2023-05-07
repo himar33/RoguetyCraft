@@ -67,7 +67,7 @@ namespace RoguetyCraft.Generic.Animation
 
             for (int i = 0; i < _animatorClips.Count; i++)
             {
-                _animatorClips[_animatorClips.ElementAt(i).Key.name] = _clips[i].ValueClip;
+                _animatorClips[_animatorClips.ElementAt(i).Key.name] = _clips.Find(x => x.KeyName == _animatorClips.ElementAt(i).Key.name).ValueClip;
             }
             _animatorOverride.ApplyOverrides(_animatorClips);
         }

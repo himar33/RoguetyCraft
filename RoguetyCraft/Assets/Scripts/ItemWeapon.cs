@@ -17,6 +17,7 @@ namespace RoguetyCraft.Items.Weapon
 
         [Separator("Particle system settings")]
         public List<Sprite> AnimationSprites;
+        public List<Sprite> HitAnimationSprites;
 
         public ItemWeapon(Sprite sprite) : base(sprite)
         {

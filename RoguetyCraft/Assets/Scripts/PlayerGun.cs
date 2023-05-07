@@ -9,20 +9,7 @@ using UnityEngine;
 public class PlayerGun : MonoBehaviour
 {
     public ItemWeapon Weapon => _weapon;
-    public bool IsShooting
-    {
-        get
-        {
-            return _isShooting;
-        }
-        private set
-        {
-            if (!value) _particleS.Stop();
-            else _particleS.Play();
-
-            _isShooting = value;
-        }
-    }
+    public bool IsShooting => _isShooting;
 
     [Separator("Weapon settings")]
     [SerializeField] private ItemWeapon _weapon;
@@ -60,6 +47,7 @@ public class PlayerGun : MonoBehaviour
         var psMain = _particleS.main;
         _initialSpeed = psMain.startSpeed.constant;
         psMain.startSpeed = _initialSpeed * _weapon.BulletSpeed;
+        psMain.playOnAwake = true;
 
         var psAnim = _particleS.textureSheetAnimation;
         psAnim.enabled = true;
@@ -86,6 +74,19 @@ public class PlayerGun : MonoBehaviour
         psEmission.enabled = true;
         _initialRate = psEmission.rateOverTime.constant;
         psEmission.rateOverTime = _initialRate * _weapon.AttackSpeed;
+
+        if (_weapon.HitAnimationSprites.Count > 0)
+        {
+            var hitAnim = _weapon.HitAnimationSprites;
+            ParticleSystem subEmitter = new();
+
+            var subEMain = subEmitter.main;
+            subEMain.startLifetime = (hitAnim.Count - 1) / 10;
+
+            var psSubEmitters = _particleS.subEmitters;
+            psSubEmitters.enabled = true;
+            psSubEmitters.AddSubEmitter(subEmitter, ParticleSystemSubEmitterType.Death, ParticleSystemSubEmitterProperties.InheritNothing);
+        }
     }
 
     private void Update()
@@ -96,11 +97,18 @@ public class PlayerGun : MonoBehaviour
 
     public void GatherInput()
     {
+        var psEmission = _particleS.emission;
+
         if (Input.GetKey(KeyCode.E))
         {
             _isShooting = true;
+            psEmission.enabled = true;
         }
-        else _isShooting = false;
+        else
+        {
+            _isShooting = false;
+            psEmission.enabled = false;
+        }
     }
 
     public void SetDirection(float dir)
