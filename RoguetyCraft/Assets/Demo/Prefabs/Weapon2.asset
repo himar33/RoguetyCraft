@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c43659aa41401b4783689dd5a476979, type: 3}
-  m_Name: main_weapon
+  m_Name: Weapon2
   m_EditorClassIdentifier: 
   _type: 0
   _sprite: {fileID: 0}
   AttackDamage: 0
-  AttackSpeed: 1
+  AttackSpeed: 2
   BulletSpeed: 4
-  BulletColor: {r: 1, g: 1, b: 1, a: 1}
+  BulletColor: {r: 1, g: 0.807178, b: 0.33490568, a: 1}
   BulletSize: 0.5
   AnimationSprites:
   - {fileID: -1603725395, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}

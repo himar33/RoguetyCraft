@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.U2D.Path;
 using UnityEngine;
+using UnityEngine.Android;
 using static UnityEngine.ParticleSystem;
 
 public class PlayerGun : MonoBehaviour
@@ -14,6 +15,7 @@ public class PlayerGun : MonoBehaviour
 
     [Separator("Weapon settings")]
     [SerializeField] private ItemWeapon _weapon;
+    [SerializeField] private ItemWeapon _weapon2; //TEST TEST TEST TEST TEST
 
     [Separator("Particle system settings")]
     [SerializeField] private ParticleSystemShapeType _shapeType = ParticleSystemShapeType.SingleSidedEdge;
@@ -37,6 +39,7 @@ public class PlayerGun : MonoBehaviour
     private PlayerController _player;
     private ParticleSystem _particleS;
     private ParticleSystemRenderer _particleSRenderer;
+    private ParticleSystem _subEmitter;
 
     private bool _isShooting = false;
     private float _initialSpeed;
@@ -51,10 +54,9 @@ public class PlayerGun : MonoBehaviour
     {
         SetParticleSystemSettings();
 
-        if (_weapon.HitAnimationSprites.Count > 0)
-        {
-            SetSubEmitterSettings();
-        }
+        if (_weapon.HitAnimationSprites.Count > 0) SetSubEmitterSettings();
+
+        SetWeapon(_weapon);
     }
 
     private void SetParticleSystemSettings()
@@ -68,17 +70,13 @@ public class PlayerGun : MonoBehaviour
 
         var psMain = _particleS.main;
         _initialSpeed = psMain.startSpeed.constant;
-        psMain.startSpeed = _initialSpeed * _weapon.BulletSpeed;
-        psMain.startSize = _weapon.BulletSize;
         psMain.playOnAwake = true;
         psMain.simulationSpace = ParticleSystemSimulationSpace.World;
         psMain.emitterVelocityMode = ParticleSystemEmitterVelocityMode.Transform;
-        psMain.startColor = _weapon.BulletColor;
 
         var psEmission = _particleS.emission;
         psEmission.enabled = true;
         _initialRate = psEmission.rateOverTime.constant;
-        psEmission.rateOverTime = _initialRate * _weapon.AttackSpeed;
 
         var psShape = _particleS.shape;
         psShape.enabled = true;
@@ -97,65 +95,84 @@ public class PlayerGun : MonoBehaviour
         psAnim.mode = ParticleSystemAnimationMode.Sprites;
         psAnim.timeMode = ParticleSystemAnimationTimeMode.FPS;
         psAnim.fps = _animationSpeed;
-        for (int i = psAnim.spriteCount - 1; i > 0; i--)
-        {
-            psAnim.RemoveSprite(i);
-        }
-        for (int i = 0; i < _weapon.AnimationSprites.Count; i++)
-        {
-            if (psAnim.spriteCount - 1 >= i)
-            {
-                psAnim.SetSprite(i, _weapon.AnimationSprites[i]);
-            }
-            else psAnim.AddSprite(_weapon.AnimationSprites[i]);
-        }
     }
 
     private void SetSubEmitterSettings()
     {
-        var hitAnim = _weapon.HitAnimationSprites;
-
         var subEmitterGO = new GameObject("Hit Particles");
         subEmitterGO.transform.SetParent(transform.GetChild(0));
 
-        var subEmitter = subEmitterGO.AddComponent<ParticleSystem>();
+        _subEmitter = subEmitterGO.AddComponent<ParticleSystem>();
         var subRenderer = subEmitterGO.GetComponent<ParticleSystemRenderer>();
         subRenderer.material = _particlesMaterial;
 
-        var subMain = subEmitter.main;
-        subMain.startLifetime = (hitAnim.Count - 1) * 0.1f;
+        var subMain = _subEmitter.main;
         subMain.simulationSpace = ParticleSystemSimulationSpace.World;
         subMain.emitterVelocityMode = ParticleSystemEmitterVelocityMode.Transform;
         subMain.startSize = _weapon.BulletSize;
         subMain.startColor = _weapon.BulletColor;
 
-        var subEmission = subEmitter.emission;
+        var subEmission = _subEmitter.emission;
         subEmission.SetBursts(new ParticleSystem.Burst[]
         {
             new Burst(1.0f, 1),
         });
 
-        var subShape = subEmitter.shape;
+        var subShape = _subEmitter.shape;
         subShape.shapeType = ParticleSystemShapeType.SingleSidedEdge;
         subShape.radius = 0f;
 
-        var subAnimation = subEmitter.textureSheetAnimation;
+        var subAnimation = _subEmitter.textureSheetAnimation;
         subAnimation.enabled = true;
         subAnimation.mode = ParticleSystemAnimationMode.Sprites;
         subAnimation.timeMode = ParticleSystemAnimationTimeMode.FPS;
         subAnimation.fps = _animationSpeed;
-        for (int i = 0; i < _weapon.HitAnimationSprites.Count; i++)
-        {
-            if (subAnimation.spriteCount - 1 >= i)
-            {
-                subAnimation.SetSprite(i, _weapon.HitAnimationSprites[i]);
-            }
-            else subAnimation.AddSprite(_weapon.HitAnimationSprites[i]);
-        }
 
         var psSubEmitters = _particleS.subEmitters;
         psSubEmitters.enabled = true;
-        psSubEmitters.AddSubEmitter(subEmitter, ParticleSystemSubEmitterType.Death, ParticleSystemSubEmitterProperties.InheritNothing);
+        psSubEmitters.AddSubEmitter(_subEmitter, ParticleSystemSubEmitterType.Death, ParticleSystemSubEmitterProperties.InheritNothing);
+    }
+
+    public void SetWeapon(ItemWeapon newWeapon)
+    {
+        _weapon = newWeapon;
+
+        var psMain = _particleS.main;
+        psMain.startSpeed = _initialSpeed * newWeapon.BulletSpeed;
+        psMain.startSize = newWeapon.BulletSize;
+        psMain.startColor = newWeapon.BulletColor;
+
+        var psEmission = _particleS.emission;
+        psEmission.rateOverTime = _initialRate * newWeapon.AttackSpeed;
+
+        var psAnim = _particleS.textureSheetAnimation;
+        for (int i = psAnim.spriteCount - 1; i > 0; i--)
+        {
+            psAnim.RemoveSprite(i);
+        }
+        for (int i = 0; i < newWeapon.AnimationSprites.Count; i++)
+        {
+            if (psAnim.spriteCount - 1 >= i)
+            {
+                psAnim.SetSprite(i, newWeapon.AnimationSprites[i]);
+            }
+            else psAnim.AddSprite(newWeapon.AnimationSprites[i]);
+        }
+
+        var hitAnim = newWeapon.HitAnimationSprites;
+        var subMain = _subEmitter.main;
+        subMain.startLifetime = (hitAnim.Count - 1) * 0.1f;
+        subMain.startColor = newWeapon.BulletColor;
+
+        var subAnimation = _subEmitter.textureSheetAnimation;
+        for (int i = 0; i < newWeapon.HitAnimationSprites.Count; i++)
+        {
+            if (subAnimation.spriteCount - 1 >= i)
+            {
+                subAnimation.SetSprite(i, hitAnim[i]);
+            }
+            else subAnimation.AddSprite(hitAnim[i]);
+        }
     }
 
     private void Update()
@@ -178,6 +195,8 @@ public class PlayerGun : MonoBehaviour
             _isShooting = false;
             psEmission.enabled = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.P)) SetWeapon(_weapon2);
     }
 
     public void SetDirection(float dir)

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c43659aa41401b4783689dd5a476979, type: 3}
+  m_Name: Weapon1
+  m_EditorClassIdentifier: 
+  _type: 0
+  _sprite: {fileID: 0}
+  AttackDamage: 0
+  AttackSpeed: 1
+  BulletSpeed: 4
+  BulletColor: {r: 1, g: 1, b: 1, a: 1}
+  BulletSize: 0.5
+  AnimationSprites:
+  - {fileID: -1603725395, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
+  - {fileID: 1588785205, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
+  - {fileID: 383256295, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
+  - {fileID: 1075500191, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
+  HitAnimationSprites:
+  - {fileID: -32455439, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
+  - {fileID: -2038132104, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
+  - {fileID: -1855414970, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
+  - {fileID: 1201491018, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
