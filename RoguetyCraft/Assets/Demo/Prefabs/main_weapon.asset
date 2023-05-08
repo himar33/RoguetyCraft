@@ -16,9 +16,16 @@ MonoBehaviour:
   _sprite: {fileID: 0}
   AttackDamage: 0
   AttackSpeed: 1
-  BulletSpeed: 2
+  BulletSpeed: 4
+  BulletColor: {r: 1, g: 1, b: 1, a: 1}
+  BulletSize: 0.5
   AnimationSprites:
   - {fileID: -1603725395, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
   - {fileID: 1588785205, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
   - {fileID: 383256295, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
   - {fileID: 1075500191, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
+  HitAnimationSprites:
+  - {fileID: -32455439, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
+  - {fileID: -2038132104, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
+  - {fileID: -1855414970, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
+  - {fileID: 1201491018, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}

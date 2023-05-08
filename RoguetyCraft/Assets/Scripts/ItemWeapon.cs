@@ -16,6 +16,8 @@ namespace RoguetyCraft.Items.Weapon
         public float BulletSpeed = 1f;
 
         [Separator("Particle system settings")]
+        public Color BulletColor = Color.white;
+        public float BulletSize = 1f;
         public List<Sprite> AnimationSprites;
         public List<Sprite> HitAnimationSprites;
 
