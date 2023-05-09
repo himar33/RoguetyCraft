@@ -1,11 +1,6 @@
 using RoguetyCraft.Player.Controller;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using MyBox;
-using System.Linq;
 using RoguetyCraft.Generic.Animation;
-using System.Numerics;
 
 namespace RoguetyCraft.Player.Animation
 {
@@ -13,28 +8,26 @@ namespace RoguetyCraft.Player.Animation
     public class PlayerAnimator : SpriteAnimator
     {
         private SpriteRenderer _sprite;
-        private PlayerController _player;
 
         protected override void Awake()
         {
             _sprite = GetComponent<SpriteRenderer>();
-            _player = GetComponentInParent<PlayerController>();
 
             base.Awake();
         }
 
         private void Update()
         {
-            if (_player.PHorizontalRawInput != 0)
+            if (PlayerController.Instance.PlayerMovement.PHorizontalRawInput != 0)
             {
-                _sprite.flipX = (_player.PHorizontalRawInput > 0) ? false : true;
+                _sprite.flipX = (PlayerController.Instance.PlayerMovement.PHorizontalRawInput > 0) ? false : true;
             }
             else _animator.speed = 1;
 
-            _animator.SetFloat("hSpeed", _player.PVelocity.x);
-            _animator.SetFloat("vSpeed", _player.PVelocity.y);
-            _animator.SetBool("isGrounded", _player.IsGrounded);
-            _animator.SetBool("isShooting", _player.PGun.IsShooting);
+            _animator.SetFloat("hSpeed", PlayerController.Instance.PlayerMovement.PVelocity.x);
+            _animator.SetFloat("vSpeed", PlayerController.Instance.PlayerMovement.PVelocity.y);
+            _animator.SetBool("isGrounded", PlayerController.Instance.PlayerMovement.IsGrounded);
+            _animator.SetBool("isShooting", PlayerController.Instance.PlayerGun.IsShooting);
         }
     }
 }

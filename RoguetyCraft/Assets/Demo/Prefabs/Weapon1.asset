@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Weapon1
   m_EditorClassIdentifier: 
   _type: 0
-  _sprite: {fileID: 0}
+  _sprite: {fileID: -2038132104, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
   AttackDamage: 0
   AttackSpeed: 1
   BulletSpeed: 4

@@ -1,14 +1,14 @@
 using RoguetyCraft.Items.Generic;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MyBox;
-using UnityEngine.Events;
+using RoguetyCraft.Player.Controller;
+using RoguetyCraft.Items.Controller;
 
 namespace RoguetyCraft.Items.Weapon
 {
     [CreateAssetMenu(fileName = "weapon", menuName = "RoguetyCraft/Items/Weapon", order = 1)]
-    public class ItemWeapon : Item, IInteractable, IUsable
+    public class ItemWeapon : Item
     {
         [Separator("Weapon settings")]
         public float AttackDamage = 10f;
@@ -25,10 +25,12 @@ namespace RoguetyCraft.Items.Weapon
         {
             _type = ItemType.WEAPON;
         }
-        public void OnInteract()
+        public override void OnInteract(ItemController controller)
         {
+            PlayerController.Instance.PlayerGun.SetWeapon(this);
+            Destroy(controller.gameObject);
         }
-        public void OnUse()
+        public override void OnUse(ItemController controller)
         {
         }
     }
