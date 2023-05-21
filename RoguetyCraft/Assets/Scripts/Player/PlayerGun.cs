@@ -102,7 +102,6 @@ namespace RoguetyCraft.Player.Gun
             subMain.simulationSpace = ParticleSystemSimulationSpace.World;
             subMain.emitterVelocityMode = ParticleSystemEmitterVelocityMode.Transform;
             subMain.startSize = _weapon.BulletSize;
-            subMain.startColor = _weapon.BulletColor;
 
             var subEmission = _subEmitter.emission;
             subEmission.SetBursts(new ParticleSystem.Burst[]
@@ -137,6 +136,9 @@ namespace RoguetyCraft.Player.Gun
             var psEmission = _particleS.emission;
             psEmission.rateOverTime = _initialRate * newWeapon.AttackSpeed;
 
+            var psCollision = _particleS.collision;
+            psCollision.radiusScale = newWeapon.ColliderRadius;
+
             var psAnim = _particleS.textureSheetAnimation;
             for (int i = psAnim.spriteCount - 1; i > 0; i--)
             {
@@ -154,7 +156,7 @@ namespace RoguetyCraft.Player.Gun
             var hitAnim = newWeapon.HitAnimationSprites;
             var subMain = _subEmitter.main;
             subMain.startLifetime = (hitAnim.Count - 1) * 0.1f;
-            subMain.startColor = newWeapon.BulletColor;
+            subMain.startColor = newWeapon.BulletHitColor;
 
             var subAnimation = _subEmitter.textureSheetAnimation;
             for (int i = 0; i < newWeapon.HitAnimationSprites.Count; i++)

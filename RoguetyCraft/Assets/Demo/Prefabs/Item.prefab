@@ -51,8 +51,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _gizmosColor: {r: 1, g: 0, b: 0, a: 1}
-  _animFreq: 4
-  _animAmp: 0.25
+  _spriteColor: {r: 1, g: 1, b: 1, a: 1}
+  _spriteLayer: 821924707
+  _orderLayer: 0
+  _animFreq: 8
+  _animAmp: 0.1
   _animDirection: {x: 0, y: 1, z: 0}
   _animCurve:
     serializedVersion: 2

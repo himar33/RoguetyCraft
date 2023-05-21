@@ -10,15 +10,19 @@ namespace RoguetyCraft.Items.Weapon
     [CreateAssetMenu(fileName = "weapon", menuName = "RoguetyCraft/Items/Weapon", order = 1)]
     public class ItemWeapon : Item
     {
-        [Separator("Weapon settings")]
+        [Separator("Weapon Settings")]
         public float AttackDamage = 10f;
         public float AttackSpeed = 1f;
         public float BulletSpeed = 1f;
 
-        [Separator("Particle system settings")]
+        [Separator("Bullet Particle Settings")]
         public Color BulletColor = Color.white;
         public float BulletSize = 1f;
+        public float ColliderRadius = 1f;
         public List<Sprite> AnimationSprites;
+
+        [Separator("Bullet Hit Particle Settings")]
+        public Color BulletHitColor = Color.white;
         public List<Sprite> HitAnimationSprites;
 
         public ItemWeapon(Sprite sprite) : base(sprite)

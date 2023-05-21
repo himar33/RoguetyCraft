@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 968238a650d1d3a418f9f436c15aedc0
+guid: 5fc7d493501c9244e8c24d3752501406
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,181 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pick_0
+      name: gunshoots_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 96
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 570d5a53c84150843acf6d7db1433316
+      internalID: -1447609175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gunshoots_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 96
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bdf311761b3abe45a0421ac71bac8ab
+      internalID: -2091527842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gunshoots_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 72
+        width: 32
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fe1dc20795dcde459f0bf8a2692aa51
+      internalID: -15992670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gunshoots_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 72
+        width: 29
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25b4cc2e8cf79344d95049e3d5a175af
+      internalID: 1886565990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gunshoots_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 60
+        width: 18
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3484b2fd49aedf4e850d364f582cf8c
+      internalID: -927573737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gunshoots_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 60
+        width: 19
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e606a0e1f2f5a294787607b6fc1e1f99
+      internalID: 1935744565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gunshoots_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 37
+        width: 20
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d657767729a84b48816ec2837cb1206
+      internalID: 1816464304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gunshoots_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 37
+        width: 19
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3ee203ca0e221f48881213b35919839
+      internalID: -1218743689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gunshoots_spritesheet_8
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
-        width: 16
-        height: 16
+        y: 13
+        width: 45
+        height: 11
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +287,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 109466e9f3ad43840ac556b260b84a44
-      internalID: 168913060
+      spriteID: bb4eb362bab21a6488b56bb3f9873261
+      internalID: 1565264835
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pick_1
+      name: gunshoots_spritesheet_9
       rect:
         serializedVersion: 2
-        x: 16
-        y: 32
-        width: 16
-        height: 16
+        x: 63
+        y: 13
+        width: 38
+        height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,167 +308,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3c59c872042cb844b109f35271391d6
-      internalID: -835283769
+      spriteID: 7d1b29327802bfc44a335b126632782c
+      internalID: -435882210
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pick_2
+      name: gunshoots_spritesheet_10
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b0af00c130a071a458366e08ee55ce46
-      internalID: 450572075
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pick_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5ac845dbee5b2644ba51bfbeaeaabb56
-      internalID: 1124095266
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pick_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f55fa58b900bc2948a1dd35403548b60
-      internalID: 2146466498
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shoot_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9ff1869873a2568448fc290eb30af745
-      internalID: -1603725395
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shoot_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7584448b5b50d3c4f905812403aab1f1
-      internalID: 1588785205
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shoot_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 57b8a515c062fb648b20faf4a8d75713
-      internalID: 383256295
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shoot_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 00103dc83c8d74f48a5a792ac9706f26
-      internalID: 1075500191
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shoot_hit_0
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 5
         y: 0
-        width: 16
-        height: 16
+        width: 10
+        height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -308,20 +329,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05b4e9b423f08ba4b952f0b9cd895c40
-      internalID: -32455439
+      spriteID: 16a9df42aa118fd498f216de9c51f58f
+      internalID: 590973987
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shoot_hit_1
+      name: gunshoots_spritesheet_11
       rect:
         serializedVersion: 2
-        x: 16
+        x: 24
         y: 0
-        width: 16
-        height: 16
+        width: 11
+        height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -329,20 +350,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f2f317d286488946ab9e34ae4cc32f8
-      internalID: -2038132104
+      spriteID: 00e98ec9d7887964586d2fe7c2612cdd
+      internalID: 1041083776
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shoot_hit_2
+      name: gunshoots_spritesheet_12
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
+        x: 5
+        y: 85
+        width: 18
+        height: 6
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -350,20 +371,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 819e9f9ab780f1b40a164091d53e612f
-      internalID: -1855414970
+      spriteID: 945bdb528bd397b4abc681f5490473f7
+      internalID: 481585891
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shoot_hit_3
+      name: gunshoots_spritesheet_13
       rect:
         serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
+        x: 38
+        y: 85
+        width: 20
+        height: 6
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -371,8 +392,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 521af50f4babdc94c987a4c23af3622c
-      internalID: 1201491018
+      spriteID: 5a534de4583e29c4e91f3645aabff1c5
+      internalID: 1790568104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gunshoots_spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 52
+        width: 12
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09f5fa10e74cd66449da484df02a905d
+      internalID: -864495915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gunshoots_spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 52
+        width: 10
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88789f3b3d4799848a9f6627a0041f51
+      internalID: 1250808417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gunshoots_spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 28
+        width: 20
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e2574ad033f68a4ebca0d470aa4473d
+      internalID: -1763705635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gunshoots_spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 28
+        width: 25
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6f8e2d5621808549a65ceb863c2cf7d
+      internalID: -877970615
       vertices: []
       indices: 
       edges: []
@@ -388,19 +493,24 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      pick_0: 168913060
-      pick_1: -835283769
-      pick_2: 450572075
-      pick_3: 1124095266
-      pick_4: 2146466498
-      shoot_0: -1603725395
-      shoot_1: 1588785205
-      shoot_2: 383256295
-      shoot_3: 1075500191
-      shoot_hit_0: -32455439
-      shoot_hit_1: -2038132104
-      shoot_hit_2: -1855414970
-      shoot_hit_3: 1201491018
+      gunshoots_spritesheet_0: -1447609175
+      gunshoots_spritesheet_1: -2091527842
+      gunshoots_spritesheet_10: 590973987
+      gunshoots_spritesheet_11: 1041083776
+      gunshoots_spritesheet_12: 481585891
+      gunshoots_spritesheet_13: 1790568104
+      gunshoots_spritesheet_14: -864495915
+      gunshoots_spritesheet_15: 1250808417
+      gunshoots_spritesheet_16: -1763705635
+      gunshoots_spritesheet_17: -877970615
+      gunshoots_spritesheet_2: -15992670
+      gunshoots_spritesheet_3: 1886565990
+      gunshoots_spritesheet_4: -927573737
+      gunshoots_spritesheet_5: 1935744565
+      gunshoots_spritesheet_6: 1816464304
+      gunshoots_spritesheet_7: -1218743689
+      gunshoots_spritesheet_8: 1565264835
+      gunshoots_spritesheet_9: -435882210
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
