@@ -14,19 +14,25 @@ namespace RoguetyCraft.Items.Controller
         [SerializeField] private Item _item;
 
         [Separator("Collider settings")]
-        [SerializeField, Tag] private string _colTag;
         [SerializeField] private Vector3 _colOffset = Vector3.zero;
         [SerializeField] private float _colRadius = 1f;
         [SerializeField] private LayerMask _colLayer;
         [SerializeField] private Color _gizmosColor = Color.red;
 
+        [Separator("Item settings")]
+        [SerializeField] private Color _spriteColor = Color.white;
+        [SerializeField, SpriteLayer] private int _spriteLayer = 0;
+        [SerializeField] private int _orderLayer = 0;
+
         [Separator("Animation settings")]
-        [SerializeField] private float _animSpeed = 1f;
+        [SerializeField] private float _animFreq = 1f;
+        [SerializeField] private float _animAmp = 1f;
         [SerializeField] private Vector3 _animDirection = Vector3.zero;
         [SerializeField] private AnimationCurve _animCurve;
 
         private Collider2D _collider;
         private SpriteRenderer _spriteRenderer;
+        private Vector3 _startPos;
 
         private void OnDrawGizmos()
         {
@@ -52,9 +58,14 @@ namespace RoguetyCraft.Items.Controller
             {
                 SpriteRenderer spr = transform.AddComponent<SpriteRenderer>();
                 spr.sprite = _item.Sprite;
+                spr.color = _spriteColor;
+                spr.sortingLayerID = _spriteLayer;
+                spr.sortingOrder = _orderLayer;
 
                 _spriteRenderer = spr;
             }
+
+            _startPos = transform.position;
         }
 
         private void Update()
@@ -65,13 +76,15 @@ namespace RoguetyCraft.Items.Controller
 
         private void UpdateAnimation()
         {
-            transform.position += _animDirection.normalized * _animSpeed * _animCurve.Evaluate(Time.time) * Time.deltaTime;
+            float t = Mathf.Sin(Time.time * _animFreq);
+            float normalizedT = (t + 1f) / 2f;
+            transform.position = _startPos + _animDirection * _animCurve.Evaluate(normalizedT) * _animAmp;
         }
 
         private void CheckInteraction()
         {
-            Physics2D.OverlapCircle(_collider.bounds.center, _colRadius, _colLayer);
-            if (_collider != null && PlayerController.Instance.IsInteracting)
+            Collider2D col = Physics2D.OverlapCircle(_collider.bounds.center, _colRadius, _colLayer);
+            if (col != null && PlayerController.Instance.IsInteracting)
             {
                 _item.OnInteract(this);
             }

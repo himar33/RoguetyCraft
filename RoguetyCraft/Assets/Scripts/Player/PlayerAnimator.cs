@@ -22,7 +22,6 @@ namespace RoguetyCraft.Player.Animation
             {
                 _sprite.flipX = (PlayerController.Instance.PlayerMovement.PHorizontalRawInput > 0) ? false : true;
             }
-            else _animator.speed = 1;
 
             _animator.SetFloat("hSpeed", PlayerController.Instance.PlayerMovement.PVelocity.x);
             _animator.SetFloat("vSpeed", PlayerController.Instance.PlayerMovement.PVelocity.y);

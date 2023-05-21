@@ -45,10 +45,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 11400000, guid: 93c9de2d6fcaca644bea4d381ec295d6, type: 2}
-  _colTag: 
   _colOffset: {x: 0, y: 0, z: 0}
   _colRadius: 0.5
   _colLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   _gizmosColor: {r: 1, g: 0, b: 0, a: 1}
+  _animFreq: 4
+  _animAmp: 0.25
+  _animDirection: {x: 0, y: 1, z: 0}
+  _animCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

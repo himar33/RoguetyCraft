@@ -350,10 +350,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 175356328925220316, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
-      propertyPath: _moveSpeed
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 2229989052069778830, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -398,10 +394,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8424665560747074955, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
-      propertyPath: _weapon2
-      value: 
-      objectReference: {fileID: 11400000, guid: 93c9de2d6fcaca644bea4d381ec295d6, type: 2}
     - target: {fileID: 8430956484077258817, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
       propertyPath: m_Name
       value: Player
@@ -957,36 +949,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1805497986 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8430956484077258817, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
-  m_PrefabInstance: {fileID: 731333420}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1805497990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1805497986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73973677226d7a545a5edb6113617863, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  _collisionOffset: 0.1
-  _moveSpeed: 8
-  _acceleration: 80
-  _deAcceleration: 50
-  _jumpForce: 25
-  _coyoteTimeLimit: 0.1
-  _jumpBuffer: 0.1
-  _jumpEndModifier: 3
-  _gravityModifier: 8
-  _maxFallingSpeed: -20
 --- !u!1 &1816033259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,7 +1109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7592245561226816930, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 5.25
       objectReference: {fileID: 0}
     - target: {fileID: 7592245561226816930, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1183,51 +1145,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7592245561226816932, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
       propertyPath: m_Name
-      value: Item
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 7592245561226816933, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
-      propertyPath: _animDirection.y
+      propertyPath: _spriteLayer
+      value: 821924707
+      objectReference: {fileID: 0}
+    - target: {fileID: 7592245561226816933, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
+      propertyPath: _spriteColor.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7592245561226816933, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
-      propertyPath: _animCurve.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7592245561226816933, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
-      propertyPath: _animCurve.m_Curve.Array.data[1].time
+      propertyPath: _spriteColor.b
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7592245561226816933, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
-      propertyPath: _animCurve.m_Curve.Array.data[0].value
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7592245561226816933, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
-      propertyPath: _animCurve.m_Curve.Array.data[1].value
+      propertyPath: _spriteColor.g
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7592245561226816933, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
-      propertyPath: _animCurve.m_Curve.Array.data[0].inSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7592245561226816933, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
-      propertyPath: _animCurve.m_Curve.Array.data[1].inSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7592245561226816933, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
-      propertyPath: _animCurve.m_Curve.Array.data[0].outSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7592245561226816933, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
-      propertyPath: _animCurve.m_Curve.Array.data[1].outSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7592245561226816933, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
-      propertyPath: _animCurve.m_Curve.Array.data[0].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7592245561226816933, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
-      propertyPath: _animCurve.m_Curve.Array.data[1].tangentMode
-      value: 0
+      propertyPath: _spriteColor.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b43536153afba4c49a7697da0cd7aefc, type: 3}
