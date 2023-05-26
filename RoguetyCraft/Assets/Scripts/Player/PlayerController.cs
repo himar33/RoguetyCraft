@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using MyBox;
-using static UnityEditor.Experimental.GraphView.GraphView;
 using RoguetyCraft.Player.Movement;
 using RoguetyCraft.Player.Animation;
 using RoguetyCraft.Player.Gun;
+using RoguetyCraft.DesignPatterns.Singleton;
 
 namespace RoguetyCraft.Player.Controller
 {
@@ -19,7 +16,7 @@ namespace RoguetyCraft.Player.Controller
 
         private bool _isInteracting = false;
 
-        private void Awake()
+        private void Start()
         {
             PlayerMovement = GetComponent<PlayerMovement>();
             PlayerAnimator = GetComponentInChildren<PlayerAnimator>();

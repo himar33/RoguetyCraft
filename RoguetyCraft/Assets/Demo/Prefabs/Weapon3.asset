@@ -23,7 +23,7 @@ MonoBehaviour:
   AnimationSprites:
   - {fileID: 590973987, guid: 5fc7d493501c9244e8c24d3752501406, type: 3}
   - {fileID: 1041083776, guid: 5fc7d493501c9244e8c24d3752501406, type: 3}
-  BulletHitColor: {r: 0.745283, g: 0, b: 0, a: 1}
+  BulletHitColor: {r: 0.5566038, g: 0.19166073, b: 0.19166073, a: 1}
   HitAnimationSprites:
   - {fileID: -32455439, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}
   - {fileID: -2038132104, guid: 968238a650d1d3a418f9f436c15aedc0, type: 3}

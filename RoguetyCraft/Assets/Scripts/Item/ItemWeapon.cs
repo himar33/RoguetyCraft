@@ -7,7 +7,7 @@ using RoguetyCraft.Items.Controller;
 
 namespace RoguetyCraft.Items.Weapon
 {
-    [CreateAssetMenu(fileName = "weapon", menuName = "RoguetyCraft/Items/Weapon", order = 1)]
+    [CreateAssetMenu(fileName = "weapon", menuName = "RoguetyCraft/Items/Weapon")]
     public class ItemWeapon : Item
     {
         [Separator("Weapon Settings")]
@@ -25,7 +25,8 @@ namespace RoguetyCraft.Items.Weapon
         public Color BulletHitColor = Color.white;
         public List<Sprite> HitAnimationSprites;
 
-        public ItemWeapon(Sprite sprite) : base(sprite)
+        protected ItemWeapon(Sprite sprite) : base(sprite) { }
+        protected override void Awake()
         {
             _type = ItemType.WEAPON;
         }

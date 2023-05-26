@@ -5,11 +5,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RoguetyCraft.Items.Weapon
+namespace RoguetyCraft.Items.Key
 {
+    [CreateAssetMenu(fileName = "key", menuName = "RoguetyCraft/Items/Key")]
     public class ItemKey : Item
     {
-        public ItemKey(Sprite sprite) : base(sprite)
+        protected ItemKey(Sprite sprite) : base(sprite) { }
+        protected override void Awake()
         {
             _type = ItemType.KEY;
         }
