@@ -29,6 +29,7 @@ namespace RoguetyCraft.Map.Manager
             foreach (var room in _roomList)
             {
                 _currGameObjectList.Add(room.InstantiateRoom(currPos, transform));
+                currPos.x += room.Size.x;
             }
         }
     }

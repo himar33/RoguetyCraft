@@ -21,6 +21,7 @@ namespace RoguetyCraft.Map.Generic
     public class Room : ScriptableObject
     {
         [Foldout("Room Data", true)]
+        [Layer] public int RoomLayer;
         [ReadOnly] public RoomType RoomType;
         [ReadOnly] public Vector3Int Origin;
         [ReadOnly] public Vector3Int Size;
@@ -74,16 +75,34 @@ namespace RoguetyCraft.Map.Generic
 
             _refID = objID;
         }
-        public GameObject InstantiateRoom(Vector3Int position, Transform parent)
+        public GameObject InstantiateRoom(Vector3Int offset, Transform parent)
         {
-            GameObject room = new(name);
-            room.transform.parent = parent;
+            GameObject room;
+            GameObject roomChild;
 
-            GameObject roomChild = new("Tilemap", typeof(Tilemap), typeof(TilemapRenderer), typeof(TilemapCollider2D), typeof(CompositeCollider2D));
-            roomChild.transform.parent = room.transform;
+            if (parent.childCount == 0)
+            {
+                room = new(name);
+                room.transform.parent = parent;
+
+                roomChild = new("Tilemap", typeof(Tilemap), typeof(TilemapRenderer), typeof(TilemapCollider2D), typeof(CompositeCollider2D));
+                roomChild.transform.parent = room.transform;
+            }
+            else
+            {
+                room = parent.GetChild(0).gameObject;
+                roomChild = room.transform.GetChild(0).gameObject;
+            }
+            roomChild.layer = RoomLayer;
+
+            Vector3Int[] newPosArray = new Vector3Int[TilePositionArray.Length];
+            for (int i = 0; i < newPosArray.Length; i++)
+            {
+                newPosArray[i] = TilePositionArray[i] + offset;
+            }
 
             var roomTilemap = roomChild.GetComponent<Tilemap>();
-            roomTilemap.SetTiles(TilePositionArray, TileArray);
+            roomTilemap.SetTiles(newPosArray, TileArray);
 
             var roomTilemapCollider = roomChild.GetComponent<TilemapCollider2D>();
             roomTilemapCollider.usedByComposite = true;

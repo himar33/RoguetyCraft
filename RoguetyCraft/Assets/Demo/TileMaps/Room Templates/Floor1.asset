@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be0db055e9c9d824d9058aaaf288efd6, type: 3}
   m_Name: Floor1
   m_EditorClassIdentifier: 
+  RoomLayer: 3
   RoomType: 0
   Origin: {x: -30, y: -10, z: 0}
   Size: {x: 60, y: 34, z: 1}
