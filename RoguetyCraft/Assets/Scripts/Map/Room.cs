@@ -1,22 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using MyBox;
 using UnityEngine.Tilemaps;
 using System;
 using UnityEditor;
-using RoguetyCraft.Map.Editor;
-using System.Linq.Expressions;
+using RoguetyCraft.Map.Editor.Generic;
 
 namespace RoguetyCraft.Map.Generic
 {
     [Serializable]
     public enum RoomType
     {
-        NON_PATHING,
-        SIDE_EXIT,
-        VERTICAL_EXIT,
-        BOTH_AXIS_EXIT
+        NORMAL,
+        START,
+        DOOR_LOCKED,
+        TREASURE,
+        SHOP,
+        TELEPORT,
+        EXIT
     }
     public class Room : ScriptableObject
     {
@@ -59,7 +59,7 @@ namespace RoguetyCraft.Map.Generic
                     "Ok");
             }
         }
-        public void SetRoom(Vector3Int _origin, Vector3Int _size, Editor.TileData[] _tiles, int objID)
+        public void SetRoom(Vector3Int _origin, Vector3Int _size, Editor.Generic.TileData[] _tiles, int objID)
         {
             Origin = _origin;
             Size = _size;

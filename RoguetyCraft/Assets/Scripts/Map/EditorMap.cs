@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using RoguetyCraft.Map.Generic;
 using System.Collections.Generic;
-using System;
 using System.Reflection;
 
-namespace RoguetyCraft.Map.Editor
+namespace RoguetyCraft.Map.Editor.Generic
 {
     public struct TileData
     {
