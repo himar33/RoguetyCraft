@@ -20,7 +20,7 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
 
         private void AddGraphView()
         {
-            LevelEditorGraphView graphView = new();
+            LevelEditorGraphView graphView = new(this);
 
             graphView.StretchToParentSize();
 

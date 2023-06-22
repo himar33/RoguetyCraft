@@ -6,7 +6,7 @@ using RoguetyCraft.Map.Generic;
 namespace RoguetyCraft.Map.Manager
 {
     [RequireComponent(typeof(Grid))]
-    public class MapManager : DesignPatterns.Singleton.Singleton<MapManager>
+    public class MapManager : DesignPatterns.Singleton.RCSingleton<MapManager>
     {
         [Separator("Map settings")]
         [SerializeField] private List<Room> _roomList = new();

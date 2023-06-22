@@ -1,3 +1,4 @@
+using RoguetyCraft.Map.Generic;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -8,11 +9,52 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
 {
     public class LevelEditorGraphView : GraphView
     {
-        public LevelEditorGraphView()
+        private LevelEditorWindow _editorWindow;
+        private LevelSearchWindow _searchWindow;
+
+        private List<LevelNode> _nodesList = new List<LevelNode>();
+
+        public LevelEditorGraphView(LevelEditorWindow editorWindow)
         {
+            _editorWindow = editorWindow;
+
             AddManipulators();
+            AddSearchWindow();
             AddGridBackground();
             AddStyles();
+        }
+
+        private void AddManipulators()
+        {
+            SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
+
+            this.AddManipulator(new ContentDragger());
+            this.AddManipulator(new SelectionDragger());
+            this.AddManipulator(new RectangleSelector());
+            this.AddManipulator(CreateNodeContextualMenu());
+        }
+
+        private void AddGridBackground()
+        {
+            GridBackground gridBackground = new GridBackground();
+            gridBackground.StretchToParentSize();
+            Insert(0, gridBackground);
+        }
+
+        private void AddSearchWindow()
+        {
+            if (_searchWindow == null)
+            {
+                _searchWindow = ScriptableObject.CreateInstance<LevelSearchWindow>();
+                _searchWindow.Init(this);
+            }
+            nodeCreationRequest = context => SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), _searchWindow);
+        }
+
+        private void AddStyles()
+        {
+            StyleSheet styleSheet = (StyleSheet) EditorGUIUtility.Load("LevelEditorStyle.uss");
+            styleSheets.Add(styleSheet);
         }
 
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
@@ -30,46 +72,38 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
             return compatiblePorts;
         }
 
-        private void AddManipulators()
+        public Vector2 GetLocalMousePosition(Vector2 mousePosition, bool isSearchWindow = false)
         {
-            SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
+            Vector2 worldMousePosition = mousePosition;
 
-            this.AddManipulator(new ContentDragger());
-            this.AddManipulator(new SelectionDragger());
-            this.AddManipulator(new RectangleSelector());
-            this.AddManipulator(CreateNodeContextualMenu());
+            if (isSearchWindow)
+            {
+                worldMousePosition -= _editorWindow.position.position;
+            }
+
+            Vector2 localMousePosition = contentViewContainer.WorldToLocal(worldMousePosition);
+            return localMousePosition;
         }
 
         private IManipulator CreateNodeContextualMenu()
         {
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
-                menuEvent => menuEvent.menu.AppendAction("Add Room", actionEvent => AddElement(CreateNode(actionEvent.eventInfo.localMousePosition)))
+                menuEvent => menuEvent.menu.AppendAction("Add Room", actionEvent => AddElement(CreateNode(GetLocalMousePosition(actionEvent.eventInfo.localMousePosition))))
             );
 
             return contextualMenuManipulator;
         }
 
-        private void AddGridBackground()
-        {
-            GridBackground gridBackground = new GridBackground();
-            gridBackground.StretchToParentSize();
-            Insert(0, gridBackground);
-        }
-
-        private LevelNode CreateNode(Vector2 position)
+        public LevelNode CreateNode(Vector2 position, RoomType type = RoomType.NORMAL)
         {
             LevelNode node = new();
 
-            node.Init(position);
+            node.Init(_nodesList.Count, type, position);
+            _nodesList.Add(node);
+
             node.Draw();
 
             return node;
-        }
-
-        private void AddStyles()
-        {
-            StyleSheet styleSheet = (StyleSheet) EditorGUIUtility.Load("LevelEditorStyle.uss");
-            styleSheets.Add(styleSheet);
         }
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace RoguetyCraft.DesignPatterns.Singleton
 {
-    public class Singleton<T> : MonoBehaviour where T : Component
+    public class RCSingleton<T> : MonoBehaviour where T : Component
     {
         public static T Instance
         {

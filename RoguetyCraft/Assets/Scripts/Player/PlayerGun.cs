@@ -16,23 +16,16 @@ namespace RoguetyCraft.Player.Gun
         [SerializeField] private ItemWeapon _weapon;
 
         [Separator("Particle system settings")]
-        [SerializeField] private ParticleSystemShapeType _shapeType = ParticleSystemShapeType.SingleSidedEdge;
-        [SerializeField] private float _shapeRadius = 0f;
-        [SerializeField] private LayerMask _hitLayer;
-        [SerializeField, Range(12, 60)] private float _animationSpeed = 12f;
-        [SerializeField] private Material _particlesMaterial;
+        [SerializeField, InitializationField] private ParticleSystemShapeType _shapeType = ParticleSystemShapeType.SingleSidedEdge;
+        [SerializeField, InitializationField] private float _shapeRadius = 0f;
+        [SerializeField, InitializationField] private LayerMask _hitLayer;
+        [SerializeField, InitializationField, Range(12, 60)] private float _animationSpeed = 12f;
+        [SerializeField, InitializationField] private Material _particlesMaterial;
 
         [Separator("Bullet Offset")]
         [SerializeField] private Vector3 _bulletPoint = Vector3.zero;
         [SerializeField] private float _gizmoRadius = 0.2f;
         [SerializeField] private Color _gizmoColor = Color.red;
-
-        [ButtonMethod]
-        public void SetParticlePosition()
-        {
-            ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
-            ps.transform.position = transform.position + _bulletPoint;
-        }
 
         private ParticleSystem _particleS;
         private ParticleSystemRenderer _particleSRenderer;

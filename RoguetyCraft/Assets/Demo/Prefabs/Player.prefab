@@ -58,61 +58,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.9}
   m_EdgeRadius: 0
---- !u!1 &2659681016709247334
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2653109717013980463}
-  - component: {fileID: 8424665560747074955}
-  m_Layer: 6
-  m_Name: BulletPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2653109717013980463
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2659681016709247334}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2229989052069778830}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8424665560747074955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2659681016709247334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f73406625184c46b47d3c129cf1efb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weapon: {fileID: 11400000, guid: 1ab6bb1c9bb7ff64fbbd917988863975, type: 2}
-  _shapeType: 12
-  _shapeRadius: 0
-  _hitLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  _animationSpeed: 12
-  _particlesMaterial: {fileID: 2100000, guid: 08f7b4ccf776e0445addef841eea4771, type: 2}
-  _bulletPoint: {x: 0.45, y: 0, z: 0}
-  _gizmoRadius: 0.2
-  _gizmoColor: {r: 0.9427508, g: 1, b: 0, a: 1}
 --- !u!1 &5118031208748016900
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,8 +200,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2229989052069778830}
   - component: {fileID: 2924695124669130315}
-  - component: {fileID: 175356328925220316}
-  - component: {fileID: 1805497990}
+  - component: {fileID: 1576983168}
+  - component: {fileID: 1576983169}
+  - component: {fileID: 1576983170}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -278,7 +224,6 @@ Transform:
   m_Children:
   - {fileID: 7212975120700117163}
   - {fileID: 5788820501106456497}
-  - {fileID: 2653109717013980463}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -303,7 +248,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &175356328925220316
+--- !u!114 &1576983168
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -312,10 +257,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8430956484077258817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b54ab265fc2a680479af80ade5aa58b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 65f73406625184c46b47d3c129cf1efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1805497990
+  _weapon: {fileID: 11400000, guid: 1ab6bb1c9bb7ff64fbbd917988863975, type: 2}
+  _shapeType: 12
+  _shapeRadius: 0
+  _hitLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  _animationSpeed: 12
+  _particlesMaterial: {fileID: 2100000, guid: 08f7b4ccf776e0445addef841eea4771, type: 2}
+  _bulletPoint: {x: 0.4, y: 0, z: 0}
+  _gizmoRadius: 0.2
+  _gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &1576983169
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,12 +287,30 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _collisionOffset: 0.1
-  _moveSpeed: 8
+  _moveSpeed: 10
   _acceleration: 80
   _deAcceleration: 50
   _jumpForce: 25
   _coyoteTimeLimit: 0.1
   _jumpBuffer: 0.1
-  _jumpEndModifier: 3
-  _gravityModifier: 8
+  _jumpEndModifier: 1
+  _gravityModifier: 5
   _maxFallingSpeed: -20
+--- !u!114 &1576983170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8430956484077258817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54ab265fc2a680479af80ade5aa58b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HasMovement: 1
+  PlayerMovement: {fileID: 1576983169}
+  HasGun: 1
+  PlayerGun: {fileID: 1576983168}
+  HasAnimator: 1
+  PlayerAnimator: {fileID: 5064693602806187353}
