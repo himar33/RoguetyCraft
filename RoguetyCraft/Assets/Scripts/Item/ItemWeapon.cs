@@ -11,6 +11,7 @@ namespace RoguetyCraft.Items.Weapon
     public class ItemWeapon : Item
     {
         [Separator("Weapon Settings")]
+        public Sprite GunSprite;
         public float AttackDamage = 10f;
         public float AttackSpeed = 1f;
         public float BulletSpeed = 1f;

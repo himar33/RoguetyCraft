@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43659aa41401b4783689dd5a476979, type: 3}
   m_Name: Weapon2
   m_EditorClassIdentifier: 
-  _type: 0
+  _type: 1
   _sprite: {fileID: -492313508, guid: 845a3766ce3653d4ea706efb6f35446c, type: 3}
+  GunSprite: {fileID: 321192508, guid: 7237ad6da3c81ba40817ab1a95a4c2ef, type: 3}
   AttackDamage: 0
   AttackSpeed: 2
   BulletSpeed: 2.5
