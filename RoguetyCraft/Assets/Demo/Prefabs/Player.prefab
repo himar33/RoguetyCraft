@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 2924695124669130315}
   - component: {fileID: 1576983168}
   - component: {fileID: 1576983169}
+  - component: {fileID: 2869365639667414922}
   - component: {fileID: 1576983170}
   m_Layer: 6
   m_Name: Player
@@ -296,6 +297,72 @@ MonoBehaviour:
   _jumpEndModifier: 1
   _gravityModifier: 5
   _maxFallingSpeed: -20
+--- !u!114 &2869365639667414922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8430956484077258817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392638311b1b14b478c5b1171233c3b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HasInitParticles: 0
+  InitParticles:
+    ParticleSystem: {fileID: 0}
+    OnStart:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEnd:
+      m_PersistentCalls:
+        m_Calls: []
+  HasMoveParticles: 0
+  MoveParticles:
+    ParticleSystem: {fileID: 0}
+    OnStart:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEnd:
+      m_PersistentCalls:
+        m_Calls: []
+  HasTurnParticles: 0
+  TurnParticles:
+    ParticleSystem: {fileID: 0}
+    OnStart:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEnd:
+      m_PersistentCalls:
+        m_Calls: []
+  HasJumpParticles: 0
+  JumpParticles:
+    ParticleSystem: {fileID: 0}
+    OnStart:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEnd:
+      m_PersistentCalls:
+        m_Calls: []
+  HasLandParticles: 0
+  LandParticles:
+    ParticleSystem: {fileID: 0}
+    OnStart:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEnd:
+      m_PersistentCalls:
+        m_Calls: []
+  HasHitParticles: 0
+  HitParticles:
+    ParticleSystem: {fileID: 0}
+    OnStart:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEnd:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &1576983170
 MonoBehaviour:
   m_ObjectHideFlags: 0

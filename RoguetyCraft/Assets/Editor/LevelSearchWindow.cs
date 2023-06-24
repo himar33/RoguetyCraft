@@ -1,42 +1,43 @@
 using RoguetyCraft.Map.Editor.LevelGraph;
 using RoguetyCraft.Map.Generic;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class LevelSearchWindow : ScriptableObject, ISearchWindowProvider
+namespace RoguetyCraft.Map.Editor.LevelGraph
 {
-    private LevelEditorGraphView _view;
-    public void Init(LevelEditorGraphView graphView)
+    public class LevelSearchWindow : ScriptableObject, ISearchWindowProvider
     {
-        _view = graphView;
-    }
-    public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
-    {
-        List<SearchTreeEntry> entries = new()
+        private LevelEditorGraphView _view;
+        public void Init(LevelEditorGraphView graphView)
+        {
+            _view = graphView;
+        }
+        public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
+        {
+            List<SearchTreeEntry> entries = new()
         {
             new SearchTreeGroupEntry(new GUIContent("Room Nodes"), 1),
         };
-        foreach (RoomType enumValue in Enum.GetValues(typeof(RoomType)))
-        {
-            SearchTreeEntry entry = new(new GUIContent(enumValue.ToString()))
+            foreach (RoomType enumValue in Enum.GetValues(typeof(RoomType)))
             {
-                level = 2,
-                userData = enumValue,
-            };
-            entries.Add(entry);
+                SearchTreeEntry entry = new(new GUIContent(enumValue.ToString()))
+                {
+                    level = 2,
+                    userData = enumValue,
+                };
+                entries.Add(entry);
+            }
+            return entries;
         }
-        return entries;
-    }
 
-    public bool OnSelectEntry(SearchTreeEntry SearchTreeEntry, SearchWindowContext context)
-    {
-        Vector2 localMousePosition = _view.GetLocalMousePosition(context.screenMousePosition, true);
-        LevelNode node = _view.CreateNode(localMousePosition, (RoomType)SearchTreeEntry.userData);
-        _view.AddElement(node);
-        return true;
+        public bool OnSelectEntry(SearchTreeEntry SearchTreeEntry, SearchWindowContext context)
+        {
+            Vector2 localMousePosition = _view.GetLocalMousePosition(context.screenMousePosition, true);
+            LevelNode node = _view.CreateNode(localMousePosition, (RoomType)SearchTreeEntry.userData);
+            _view.AddElement(node);
+            return true;
+        }
     }
 }

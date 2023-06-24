@@ -7,19 +7,19 @@ using MyBox;
 
 namespace RoguetyCraft.Player.Controller
 {
-    [RequireTag("Player"), RequireLayer("Player"), RequireComponent(typeof(PlayerMovement)), RequireComponent(typeof(PlayerGun))]
+    [RequireTag("Player"), RequireLayer("Player")]
     public class PlayerController : RCSingleton<PlayerController>
     {
         [Foldout("Player Movement", true)]
-        public bool HasMovement = true;
+        public bool HasMovement = false;
         [ConditionalField(nameof(HasMovement)), DisplayInspector(displayScriptField: false)] public PlayerMovement PlayerMovement;
 
         [Foldout("Player Gun", true)]
-        public bool HasGun = true;
+        public bool HasGun = false;
         [ConditionalField(nameof(HasGun)), DisplayInspector(displayScriptField: false)] public PlayerGun PlayerGun;
 
         [Foldout("Player Animator", true)]
-        public bool HasAnimator = true;
+        public bool HasAnimator = false;
         [ConditionalField(nameof(HasAnimator)), DisplayInspector(displayScriptField: false)] public PlayerAnimator PlayerAnimator;
 
         public bool IsInteracting => _isInteracting;
@@ -33,18 +33,71 @@ namespace RoguetyCraft.Player.Controller
 
         private void Reset()
         {
-            PlayerMovement = GetComponent<PlayerMovement>();
-            PlayerGun = GetComponent<PlayerGun>();
-            PlayerAnimator = gameObject.GetComponentInChildren<PlayerAnimator>();
+            if (TryGetComponent(out PlayerMovement)) HasMovement = true;
+            else
+            {
+                PlayerMovement = GetComponentInChildren<PlayerMovement>();
+                if (PlayerMovement != null)
+                {
+                    HasMovement = true;
+                }
+            }
+
+            if (TryGetComponent(out PlayerGun)) HasGun = true;
+            else
+            {
+                PlayerGun = GetComponentInChildren<PlayerGun>();
+                if (PlayerGun != null)
+                {
+                    HasGun = true;
+                }
+            }
+
+            if (TryGetComponent(out PlayerAnimator)) HasAnimator = true;
+            else
+            {
+                PlayerAnimator = GetComponentInChildren<PlayerAnimator>();
+                if (PlayerAnimator != null)
+                {
+                    HasAnimator = true;
+                }
+            }
         }
 
         private void OnValidate()
         {
-            if (gameObject.HasComponent<PlayerMovement>() && PlayerMovement != null) PlayerMovement.enabled = HasMovement;
+            if ((gameObject.HasComponent<PlayerMovement>() || GetComponentInChildren<PlayerMovement>() != null))
+            {
+                if (PlayerMovement == null)
+                {
+                    if (TryGetComponent(out PlayerMovement)) {}
+                    else PlayerMovement = GetComponentInChildren<PlayerMovement>();
+                }
+                PlayerMovement.enabled = HasMovement;
+            }
+            else if (HasMovement) Debug.LogWarning("Player Controller object needs a Player Movement script attached to do this action!");
 
-            if (gameObject.HasComponent<PlayerGun>() && PlayerGun != null) PlayerGun.enabled = HasGun;
+            if ((gameObject.HasComponent<PlayerGun>() || GetComponentInChildren<PlayerGun>() != null))
+            {
+                if (PlayerGun == null)
+                {
+                    if (TryGetComponent(out PlayerGun)) { }
+                    else PlayerGun = GetComponentInChildren<PlayerGun>();
+                }
+                PlayerGun.enabled = HasGun;
+            }
+            else if (HasGun) Debug.LogWarning("Player Controller object needs a Player Gun script attached to do this action!");
 
-            if (gameObject.GetComponentInChildren<PlayerAnimator>() != null && PlayerAnimator != null) PlayerAnimator.enabled = HasAnimator;
+            if ((gameObject.HasComponent<PlayerAnimator>() || GetComponentInChildren<PlayerAnimator>() != null))
+            {
+                if (PlayerAnimator == null)
+                {
+                    if (TryGetComponent(out PlayerAnimator)) { }
+                    else PlayerAnimator = GetComponentInChildren<PlayerAnimator>();
+                }
+                PlayerAnimator.enabled = HasAnimator;
+            }
+            else if (HasAnimator) Debug.LogWarning("Player Controller object needs a Player Animator script attached to do this action!");
         }
     }
 }

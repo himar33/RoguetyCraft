@@ -16,6 +16,7 @@ namespace RoguetyCraft.Player.Movement
         public Vector2 PDirection { get; private set; }
 
         public bool IsJumping { get; private set; }
+        public bool IsRunning => (_colDown && _rb.velocity.x != .0f);
         public bool IsGrounded => _colDown;
 
         [Separator("Collision")]
