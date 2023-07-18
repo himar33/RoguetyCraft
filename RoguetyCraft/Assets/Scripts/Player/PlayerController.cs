@@ -43,38 +43,17 @@ namespace RoguetyCraft.Player.Controller
 
         private void OnValidate()
         {
-            if ((gameObject.HasComponent<PlayerMovement>() || GetComponentInChildren<PlayerMovement>() != null))
-            {
-                if (PlayerMovement == null)
-                {
-                    if (TryGetComponent(out PlayerMovement)) {}
-                    else PlayerMovement = GetComponentInChildren<PlayerMovement>();
-                }
-                PlayerMovement.enabled = HasMovement;
-            }
-            else if (HasMovement) Debug.LogWarning("Player Controller object needs a Player Movement script attached to do this action!");
+            bool hasMove = Utilities.GetComponent(gameObject, out PlayerMovement);
+            if (hasMove) PlayerMovement.enabled = HasMovement;
+            else if (HasMovement && !hasMove) Debug.LogWarning("Player Controller object needs a Player Movement script attached to do this action!");
 
-            if ((gameObject.HasComponent<PlayerGun>() || GetComponentInChildren<PlayerGun>() != null))
-            {
-                if (PlayerGun == null)
-                {
-                    if (TryGetComponent(out PlayerGun)) { }
-                    else PlayerGun = GetComponentInChildren<PlayerGun>();
-                }
-                PlayerGun.enabled = HasGun;
-            }
-            else if (HasGun) Debug.LogWarning("Player Controller object needs a Player Gun script attached to do this action!");
+            bool hasGun = Utilities.GetComponent(gameObject, out PlayerGun);
+            if (hasGun) PlayerGun.enabled = HasGun;
+            else if (HasGun && !hasGun) Debug.LogWarning("Player Controller object needs a Player Gun script attached to do this action!");
 
-            if ((gameObject.HasComponent<PlayerAnimator>() || GetComponentInChildren<PlayerAnimator>() != null))
-            {
-                if (PlayerAnimator == null)
-                {
-                    if (TryGetComponent(out PlayerAnimator)) { }
-                    else PlayerAnimator = GetComponentInChildren<PlayerAnimator>();
-                }
-                PlayerAnimator.enabled = HasAnimator;
-            }
-            else if (HasAnimator) Debug.LogWarning("Player Controller object needs a Player Animator script attached to do this action!");
+            bool hasAnim = Utilities.GetComponent(gameObject, out PlayerAnimator);
+            if (hasAnim) PlayerAnimator.enabled = HasAnimator;
+            else if (HasAnimator && !hasAnim) Debug.LogWarning("Player Controller object needs a Player Animator script attached to do this action!");
         }
     }
 }

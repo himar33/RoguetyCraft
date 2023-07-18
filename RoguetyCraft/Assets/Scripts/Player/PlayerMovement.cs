@@ -1,6 +1,8 @@
 using MyBox;
 using RoguetyCraft.Items.Controller;
+using RoguetyCraft.Player.Controller;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace RoguetyCraft.Player.Movement
 {
@@ -35,6 +37,11 @@ namespace RoguetyCraft.Player.Movement
         [SerializeField, Range(1, 10)] private float _jumpEndModifier = 1f;
         [SerializeField] private float _gravityModifier = 5f;
         [SerializeField] private float _maxFallingSpeed = -20f;
+
+        [Separator("Events")]
+        [SerializeField] private UnityEvent _onFlip;
+        [SerializeField] private UnityEvent _onJump;
+        [SerializeField] private UnityEvent _onLand;
 
         private Rigidbody2D _rb;
         private float _currHorizontalSpeed, _currVerticalSpeed;
@@ -91,9 +98,16 @@ namespace RoguetyCraft.Player.Movement
             PHorizontalRawInput = Input.GetAxisRaw("Horizontal");
             PHorizontalInput = Input.GetAxis("Horizontal");
 
+            Vector2 lastDirection = PDirection;
+
             if (PHorizontalRawInput != 0)
             {
                 PDirection = (PHorizontalRawInput > 0) ? Vector2.right : Vector2.left;
+            }
+
+            if (PDirection != lastDirection && IsGrounded)
+            {
+                _onFlip.Invoke();
             }
 
             if (PJumpDown)
@@ -113,7 +127,9 @@ namespace RoguetyCraft.Player.Movement
             if (_colDown && !groundCheck) _timeGrounded = Time.time;
             else if (!_colDown && groundCheck)
             {
+                Debug.Log("????????????");
                 _coyoteActive = true;
+                _onLand.Invoke();
             }
 
             _colDown = Physics2D.BoxCast(new(_colCenter.x, _colMin.y), new(_colSize.x, _collisionOffset), 0, Vector2.down, _collisionOffset, _groundLayer);
@@ -165,6 +181,7 @@ namespace RoguetyCraft.Player.Movement
         {
             if (_pendingToJump)
             {
+                _onJump.Invoke();
                 _currVerticalSpeed = _jumpForce;
                 _pendingToJump = false;
             }
