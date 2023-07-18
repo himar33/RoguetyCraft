@@ -2,6 +2,8 @@ using MyBox;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using RoguetyCraft.Generic.Utility;
+using UnityEditor.Animations;
 
 namespace RoguetyCraft.Generic.Animation
 {
@@ -31,18 +33,21 @@ namespace RoguetyCraft.Generic.Animation
             }
         }
     }
-    [RequireComponent(typeof(Animator))]
     public class SpriteAnimator : MonoBehaviour
     {
+        [SerializeField] protected AnimatorController _animatorController;
         [SerializeField] protected List<AnimationClipVisual> _clips = new();
 
         [ButtonMethod]
         public void ResetClips()
         {
-            _animator = GetComponent<Animator>();
-            if (_animator == null) return;
+            if (!Utilities.GetComponent(gameObject, out _animator))
+            {
+                Debug.LogError("Animator value is null, make sure you assign a value!");
+                return;
+            }
 
-            RuntimeAnimatorController runAnim = _animator.runtimeAnimatorController;
+            RuntimeAnimatorController runAnim = _animatorController;
 
             _clips.Clear();
             for (int i = 0; i < runAnim.animationClips.Length; i++)
@@ -58,8 +63,13 @@ namespace RoguetyCraft.Generic.Animation
 
         protected virtual void Awake()
         {
-            _animator = GetComponent<Animator>();
-            _animatorOverride = new AnimatorOverrideController(_animator.runtimeAnimatorController);
+            if (!Utilities.GetComponent(gameObject, out _animator))
+            {
+                Debug.LogError("Animator value is null, make sure you assign a value!");
+                return;
+            }
+
+            _animatorOverride = new AnimatorOverrideController(_animatorController);
             _animator.runtimeAnimatorController = _animatorOverride;
 
             _animatorClips = new AnimationClipOverrides(_animatorOverride.overridesCount);

@@ -3,6 +3,7 @@ using RoguetyCraft.Player.Movement;
 using RoguetyCraft.Player.Animation;
 using RoguetyCraft.Player.Gun;
 using RoguetyCraft.DesignPatterns.Singleton;
+using RoguetyCraft.Generic.Utility;
 using MyBox;
 
 namespace RoguetyCraft.Player.Controller
@@ -33,35 +34,11 @@ namespace RoguetyCraft.Player.Controller
 
         private void Reset()
         {
-            if (TryGetComponent(out PlayerMovement)) HasMovement = true;
-            else
-            {
-                PlayerMovement = GetComponentInChildren<PlayerMovement>();
-                if (PlayerMovement != null)
-                {
-                    HasMovement = true;
-                }
-            }
+            HasMovement = Utilities.GetComponent(gameObject, out PlayerMovement);
 
-            if (TryGetComponent(out PlayerGun)) HasGun = true;
-            else
-            {
-                PlayerGun = GetComponentInChildren<PlayerGun>();
-                if (PlayerGun != null)
-                {
-                    HasGun = true;
-                }
-            }
+            HasGun = Utilities.GetComponent(gameObject, out PlayerGun);
 
-            if (TryGetComponent(out PlayerAnimator)) HasAnimator = true;
-            else
-            {
-                PlayerAnimator = GetComponentInChildren<PlayerAnimator>();
-                if (PlayerAnimator != null)
-                {
-                    HasAnimator = true;
-                }
-            }
+            HasAnimator = Utilities.GetComponent(gameObject, out PlayerAnimator);
         }
 
         private void OnValidate()

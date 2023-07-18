@@ -1,17 +1,17 @@
 using RoguetyCraft.Player.Controller;
 using UnityEngine;
 using RoguetyCraft.Generic.Animation;
+using RoguetyCraft.Generic.Utility;
 
 namespace RoguetyCraft.Player.Animation
 {
-    [RequireComponent(typeof(SpriteRenderer))]
     public class PlayerAnimator : SpriteAnimator
     {
         private SpriteRenderer _sprite;
 
         protected override void Awake()
         {
-            _sprite = GetComponent<SpriteRenderer>();
+            Utilities.GetComponent(gameObject, out _sprite);
 
             base.Awake();
         }

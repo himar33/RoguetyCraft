@@ -69,7 +69,6 @@ GameObject:
   - component: {fileID: 7212975120700117163}
   - component: {fileID: 8343870796799105264}
   - component: {fileID: 6694105790926196895}
-  - component: {fileID: 5064693602806187353}
   m_Layer: 6
   m_Name: SpriteRender
   m_TagString: Untagged
@@ -165,31 +164,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5064693602806187353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5118031208748016900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c63429c80c561d48b7cea91e1796602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _clips:
-  - KeyName: player_idle_anim
-    ValueClip: {fileID: 7400000, guid: a24c7477611504546ad10623fb40d939, type: 2}
-  - KeyName: player_run_anim
-    ValueClip: {fileID: 7400000, guid: e2114194de826b742af9a4e197f3abfe, type: 2}
-  - KeyName: player_jump_anim
-    ValueClip: {fileID: 7400000, guid: 3ac44df90aec1694088477fd24ac2d11, type: 2}
-  - KeyName: player_fall_anim
-    ValueClip: {fileID: 7400000, guid: 90634b3b031b26448a288855d23476fd, type: 2}
-  - KeyName: player_idleShoot_anim
-    ValueClip: {fileID: 7400000, guid: 0ebd1b9362686da48ad82779495f12a4, type: 2}
-  - KeyName: player_runShoot_anim
-    ValueClip: {fileID: 7400000, guid: cb9c6736ab0f1704dae76a66efc1dcaf, type: 2}
 --- !u!1 &8430956484077258817
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +176,7 @@ GameObject:
   - component: {fileID: 2924695124669130315}
   - component: {fileID: 1576983168}
   - component: {fileID: 1576983169}
-  - component: {fileID: 2869365639667414922}
+  - component: {fileID: 1033311065}
   - component: {fileID: 1576983170}
   m_Layer: 6
   m_Name: Player
@@ -297,7 +271,7 @@ MonoBehaviour:
   _jumpEndModifier: 1
   _gravityModifier: 5
   _maxFallingSpeed: -20
---- !u!114 &2869365639667414922
+--- !u!114 &1033311065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -306,63 +280,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 8430956484077258817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 392638311b1b14b478c5b1171233c3b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c63429c80c561d48b7cea91e1796602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasInitParticles: 0
-  InitParticles:
-    ParticleSystem: {fileID: 0}
-    OnStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnEnd:
-      m_PersistentCalls:
-        m_Calls: []
-  HasMoveParticles: 0
-  MoveParticles:
-    ParticleSystem: {fileID: 0}
-    OnStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnEnd:
-      m_PersistentCalls:
-        m_Calls: []
-  HasTurnParticles: 0
-  TurnParticles:
-    ParticleSystem: {fileID: 0}
-    OnStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnEnd:
-      m_PersistentCalls:
-        m_Calls: []
-  HasJumpParticles: 0
-  JumpParticles:
-    ParticleSystem: {fileID: 0}
-    OnStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnEnd:
-      m_PersistentCalls:
-        m_Calls: []
-  HasLandParticles: 0
-  LandParticles:
-    ParticleSystem: {fileID: 0}
-    OnStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnEnd:
-      m_PersistentCalls:
-        m_Calls: []
-  HasHitParticles: 0
-  HitParticles:
-    ParticleSystem: {fileID: 0}
-    OnStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnEnd:
-      m_PersistentCalls:
-        m_Calls: []
+  _animatorController: {fileID: 9100000, guid: eb35b07d0e5cf5e40b5a7ead07a79019, type: 2}
+  _clips:
+  - KeyName: player_idle_anim
+    ValueClip: {fileID: 7400000, guid: a24c7477611504546ad10623fb40d939, type: 2}
+  - KeyName: player_run_anim
+    ValueClip: {fileID: 7400000, guid: e2114194de826b742af9a4e197f3abfe, type: 2}
+  - KeyName: player_jump_anim
+    ValueClip: {fileID: 7400000, guid: 3ac44df90aec1694088477fd24ac2d11, type: 2}
+  - KeyName: player_fall_anim
+    ValueClip: {fileID: 7400000, guid: 90634b3b031b26448a288855d23476fd, type: 2}
+  - KeyName: player_idleShoot_anim
+    ValueClip: {fileID: 7400000, guid: 0ebd1b9362686da48ad82779495f12a4, type: 2}
+  - KeyName: player_runShoot_anim
+    ValueClip: {fileID: 7400000, guid: cb9c6736ab0f1704dae76a66efc1dcaf, type: 2}
 --- !u!114 &1576983170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,4 +314,4 @@ MonoBehaviour:
   HasGun: 1
   PlayerGun: {fileID: 1576983168}
   HasAnimator: 1
-  PlayerAnimator: {fileID: 5064693602806187353}
+  PlayerAnimator: {fileID: 1033311065}
