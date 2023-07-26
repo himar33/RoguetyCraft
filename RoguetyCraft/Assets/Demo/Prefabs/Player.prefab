@@ -325,6 +325,12 @@ MonoBehaviour:
   _bulletPoint: {x: 0.4, y: 0, z: 0}
   _gizmoRadius: 0.2
   _gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  _onStartShooting:
+    m_PersistentCalls:
+      m_Calls: []
+  _onEndShooting:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7823404664614029869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,7 +389,7 @@ MonoBehaviour:
   _onLand:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1089824408919381566, guid: 2ca73fdba6c19c849b40496a765bed9d, type: 3}
+      - m_Target: {fileID: 7299993829707043440}
         m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
         m_MethodName: Play
         m_Mode: 1
@@ -409,6 +415,10 @@ PrefabInstance:
     - target: {fileID: 1089824408919381566, guid: 2ca73fdba6c19c849b40496a765bed9d, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089824408919381566, guid: 2ca73fdba6c19c849b40496a765bed9d, type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1089824408919381567, guid: 2ca73fdba6c19c849b40496a765bed9d, type: 3}
       propertyPath: m_RootOrder
@@ -456,6 +466,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ca73fdba6c19c849b40496a765bed9d, type: 3}
+--- !u!198 &7299993829707043440 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1089824408919381566, guid: 2ca73fdba6c19c849b40496a765bed9d, type: 3}
+  m_PrefabInstance: {fileID: 7660935436084954190}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7299993829707043441 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1089824408919381567, guid: 2ca73fdba6c19c849b40496a765bed9d, type: 3}

@@ -3,6 +3,7 @@ using MyBox;
 using RoguetyCraft.Player.Controller;
 using RoguetyCraft.Items.Controller;
 using UnityEditor;
+using RoguetyCraft.Generic.Interfaces;
 
 namespace RoguetyCraft.Items.Generic
 {
@@ -13,14 +14,7 @@ namespace RoguetyCraft.Items.Generic
         KEY,
         POWERUP
     }
-    public interface IInteractable
-    {
-        void OnInteract(ItemController controller);
-    }
-    public interface IUsable
-    {
-        void OnUse(ItemController controller);
-    }
+    
     public abstract class Item : ScriptableObject, IInteractable, IUsable
     {
         public ItemType Type => _type;

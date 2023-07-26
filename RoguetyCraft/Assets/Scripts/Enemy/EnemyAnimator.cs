@@ -1,13 +1,13 @@
 using RoguetyCraft.Enemy.Controller;
 using RoguetyCraft.Generic.Animation;
-using RoguetyCraft.Player.Controller;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyAnimator : SpriteAnimator
 {
+    public Animator Anim => _animator;
+    public SpriteRenderer Sprite => _sprite;
+
     private SpriteRenderer _sprite;
     private EnemyController _enemy;
 

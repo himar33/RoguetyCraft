@@ -65,17 +65,21 @@ namespace RoguetyCraft.Enemy.States
         public EnemyPatrol(EnemyController enemy) : base(enemy) { _id = EnemyStates.PATROL; }
         public override void Update()
         {
-            if (_enemy.EMovement.CanSeeTarget) _enemy.EStateMachine.Set(EnemyStates.CHASE);
-            
             if ((!_enemy.EMovement.OnEdge || _enemy.EMovement.OnWall) && _enemy.EMovement.IsGrounded)
             {
                 _enemy.EMovement.ChangeDirection();
                 _enemy.EStateMachine.Set((_enemy.EMovement.CanSeeTarget) ? EnemyStates.CHASE : EnemyStates.IDLE);
             }
+
+            if (_enemy.EMovement.CanSeeTarget) _enemy.EStateMachine.Set(EnemyStates.CHASE);
         }
         public override void FixedUpdate()
         {
             _enemy.EMovement.SetVelocity(_enemy.EMovement.Direction.x * _enemy.EMovement.MoveSpeed);
+        }
+        public override void OnExit()
+        {
+            _enemy.LastVelocity = _enemy.EMovement.GetVelocity().magnitude;
         }
     }
     public class EnemyChase : EnemyState
@@ -83,11 +87,23 @@ namespace RoguetyCraft.Enemy.States
         public EnemyChase(EnemyController enemy) : base(enemy) { _id = EnemyStates.CHASE; }
         public override void Update()
         {
-            if (!_enemy.EMovement.CanSeeTarget) _enemy.EStateMachine.Set(EnemyStates.PATROL);
+            bool targetCheck = _enemy.EMovement.CanSeeTarget;
+
+            if ((!_enemy.EMovement.OnEdge || _enemy.EMovement.OnWall) && _enemy.EMovement.IsGrounded)
+            {
+                _enemy.EMovement.ChangeDirection();
+                _enemy.EStateMachine.Set((targetCheck) ? EnemyStates.CHASE : EnemyStates.IDLE);
+            }
+
+            if (!targetCheck) _enemy.EStateMachine.Set(EnemyStates.PATROL);
         }
         public override void FixedUpdate()
         {
             _enemy.EMovement.SetVelocity(_enemy.EMovement.Direction.x * _enemy.EMovement.ChaseSpeed);
+        }
+        public override void OnExit()
+        {
+            _enemy.LastVelocity = _enemy.EMovement.GetVelocity().magnitude;
         }
     }
     public class EnemyAttack : EnemyState
@@ -97,5 +113,32 @@ namespace RoguetyCraft.Enemy.States
     public class EnemyDead : EnemyState
     {
         public EnemyDead(EnemyController enemy) : base(enemy) { _id = EnemyStates.DEAD; }
+        public override void OnEnter()
+        {
+            GameObject.Destroy(_enemy.gameObject);
+        }
+    }
+    public class EnemyHit : EnemyState
+    {
+        public EnemyHit(EnemyController enemy) : base(enemy) { _id = EnemyStates.HIT; }
+        public override void OnEnter()
+        {
+            _enemy.EMovement.SetVelocity(0f);
+            _enemy.EAnimator.Anim.enabled = false;
+            _enemy.EAnimator.Sprite.color = _enemy.HitColorMask;
+
+            _enemy.StartCoroutine(HitPause());
+        }
+        public override void OnExit()
+        {
+            _enemy.EAnimator.Sprite.color = _enemy.InitialColorMask;
+            _enemy.EAnimator.Anim.enabled = true;
+            _enemy.EMovement.SetVelocity(_enemy.LastVelocity);
+        }
+        public IEnumerator HitPause()
+        {
+            yield return new WaitForSecondsRealtime(_enemy.HitTime);
+            _enemy.EStateMachine.Set((_enemy.EMovement.CanSeeTarget) ? EnemyStates.CHASE : EnemyStates.IDLE);
+        }
     }
 }

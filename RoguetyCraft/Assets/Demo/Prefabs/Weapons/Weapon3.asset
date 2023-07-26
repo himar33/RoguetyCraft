@@ -15,7 +15,7 @@ MonoBehaviour:
   _type: 1
   _sprite: {fileID: -492313508, guid: 845a3766ce3653d4ea706efb6f35446c, type: 3}
   GunSprite: {fileID: 751344502, guid: 7237ad6da3c81ba40817ab1a95a4c2ef, type: 3}
-  AttackDamage: 0
+  AttackDamage: 1
   AttackSpeed: 1.5
   BulletSpeed: 4
   BulletColor: {r: 1, g: 1, b: 1, a: 1}

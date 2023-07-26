@@ -687,18 +687,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7299993829707043440, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
-      propertyPath: InitialModule.gravityModifier.scalar
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7823404664614029869, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
-      propertyPath: _onLand.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1914087408}
-    - target: {fileID: 7823404664614029869, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
-      propertyPath: _onLand.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Play
-      objectReference: {fileID: 0}
     - target: {fileID: 8430956484077258817, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
       propertyPath: m_Name
       value: Player
@@ -883,11 +871,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!198 &1914087408 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7299993829707043440, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
-  m_PrefabInstance: {fileID: 1033311063}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2109922094
 GameObject:
   m_ObjectHideFlags: 0

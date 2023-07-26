@@ -1,16 +1,20 @@
 using MyBox;
+using RoguetyCraft.Generic.Interfaces;
 using RoguetyCraft.Items.Controller;
 using RoguetyCraft.Items.Weapon;
 using RoguetyCraft.Player.Controller;
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEngine.ParticleSystem;
 
 namespace RoguetyCraft.Player.Gun
 {
-    public class PlayerGun : MonoBehaviour
+    public class PlayerGun : MonoBehaviour, IDamager
     {
         public ItemWeapon Weapon => _weapon;
         public bool IsShooting => _isShooting;
+
+        public float AttackDamage { get => _attackDamage; set => _attackDamage = value; }
 
         [Separator("Weapon settings")]
         [SerializeField] private ItemWeapon _weapon;
@@ -27,11 +31,16 @@ namespace RoguetyCraft.Player.Gun
         [SerializeField] private float _gizmoRadius = 0.2f;
         [SerializeField] private Color _gizmoColor = Color.red;
 
+        [Separator("Events")]
+        [SerializeField] private UnityEvent _onStartShooting;
+        [SerializeField] private UnityEvent _onEndShooting;
+
         private ParticleSystem _particleS;
         private ParticleSystemRenderer _particleSRenderer;
         private ParticleSystem _subEmitter;
 
         private bool _isShooting = false;
+        public float _attackDamage;
         private float _initialSpeed;
         private float _initialRate;
 
@@ -74,6 +83,7 @@ namespace RoguetyCraft.Player.Gun
             psCollision.mode = ParticleSystemCollisionMode.Collision2D;
             psCollision.lifetimeLoss = 1f;
             psCollision.collidesWith = _hitLayer;
+            psCollision.sendCollisionMessages = true;
 
             var psAnim = _particleS.textureSheetAnimation;
             psAnim.enabled = true;
@@ -120,6 +130,8 @@ namespace RoguetyCraft.Player.Gun
         public void SetWeapon(ItemWeapon newWeapon)
         {
             _weapon = newWeapon;
+
+            _attackDamage = _weapon.AttackDamage;
 
             var psMain = _particleS.main;
             psMain.startSpeed = _initialSpeed * newWeapon.BulletSpeed;
@@ -172,13 +184,15 @@ namespace RoguetyCraft.Player.Gun
         {
             var psEmission = _particleS.emission;
 
-            if (PlayerController.Instance.PlayerMovement.IsGrounded && Input.GetKey(KeyCode.Mouse0))
+            if (PlayerController.Instance.PlayerMovement.IsGrounded && Input.GetKeyDown(KeyCode.Mouse0))
             {
+                _onStartShooting.Invoke();
                 _isShooting = true;
                 psEmission.enabled = true;
             }
-            else
+            if (!PlayerController.Instance.PlayerMovement.IsGrounded || Input.GetKeyUp(KeyCode.Mouse0))
             {
+                _onEndShooting.Invoke();
                 _isShooting = false;
                 psEmission.enabled = false;
             }
@@ -198,6 +212,11 @@ namespace RoguetyCraft.Player.Gun
         {
             Gizmos.color = _gizmoColor;
             Gizmos.DrawWireSphere(transform.position + _bulletPoint, _gizmoRadius);
+        }
+
+        public void DealDamage(IDamageable target)
+        {
+            target.TakeDamage(AttackDamage);
         }
     }
 }

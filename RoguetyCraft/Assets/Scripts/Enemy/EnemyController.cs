@@ -1,41 +1,51 @@
 using MyBox;
-using RoguetyCraft.DesignPatterns.State;
 using RoguetyCraft.Enemy.Generic;
 using RoguetyCraft.Enemy.Movement;
 using RoguetyCraft.Enemy.States;
-using System.Collections;
-using System.Collections.Generic;
+using RoguetyCraft.Generic.Interfaces;
+using RoguetyCraft.Generic.Utility;
 using UnityEngine;
 
 namespace RoguetyCraft.Enemy.Controller
 {
-    public class EnemyController : MonoBehaviour
+    public class EnemyController : MonoBehaviour, IDamageable
     {
-        public EnemyStats EStats { get; private set; }
-        public EnemyMovement EMovement { get; private set; }
+        public EnemyMovement EMovement => _enemyMovement;
+        public EnemyAnimator EAnimator => _enemyAnimator;
         public EnemyStateMachine EStateMachine { get; private set; }
+        public float Health { get => _health; set => _health = value; }
 
-        [Separator("Enemy Stats")]
-        [SerializeField] private float _health = 20f;
-        [SerializeField] private float _attackDamage = 5f;
-        [SerializeField] private float _attackSpeed = 1f;
+        [Separator("Stats")]
+        [SerializeField] private float _health = 10f;
+        //[SerializeField] private float _attack = 2f;
+        //[SerializeField] private float _attackSpeed = 1f;
+
+        [Separator("Hit Settings")]
+        public float HitTime = 0.5f;
+        public Color HitColorMask = Color.red;
+        [ReadOnly] public Color InitialColorMask;
+        [ReadOnly] public float LastVelocity = 0f;
+
+        private EnemyMovement _enemyMovement;
+        private EnemyAnimator _enemyAnimator;
 
         private void Awake()
         {
-            EMovement = GetComponent<EnemyMovement>();
+            Utilities.GetComponent(gameObject, out _enemyMovement);
+            Utilities.GetComponent(gameObject, out _enemyAnimator);
+
+            InitialColorMask = _enemyAnimator.Sprite.color;
         }
 
         private void Start()
         {
-            EnemyStats _stats = new(_health, _attackDamage, _attackSpeed);
-            EStats = _stats;
-
             EStateMachine = new EnemyStateMachine();
 
             EStateMachine.Add(new EnemyIdle(this));
             EStateMachine.Add(new EnemyPatrol(this));
             EStateMachine.Add(new EnemyChase(this));
             EStateMachine.Add(new EnemyAttack(this));
+            EStateMachine.Add(new EnemyHit(this));
             EStateMachine.Add(new EnemyDead(this));
 
             EStateMachine.Set(EnemyStates.PATROL);
@@ -49,6 +59,21 @@ namespace RoguetyCraft.Enemy.Controller
         private void FixedUpdate()
         {
             EStateMachine.FixedUpdate();
+        }
+
+        public void TakeDamage(float amount)
+        {
+            Health -= amount;
+            if (Health <= 0)
+            {
+                EStateMachine.Set(EnemyStates.DEAD);
+            }
+            else EStateMachine.Set(EnemyStates.HIT);
+        }
+
+        private void OnParticleCollision(GameObject other)
+        {
+            TakeDamage(other.GetComponentInParent<IDamager>().AttackDamage);
         }
     }
 }
