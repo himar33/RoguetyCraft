@@ -1,5 +1,6 @@
-using RoguetyCraft.Enemy.Controller;
+using RoguetyCraft.Enemies.Controller;
 using RoguetyCraft.Generic.Animation;
+using RoguetyCraft.Generic.Utility;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,8 +14,8 @@ public class EnemyAnimator : SpriteAnimator
 
     protected override void Awake()
     {
-        _sprite = GetComponent<SpriteRenderer>();
-        _enemy = GetComponentInParent<EnemyController>();
+        RoguetyUtilities.GetComponent(gameObject, out _sprite);
+        RoguetyUtilities.GetComponent(gameObject, out _enemy);
 
         base.Awake();
     }

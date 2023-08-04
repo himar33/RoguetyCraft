@@ -28,14 +28,5 @@ namespace RoguetyCraft.Items.Generic
         protected virtual void Awake() { }
         public virtual void OnInteract(ItemController controller) { }
         public virtual void OnUse(ItemController controller) { }
-
-        [MenuItem("GameObject/RoguetyCraft/Item", priority = 1)]
-        static void Create()
-        {
-            GameObject go = new GameObject("NewItem");
-            go.transform.position = new Vector3(0, 0, 0);
-
-            go.AddComponent<ItemController>();
-        }
     }
 }

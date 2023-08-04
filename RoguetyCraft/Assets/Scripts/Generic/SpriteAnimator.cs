@@ -41,9 +41,9 @@ namespace RoguetyCraft.Generic.Animation
         [ButtonMethod]
         public void ResetClips()
         {
-            if (!Utilities.GetComponent(gameObject, out _animator))
+            if (!RoguetyUtilities.GetComponent(gameObject, out _animator))
             {
-                Debug.LogError("Animator value is null, make sure you assign a value!");
+                Debug.LogError("Animator value is null, make sure you attach an animator!");
                 return;
             }
 
@@ -63,9 +63,9 @@ namespace RoguetyCraft.Generic.Animation
 
         protected virtual void Awake()
         {
-            if (!Utilities.GetComponent(gameObject, out _animator))
+            if (!RoguetyUtilities.GetComponent(gameObject, out _animator))
             {
-                Debug.LogError("Animator value is null, make sure you assign a value!");
+                Debug.LogError("Animator value is null, make sure you attach an animator!");
                 return;
             }
 

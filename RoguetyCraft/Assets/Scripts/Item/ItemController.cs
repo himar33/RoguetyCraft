@@ -3,6 +3,7 @@ using MyBox;
 using RoguetyCraft.Items.Generic;
 using Unity.VisualScripting;
 using RoguetyCraft.Player.Controller;
+using UnityEditor;
 
 namespace RoguetyCraft.Items.Controller
 {
@@ -15,7 +16,7 @@ namespace RoguetyCraft.Items.Controller
 
         [Separator("Collider settings")]
         [SerializeField] private Vector3 _colOffset = Vector3.zero;
-        [SerializeField] private float _colRadius = 1f;
+        [SerializeField] private float _colRadius = 0.5f;
         [SerializeField] private LayerMask _colLayer;
         [SerializeField] private Color _gizmosColor = Color.red;
 
@@ -25,9 +26,9 @@ namespace RoguetyCraft.Items.Controller
         [SerializeField] private int _orderLayer = 0;
 
         [Separator("Animation settings")]
-        [SerializeField] private float _animFreq = 1f;
-        [SerializeField] private float _animAmp = 1f;
-        [SerializeField] private Vector3 _animDirection = Vector3.zero;
+        [SerializeField] private float _animFreq = 8f;
+        [SerializeField] private float _animAmp = 0.1f;
+        [SerializeField] private Vector3 _animDirection = Vector3.up;
         [SerializeField] private AnimationCurve _animCurve;
 
         private Collider2D _collider;
@@ -88,6 +89,15 @@ namespace RoguetyCraft.Items.Controller
             {
                 _item.OnInteract(this);
             }
+        }
+
+        [MenuItem("GameObject/RoguetyCraft/ItemController", priority = 1)]
+        static void Create()
+        {
+            GameObject go = new GameObject("NewItem");
+            go.transform.position = new Vector3(0, 0, 0);
+
+            go.AddComponent<ItemController>();
         }
     }
 }

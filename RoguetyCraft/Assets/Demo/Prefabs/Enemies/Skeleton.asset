@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5666a6505f8b6aa44a3571476d64e817, type: 3}
+  m_Name: Skeleton
+  m_EditorClassIdentifier: 
+  Health: 10
+  HitTime: 0.5
+  HitColorMask: {r: 1, g: 0, b: 0, a: 1}
+  MoveSpeed: 3
+  ChaseMoveSpeed: 6
+  ChangeStopTime: 2
+  Distance: 0.1
+  Groundlayer:
+    serializedVersion: 2
+    m_Bits: 8
+  TargetTag: Player
+  TargetDistance: 4
+  AttackDistance: 1
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  AnimatorController: {fileID: 9100000, guid: 78946f3517c4afd4eb18660cb6a4778a, type: 2}
+  Clips:
+  - KeyName: skeleton_idle
+    ValueClip: {fileID: 7400000, guid: 746946e8ed20ea249a342d0760699df5, type: 2}
+  - KeyName: skeleton_walk
+    ValueClip: {fileID: 7400000, guid: 7f06d28c63372aa46bec0cefcd59f7c5, type: 2}

@@ -4,13 +4,14 @@ using UnityEngine;
 
 namespace RoguetyCraft.Generic.Utility
 {
-    public static class Utilities
+    public static class RoguetyUtilities
     {
         public static bool GetComponent<T>(GameObject gameObject, out T comp) where T : Component
         {
             if (!gameObject.TryGetComponent<T>(out T component))
             {
                 component = gameObject.GetComponentInChildren<T>();
+                if (component == null) component = gameObject.GetComponentInParent<T>();
             }
             comp = component;
 
@@ -23,6 +24,7 @@ namespace RoguetyCraft.Generic.Utility
 
             list.AddRange(gameObject.GetComponents<T>());
             list.AddRange(gameObject.GetComponentsInChildren<T>());
+            list.AddRange(gameObject.GetComponentsInParent<T>());
             comp = list;
 
             return list != null;
@@ -33,6 +35,7 @@ namespace RoguetyCraft.Generic.Utility
             if (!gameObject.TryGetComponent<T>(out T component))
             {
                 component = gameObject.GetComponentInChildren<T>();
+                if (component == null) component = gameObject.GetComponentInParent<T>();
             }
 
             return component != null;

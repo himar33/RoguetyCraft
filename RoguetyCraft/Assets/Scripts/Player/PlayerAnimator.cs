@@ -11,7 +11,7 @@ namespace RoguetyCraft.Player.Animation
 
         protected override void Awake()
         {
-            Utilities.GetComponent(gameObject, out _sprite);
+            RoguetyUtilities.GetComponent(gameObject, out _sprite);
             base.Awake();
         }
 

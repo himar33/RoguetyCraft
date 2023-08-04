@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MyBox;
+using RoguetyCraft.Enemies.Generic;
 
-namespace RoguetyCraft.Enemy.Movement
+namespace RoguetyCraft.Enemies.Movement
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class EnemyMovement : MonoBehaviour
@@ -43,6 +44,21 @@ namespace RoguetyCraft.Enemy.Movement
             _rb = GetComponent<Rigidbody2D>();
             _col = GetComponentInChildren<Collider2D>();
             _target = GameObject.FindGameObjectWithTag(_targetTag).transform;
+        }
+
+        public void UpdateMovementData(Enemy enemyData)
+        {
+            _moveSpeed = enemyData.MoveSpeed;
+            _chaseMoveSpeed = enemyData.ChaseMoveSpeed;
+            _changeStopTime = enemyData.ChangeStopTime;
+
+            _distance = enemyData.Distance;
+            _groundLayer = enemyData.Groundlayer;
+
+            _targetTag = enemyData.TargetTag;
+            _targetDistance = enemyData.TargetDistance;
+            _attackDistance = enemyData.AttackDistance;
+            _targetLayer = enemyData.TargetLayer;
         }
 
         private void OnDrawGizmos()

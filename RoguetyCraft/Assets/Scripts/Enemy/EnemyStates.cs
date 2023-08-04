@@ -1,11 +1,19 @@
 using RoguetyCraft.DesignPatterns.State;
-using RoguetyCraft.Enemy.Controller;
-using RoguetyCraft.Enemy.Generic;
+using RoguetyCraft.Enemies.Controller;
 using System.Collections;
 using UnityEngine;
 
-namespace RoguetyCraft.Enemy.States
+namespace RoguetyCraft.Enemies
 {
+    public enum EnemyStates
+    {
+        IDLE,
+        PATROL,
+        CHASE,
+        ATTACK,
+        HIT,
+        DEAD
+    }
     public class EnemyState : State
     {
         public EnemyStates ID => _id;

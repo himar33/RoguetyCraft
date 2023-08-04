@@ -16,6 +16,8 @@ namespace RoguetyCraft.Generic.Interfaces
     public interface IDamageable
     {
         public float Health { get; set; }
+        public float HitTime { get; set; }
+        public Color HitColorMask { get; set; }
         public void TakeDamage(float amount);
     }
     public interface IDamager

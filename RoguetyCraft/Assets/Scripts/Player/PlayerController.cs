@@ -34,24 +34,24 @@ namespace RoguetyCraft.Player.Controller
 
         private void Reset()
         {
-            HasMovement = Utilities.GetComponent(gameObject, out PlayerMovement);
+            HasMovement = RoguetyUtilities.GetComponent(gameObject, out PlayerMovement);
 
-            HasGun = Utilities.GetComponent(gameObject, out PlayerGun);
+            HasGun = RoguetyUtilities.GetComponent(gameObject, out PlayerGun);
 
-            HasAnimator = Utilities.GetComponent(gameObject, out PlayerAnimator);
+            HasAnimator = RoguetyUtilities.GetComponent(gameObject, out PlayerAnimator);
         }
 
         private void OnValidate()
         {
-            bool hasMove = Utilities.GetComponent(gameObject, out PlayerMovement);
+            bool hasMove = RoguetyUtilities.GetComponent(gameObject, out PlayerMovement);
             if (hasMove) PlayerMovement.enabled = HasMovement;
             else if (HasMovement && !hasMove) Debug.LogWarning("Player Controller object needs a Player Movement script attached to do this action!");
 
-            bool hasGun = Utilities.GetComponent(gameObject, out PlayerGun);
+            bool hasGun = RoguetyUtilities.GetComponent(gameObject, out PlayerGun);
             if (hasGun) PlayerGun.enabled = HasGun;
             else if (HasGun && !hasGun) Debug.LogWarning("Player Controller object needs a Player Gun script attached to do this action!");
 
-            bool hasAnim = Utilities.GetComponent(gameObject, out PlayerAnimator);
+            bool hasAnim = RoguetyUtilities.GetComponent(gameObject, out PlayerAnimator);
             if (hasAnim) PlayerAnimator.enabled = HasAnimator;
             else if (HasAnimator && !hasAnim) Debug.LogWarning("Player Controller object needs a Player Animator script attached to do this action!");
         }
