@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace RoguetyCraft.Generic.Utility
 {
     public static class RoguetyUtilities
     {
-        public static bool GetComponent<T>(GameObject gameObject, out T comp) where T : Component
+        public static bool GetComponent<T>(this GameObject gameObject, out T comp) where T : Component
         {
             if (!gameObject.TryGetComponent<T>(out T component))
             {
@@ -18,7 +19,7 @@ namespace RoguetyCraft.Generic.Utility
             return component != null;
         }
 
-        public static bool GetComponents<T>(GameObject gameObject, out List<T> comp) where T : Component
+        public static bool GetComponents<T>(this GameObject gameObject, out List<T> comp) where T : Component
         {
             List<T> list = new();
 
@@ -30,7 +31,7 @@ namespace RoguetyCraft.Generic.Utility
             return list != null;
         }
 
-        public static bool HasComponent<T>(GameObject gameObject) where T : Component
+        public static bool HasComponent<T>(this GameObject gameObject) where T : Component
         {
             if (!gameObject.TryGetComponent<T>(out T component))
             {
@@ -39,6 +40,23 @@ namespace RoguetyCraft.Generic.Utility
             }
 
             return component != null;
+        }
+
+        public static List<Sprite> GetSpritesFromClip(AnimationClip clip)
+        {
+            var sprites = new List<Sprite>();
+            if (clip != null)
+            {
+                foreach (var binding in AnimationUtility.GetObjectReferenceCurveBindings(clip))
+                {
+                    var keyframes = AnimationUtility.GetObjectReferenceCurve(clip, binding);
+                    foreach (var frame in keyframes)
+                    {
+                        sprites.Add((Sprite)frame.value);
+                    }
+                }
+            }
+            return sprites;
         }
     }
 }

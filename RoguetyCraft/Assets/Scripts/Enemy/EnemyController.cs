@@ -5,23 +5,27 @@ using UnityEngine;
 using UnityEditor;
 using RoguetyCraft.Enemies.Generic;
 using RoguetyCraft.Player.Movement;
+using MyBox;
 
 namespace RoguetyCraft.Enemies.Controller
 {
+    [RequireLayer("Enemy")]
     public class EnemyController : MonoBehaviour, IDamageable
     {
         [SerializeField] private Enemy _enemyData;
-        public Enemy EnemyData => _enemyData;
 
         public EnemyMovement EMovement => _enemyMovement;
         public EnemyAnimator EAnimator => _enemyAnimator;
         public EnemyStateMachine EStateMachine { get; private set; }
-        public float Health { get => _enemyData.Health; set => Health = value; }
-        public float HitTime { get => _enemyData.HitTime; set => HitTime = value; }
-        public Color HitColorMask { get => _enemyData.HitColorMask; set => HitColorMask = value; }
+        public float Health { get => _health; set => _health = value; }
+        public float HitTime { get => _hitTime; set => _hitTime = value; }
+        public Color HitColorMask { get => _hitColorMask; set => _hitColorMask = value; }
         public Color InitialColorMask { get => _initialColorMask; set => _initialColorMask = value; }
         public float LastVelocity { get => _lastVelocity; set => _lastVelocity = value; }
 
+        private float _health;
+        private float _hitTime;
+        private Color _hitColorMask;
         private Color _initialColorMask;
         private float _lastVelocity = 0f;
 
@@ -36,6 +40,8 @@ namespace RoguetyCraft.Enemies.Controller
             RoguetyUtilities.GetComponent(gameObject, out _spriteRenderer);
 
             _initialColorMask = _spriteRenderer.color;
+
+            UpdateData();
         }
 
         private void Start()
@@ -71,9 +77,32 @@ namespace RoguetyCraft.Enemies.Controller
         {
             if (_enemyData != null)
             {
-                if (RoguetyUtilities.GetComponent(gameObject, out EnemyMovement movement))
+                UpdateData();
+            }
+        }
+
+        private void UpdateData()
+        {
+            _health = _enemyData.Health;
+            _hitTime = _enemyData.HitTime;
+            _hitColorMask = _enemyData.HitColorMask;
+
+            if (RoguetyUtilities.GetComponent(gameObject, out EnemyMovement movement))
+            {
+                movement.UpdateMovementData(_enemyData);
+            }
+            if (RoguetyUtilities.GetComponent(gameObject, out EnemyAnimator animator))
+            {
+                animator.AnimatorController = _enemyData.AnimatorController;
+                animator.Animations = _enemyData.Clips;
+                if (RoguetyUtilities.GetComponent(gameObject, out SpriteRenderer spriteR))
                 {
-                    movement.UpdateMovementData(_enemyData);
+                    spriteR.sprite = RoguetyUtilities.GetSpritesFromClip(_enemyData.Clips[0].ValueClip)[0];
+                    if (RoguetyUtilities.GetComponent(gameObject, out BoxCollider2D collider))
+                    {
+                        Vector2 S = spriteR.bounds.size;
+                        collider.size = S;
+                    }
                 }
             }
         }

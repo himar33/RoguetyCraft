@@ -46,12 +46,10 @@ namespace RoguetyCraft.Enemies.Generic
             {
                 _animatorController = AnimatorController;
 
-                RuntimeAnimatorController runAnim = AnimatorController;
-
                 Clips.Clear();
-                for (int i = 0; i < runAnim.animationClips.Length; i++)
+                for (int i = 0; i < _animatorController.animationClips.Length; i++)
                 {
-                    AnimationClipVisual clipVisual = new(runAnim.animationClips[i].name, runAnim.animationClips[i]);
+                    AnimationClipVisual clipVisual = new(_animatorController.animationClips[i].name, _animatorController.animationClips[i]);
                     Clips.Add(clipVisual);
                 }
             }

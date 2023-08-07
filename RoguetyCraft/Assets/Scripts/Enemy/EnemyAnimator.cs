@@ -8,6 +8,7 @@ public class EnemyAnimator : SpriteAnimator
 {
     public Animator Anim => _animator;
     public SpriteRenderer Sprite => _sprite;
+    public Sprite SpriteTex { get { return _sprite.sprite; } set { _sprite.sprite = value; } }
 
     private SpriteRenderer _sprite;
     private EnemyController _enemy;

@@ -8,9 +8,9 @@ using UnityEditor.Animations;
 namespace RoguetyCraft.Generic.Animation
 {
     [System.Serializable]
-    public struct AnimationClipVisual
+    public class AnimationClipVisual
     {
-        [HideInInspector] public string KeyName;
+        public string KeyName;
         public AnimationClip ValueClip;
         public AnimationClipVisual(string _name, AnimationClip _clip)
         {
@@ -35,6 +35,9 @@ namespace RoguetyCraft.Generic.Animation
     }
     public class SpriteAnimator : MonoBehaviour
     {
+        public AnimatorController AnimatorController { get { return _animatorController; } set { _animatorController = value; } }
+        public List<AnimationClipVisual> Animations { get { return _clips; } set { _clips = value; } }
+
         [SerializeField] protected AnimatorController _animatorController;
         [SerializeField] protected List<AnimationClipVisual> _clips = new();
 
@@ -47,12 +50,10 @@ namespace RoguetyCraft.Generic.Animation
                 return;
             }
 
-            RuntimeAnimatorController runAnim = _animatorController;
-
             _clips.Clear();
-            for (int i = 0; i < runAnim.animationClips.Length; i++)
+            for (int i = 0; i < _animatorController.animationClips.Length; i++)
             {
-                AnimationClipVisual clipVisual = new(runAnim.animationClips[i].name, runAnim.animationClips[i]);
+                AnimationClipVisual clipVisual = new(_animatorController.animationClips[i].name, _animatorController.animationClips[i]);
                 _clips.Add(clipVisual);
             }
         }
@@ -77,7 +78,7 @@ namespace RoguetyCraft.Generic.Animation
 
             for (int i = 0; i < _animatorClips.Count; i++)
             {
-                _animatorClips[_animatorClips.ElementAt(i).Key.name] = _clips.Find(x => x.ValueClip == _animatorClips.ElementAt(i).Value).ValueClip;
+                _animatorClips[_animatorClips.ElementAt(i).Key.name] = _clips.Find(x => x.KeyName == _animatorClips.ElementAt(i).Key.name).ValueClip;
             }
             _animatorOverride.ApplyOverrides(_animatorClips);
         }
