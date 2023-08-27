@@ -10,12 +10,12 @@ namespace RoguetyCraft.Generic.Animation
     [System.Serializable]
     public class AnimationClipVisual
     {
-        public string KeyName;
+        [ReadOnly] public string KeyName;
         public AnimationClip ValueClip;
-        public AnimationClipVisual(string _name, AnimationClip _clip)
+        public AnimationClipVisual(string name, AnimationClip clip)
         {
-            KeyName = _name;
-            ValueClip = _clip;
+            KeyName = name;
+            ValueClip = clip;
         }
     }
     public class AnimationClipOverrides : List<KeyValuePair<AnimationClip, AnimationClip>>
@@ -36,27 +36,11 @@ namespace RoguetyCraft.Generic.Animation
     public class SpriteAnimator : MonoBehaviour
     {
         public AnimatorController AnimatorController { get { return _animatorController; } set { _animatorController = value; } }
-        public List<AnimationClipVisual> Animations { get { return _clips; } set { _clips = value; } }
+        
+        public List<AnimationClipVisual> Animations { get { return _animationClips; } set { _animationClips = value; } }
 
         [SerializeField] protected AnimatorController _animatorController;
-        [SerializeField] protected List<AnimationClipVisual> _clips = new();
-
-        [ButtonMethod]
-        public void ResetClips()
-        {
-            if (!RoguetyUtilities.GetComponent(gameObject, out _animator))
-            {
-                Debug.LogError("Animator value is null, make sure you attach an animator!");
-                return;
-            }
-
-            _clips.Clear();
-            for (int i = 0; i < _animatorController.animationClips.Length; i++)
-            {
-                AnimationClipVisual clipVisual = new(_animatorController.animationClips[i].name, _animatorController.animationClips[i]);
-                _clips.Add(clipVisual);
-            }
-        }
+        [SerializeField] protected List<AnimationClipVisual> _animationClips = new();
 
         protected Animator _animator;
         protected AnimatorOverrideController _animatorOverride;
@@ -69,7 +53,6 @@ namespace RoguetyCraft.Generic.Animation
                 Debug.LogError("Animator value is null, make sure you attach an animator!");
                 return;
             }
-
             _animatorOverride = new AnimatorOverrideController(_animatorController);
             _animator.runtimeAnimatorController = _animatorOverride;
 
@@ -78,7 +61,7 @@ namespace RoguetyCraft.Generic.Animation
 
             for (int i = 0; i < _animatorClips.Count; i++)
             {
-                _animatorClips[_animatorClips.ElementAt(i).Key.name] = _clips.Find(x => x.KeyName == _animatorClips.ElementAt(i).Key.name).ValueClip;
+                _animatorClips[_animatorClips.ElementAt(i).Key.name] = _animationClips.Find(x => x.KeyName == _animatorClips.ElementAt(i).Key.name).ValueClip;
             }
             _animatorOverride.ApplyOverrides(_animatorClips);
         }

@@ -511,9 +511,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animatorController: {fileID: 9100000, guid: 78946f3517c4afd4eb18660cb6a4778a, type: 2}
-  _clips:
-  - ValueClip: {fileID: 7400000, guid: 746946e8ed20ea249a342d0760699df5, type: 2}
-  - ValueClip: {fileID: 7400000, guid: 7f06d28c63372aa46bec0cefcd59f7c5, type: 2}
+  _animationClips:
+  - KeyName: enemy_idle
+    ValueClip: {fileID: 7400000, guid: 84545af7dfaf8e64990c1ce55af3114f, type: 2}
+  - KeyName: enemy_walk
+    ValueClip: {fileID: 7400000, guid: 2e2b6fdb332704249a81511f6a317c6c, type: 2}
 --- !u!114 &448351407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,10 +528,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80bc3b2c968903d4d9eb4a446f3cc216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 3.5
+  _moveSpeed: 3
   _chaseMoveSpeed: 6
   _changeStopTime: 2
-  _distance: 0.1
+  _distance: 0.2
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -655,6 +657,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1180742078, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
+      propertyPath: HasMovement
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180742079, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
+      propertyPath: _animatorController
+      value: 
+      objectReference: {fileID: 9100000, guid: eb35b07d0e5cf5e40b5a7ead07a79019, type: 2}
+    - target: {fileID: 1180742079, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
+      propertyPath: _animationClips.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2229989052069778830, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -698,6 +712,10 @@ PrefabInstance:
     - target: {fileID: 2229989052069778830, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823404664614029869, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8430956484077258817, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
       propertyPath: m_Name
@@ -849,9 +867,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animatorController: {fileID: 9100000, guid: 78946f3517c4afd4eb18660cb6a4778a, type: 2}
-  _clips:
-  - ValueClip: {fileID: 7400000, guid: 746946e8ed20ea249a342d0760699df5, type: 2}
-  - ValueClip: {fileID: 7400000, guid: 7f06d28c63372aa46bec0cefcd59f7c5, type: 2}
+  _animationClips:
+  - KeyName: enemy_idle
+    ValueClip: {fileID: 7400000, guid: 84545af7dfaf8e64990c1ce55af3114f, type: 2}
+  - KeyName: enemy_walk
+    ValueClip: {fileID: 7400000, guid: 2e2b6fdb332704249a81511f6a317c6c, type: 2}
 --- !u!114 &788574897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,10 +884,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80bc3b2c968903d4d9eb4a446f3cc216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 3.5
+  _moveSpeed: 3
   _chaseMoveSpeed: 6
   _changeStopTime: 2
-  _distance: 0.1
+  _distance: 0.2
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1077,9 +1097,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animatorController: {fileID: 9100000, guid: 78946f3517c4afd4eb18660cb6a4778a, type: 2}
-  _clips:
-  - ValueClip: {fileID: 7400000, guid: 746946e8ed20ea249a342d0760699df5, type: 2}
-  - ValueClip: {fileID: 7400000, guid: 7f06d28c63372aa46bec0cefcd59f7c5, type: 2}
+  _animationClips:
+  - KeyName: enemy_idle
+    ValueClip: {fileID: 7400000, guid: 84545af7dfaf8e64990c1ce55af3114f, type: 2}
+  - KeyName: enemy_walk
+    ValueClip: {fileID: 7400000, guid: 2e2b6fdb332704249a81511f6a317c6c, type: 2}
 --- !u!114 &1028261832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,10 +1114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80bc3b2c968903d4d9eb4a446f3cc216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 3.5
+  _moveSpeed: 3
   _chaseMoveSpeed: 6
   _changeStopTime: 2
-  _distance: 0.1
+  _distance: 0.2
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1247,9 +1269,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animatorController: {fileID: 9100000, guid: 78946f3517c4afd4eb18660cb6a4778a, type: 2}
-  _clips:
-  - ValueClip: {fileID: 7400000, guid: 2d0e6193f2a4f8343bb2e3baeea90114, type: 2}
-  - ValueClip: {fileID: 7400000, guid: e1bd36e6c8aeb234f9070019bbdc8888, type: 2}
+  _animationClips:
+  - KeyName: enemy_idle
+    ValueClip: {fileID: 7400000, guid: 2d0e6193f2a4f8343bb2e3baeea90114, type: 2}
+  - KeyName: enemy_walk
+    ValueClip: {fileID: 7400000, guid: e1bd36e6c8aeb234f9070019bbdc8888, type: 2}
 --- !u!114 &1175672239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1265,7 +1289,7 @@ MonoBehaviour:
   _moveSpeed: 1.5
   _chaseMoveSpeed: 3
   _changeStopTime: 2
-  _distance: 0.1
+  _distance: 0.2
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1502,9 +1526,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animatorController: {fileID: 9100000, guid: 78946f3517c4afd4eb18660cb6a4778a, type: 2}
-  _clips:
-  - ValueClip: {fileID: 7400000, guid: 2d0e6193f2a4f8343bb2e3baeea90114, type: 2}
-  - ValueClip: {fileID: 7400000, guid: e1bd36e6c8aeb234f9070019bbdc8888, type: 2}
+  _animationClips:
+  - KeyName: enemy_idle
+    ValueClip: {fileID: 7400000, guid: 84545af7dfaf8e64990c1ce55af3114f, type: 2}
+  - KeyName: enemy_walk
+    ValueClip: {fileID: 7400000, guid: 2e2b6fdb332704249a81511f6a317c6c, type: 2}
 --- !u!114 &1604703217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1520,7 +1546,7 @@ MonoBehaviour:
   _moveSpeed: 1.5
   _chaseMoveSpeed: 3
   _changeStopTime: 2
-  _distance: 0.1
+  _distance: 0.2
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8

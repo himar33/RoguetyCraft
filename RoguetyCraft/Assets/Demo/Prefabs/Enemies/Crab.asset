@@ -12,25 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5666a6505f8b6aa44a3571476d64e817, type: 3}
   m_Name: Crab
   m_EditorClassIdentifier: 
-  Health: 10
-  HitTime: 0.5
-  HitColorMask: {r: 1, g: 0, b: 0, a: 1}
-  MoveSpeed: 1.5
-  ChaseMoveSpeed: 3
-  ChangeStopTime: 2
-  Distance: 0.1
-  Groundlayer:
+  _health: 40
+  _hitTime: 0.5
+  _hitColorMask: {r: 1, g: 0.8, b: 0, a: 1}
+  _moveSpeed: 1.5
+  _chaseMoveSpeed: 3
+  _changeStopTime: 2
+  _distance: 0.2
+  _groundlayer:
     serializedVersion: 2
     m_Bits: 8
-  TargetTag: Player
-  TargetDistance: 4
-  AttackDistance: 1
-  TargetLayer:
+  _targetTag: Player
+  _targetDistance: 4
+  _attackDistance: 1
+  _targetLayer:
     serializedVersion: 2
     m_Bits: 64
-  AnimatorController: {fileID: 9100000, guid: 78946f3517c4afd4eb18660cb6a4778a, type: 2}
-  Clips:
-  - KeyName: skeleton_idle
+  _animatorController: {fileID: 9100000, guid: 78946f3517c4afd4eb18660cb6a4778a, type: 2}
+  _clips:
+  - KeyName: enemy_idle
     ValueClip: {fileID: 7400000, guid: 2d0e6193f2a4f8343bb2e3baeea90114, type: 2}
-  - KeyName: skeleton_walk
+  - KeyName: enemy_walk
     ValueClip: {fileID: 7400000, guid: e1bd36e6c8aeb234f9070019bbdc8888, type: 2}
+  m_animatorController: enemy_animator

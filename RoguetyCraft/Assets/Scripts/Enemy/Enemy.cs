@@ -3,54 +3,73 @@ using MyBox;
 using RoguetyCraft.Generic.Animation;
 using System.Collections.Generic;
 using UnityEditor.Animations;
-using Cinemachine;
 
 namespace RoguetyCraft.Enemies.Generic
 {
     [CreateAssetMenu(fileName = "enemy", menuName = "RoguetyCraft/Enemy")]
     public class Enemy : ScriptableObject
     {
+        public float Health => _health;
+        public float HitTime => _hitTime;
+        public Color HitColorMask => _hitColorMask;
+        public float MoveSpeed => _moveSpeed;
+        public float ChaseMoveSpeed => _chaseMoveSpeed;
+        public float ChangeStopTime => _changeStopTime;
+        public float Distance => _distance;
+        public LayerMask Groundlayer => _groundlayer;
+        public string TargetTag => _targetTag;
+        public float TargetDistance => _targetDistance;
+        public float AttackDistance => _attackDistance;
+        public LayerMask TargetLayer => _targetLayer;
+        public AnimatorController AnimatorController => _animatorController;
+        public List<AnimationClipVisual> Clips => _clips;
+
         [Separator("Enemy General")]
-        public float Health = 10f;
-        public float HitTime = 0.5f;
-        public Color HitColorMask = Color.red;
+        [SerializeField] private float _health = 10f;
+        [SerializeField] private float _hitTime = 0.5f;
+        [SerializeField] private Color _hitColorMask = Color.red;
 
         [Space(20)]
 
         [Separator("Enemy Movement")]
-        public float MoveSpeed = 3f;
-        public float ChaseMoveSpeed = 6f;
-        public float ChangeStopTime = 2f;
+        [SerializeField] private float _moveSpeed = 3f;
+        [SerializeField] private float _chaseMoveSpeed = 6f;
+        [SerializeField] private float _changeStopTime = 2f;
 
         [Space(20)]
-        public float Distance = 0.2f;
-        public LayerMask Groundlayer;
+        [SerializeField] private float _distance = 0.2f;
+        [SerializeField] private LayerMask _groundlayer;
 
         [Space(20)]
-        [Tag] public string TargetTag;
-        public float TargetDistance = 4f;
-        public float AttackDistance = 1f;
-        public LayerMask TargetLayer;
+        [Tag, SerializeField] private string _targetTag;
+        [SerializeField] private float _targetDistance = 4f;
+        [SerializeField] private float _attackDistance = 1f;
+        [SerializeField] private LayerMask _targetLayer;
 
         [Space(20)]
 
         [Separator("Enemy Animator")]
-        public AnimatorController AnimatorController;
-        public List<AnimationClipVisual> Clips = new();
+        [SerializeField] private AnimatorController _animatorController;
+        [SerializeField] private List<AnimationClipVisual> _clips;
 
-        private AnimatorController _animatorController;
+        [SerializeField, ReadOnly] private string  m_animatorController;
 
         private void OnValidate()
         {
-            if (_animatorController != AnimatorController)
+            if (_animatorController != null && m_animatorController != _animatorController.name)
             {
-                _animatorController = AnimatorController;
+                Debug.Log($"{name} => m_animatorController:{m_animatorController} != _animatorController.name:{_animatorController.name}");
+                m_animatorController = _animatorController.name;
+                _clips.Clear();
 
-                Clips.Clear();
-                for (int i = 0; i < _animatorController.animationClips.Length; i++)
+                AnimatorControllerLayer layer = _animatorController.layers[0];
+                for (int i = 0; i < layer.stateMachine.states.Length; i++)
                 {
-                    AnimationClipVisual clipVisual = new(_animatorController.animationClips[i].name, _animatorController.animationClips[i]);
-                    Clips.Add(clipVisual);
+                    string stateName = layer.stateMachine.states[i].state.name;
+                    AnimationClip clip = (AnimationClip)layer.stateMachine.states[i].state.motion;
+
+                    AnimationClipVisual clipVisual = new(stateName, clip);
+                    _clips.Add(clipVisual);
                 }
             }
         }

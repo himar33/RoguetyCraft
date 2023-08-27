@@ -6,6 +6,9 @@ using UnityEditor;
 using RoguetyCraft.Enemies.Generic;
 using RoguetyCraft.Player.Movement;
 using MyBox;
+using System.Runtime.CompilerServices;
+using System.Collections.Generic;
+using RoguetyCraft.Generic.Animation;
 
 namespace RoguetyCraft.Enemies.Controller
 {
@@ -40,8 +43,6 @@ namespace RoguetyCraft.Enemies.Controller
             RoguetyUtilities.GetComponent(gameObject, out _spriteRenderer);
 
             _initialColorMask = _spriteRenderer.color;
-
-            UpdateData();
         }
 
         private void Start()
@@ -77,31 +78,34 @@ namespace RoguetyCraft.Enemies.Controller
         {
             if (_enemyData != null)
             {
-                UpdateData();
-            }
-        }
+                _health = _enemyData.Health;
+                _hitTime = _enemyData.HitTime;
+                _hitColorMask = _enemyData.HitColorMask;
 
-        private void UpdateData()
-        {
-            _health = _enemyData.Health;
-            _hitTime = _enemyData.HitTime;
-            _hitColorMask = _enemyData.HitColorMask;
-
-            if (RoguetyUtilities.GetComponent(gameObject, out EnemyMovement movement))
-            {
-                movement.UpdateMovementData(_enemyData);
-            }
-            if (RoguetyUtilities.GetComponent(gameObject, out EnemyAnimator animator))
-            {
-                animator.AnimatorController = _enemyData.AnimatorController;
-                animator.Animations = _enemyData.Clips;
-                if (RoguetyUtilities.GetComponent(gameObject, out SpriteRenderer spriteR))
+                if (RoguetyUtilities.GetComponent(gameObject, out EnemyMovement movement))
                 {
-                    spriteR.sprite = RoguetyUtilities.GetSpritesFromClip(_enemyData.Clips[0].ValueClip)[0];
-                    if (RoguetyUtilities.GetComponent(gameObject, out BoxCollider2D collider))
+                    movement.UpdateMovementData(_enemyData);
+                }
+                if (RoguetyUtilities.GetComponent(gameObject, out EnemyAnimator animator))
+                {
+                    animator.AnimatorController = _enemyData.AnimatorController;
+
+                    List<AnimationClipVisual> animationClipVisuals = new();
+                    for (int i = 0; i < _enemyData.Clips.Count; i++)
                     {
-                        Vector2 S = spriteR.bounds.size;
-                        collider.size = S;
+                        AnimationClipVisual animationClipVisual = new(_enemyData.Clips[i].KeyName, _enemyData.Clips[i].ValueClip);
+                        animationClipVisuals.Add(animationClipVisual);
+                    }
+                    animator.Animations = animationClipVisuals;
+
+                    if (RoguetyUtilities.GetComponent(gameObject, out SpriteRenderer spriteR))
+                    {
+                        spriteR.sprite = RoguetyUtilities.GetSpritesFromClip(_enemyData.Clips[0].ValueClip)[0];
+                        if (RoguetyUtilities.GetComponent(gameObject, out BoxCollider2D collider))
+                        {
+                            Vector2 S = spriteR.bounds.size;
+                            collider.size = S;
+                        }
                     }
                 }
             }
