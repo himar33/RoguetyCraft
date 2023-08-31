@@ -1,4 +1,5 @@
 using RoguetyCraft.Map.Generic;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -21,6 +22,10 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
             AddManipulators();
             AddSearchWindow();
             AddGridBackground();
+
+            OnElementsDeleted();
+            OnGraphViewChanged();
+
             AddStyles();
         }
 
@@ -34,13 +39,6 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
             this.AddManipulator(CreateNodeContextualMenu());
         }
 
-        private void AddGridBackground()
-        {
-            GridBackground gridBackground = new GridBackground();
-            gridBackground.StretchToParentSize();
-            Insert(0, gridBackground);
-        }
-
         private void AddSearchWindow()
         {
             if (_searchWindow == null)
@@ -49,6 +47,80 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
                 _searchWindow.Init(this);
             }
             nodeCreationRequest = context => SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), _searchWindow);
+        }
+
+        private void AddGridBackground()
+        {
+            GridBackground gridBackground = new GridBackground();
+            gridBackground.StretchToParentSize();
+            Insert(0, gridBackground);
+        }
+
+        private void OnElementsDeleted()
+        {
+            deleteSelection = (operationName, askUser) =>
+            {
+                Type edgeType = typeof(Edge);
+
+                List<LevelNode> nodesToDelete = new List<LevelNode>();
+                List<Edge> edgesToDelete = new List<Edge>();
+
+                foreach (GraphElement selectedElement in selection)
+                {
+                    if (selectedElement is LevelNode node)
+                    {
+                        nodesToDelete.Add(node);
+                        continue;
+                    }
+
+                    if (selectedElement.GetType() == edgeType)
+                    {
+                        Edge edge = (Edge)selectedElement;
+                        edgesToDelete.Add(edge);
+                        continue;
+                    }
+                }
+
+                DeleteElements(edgesToDelete);
+
+                foreach (LevelNode nodeToDelete in nodesToDelete)
+                {
+                    _nodesList.Remove(nodeToDelete);
+                    foreach (LevelNode nodeInList in _nodesList)
+                    {
+                        int index = _nodesList.IndexOf(nodeInList); 
+                        nodeInList.RoomIndex = index;
+                        nodeInList.Redraw();
+                    }
+
+                    nodeToDelete.DeleteAllPorts();
+                    RemoveElement(nodeToDelete);
+                }
+            };
+        }
+
+        private void OnGraphViewChanged()
+        {
+            graphViewChanged = (changes) =>
+            {
+                if (changes.edgesToCreate != null)
+                {
+                    foreach (Edge edge in changes.edgesToCreate)
+                    {
+                    }
+                }
+
+                if (changes.elementsToRemove != null)
+                {
+                    Type edgeType = typeof(Edge);
+
+                    foreach (GraphElement element in changes.elementsToRemove)
+                    {
+                    }
+                }
+
+                return changes;
+            };
         }
 
         private void AddStyles()
@@ -98,9 +170,8 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
         {
             LevelNode node = new();
 
-            node.Init(_nodesList.Count, type, position);
+            node.Init(_nodesList.Count, this, type, position);
             _nodesList.Add(node);
-
             node.Draw();
 
             return node;

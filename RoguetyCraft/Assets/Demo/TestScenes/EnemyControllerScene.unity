@@ -513,9 +513,9 @@ MonoBehaviour:
   _animatorController: {fileID: 9100000, guid: 78946f3517c4afd4eb18660cb6a4778a, type: 2}
   _animationClips:
   - KeyName: enemy_idle
-    ValueClip: {fileID: 7400000, guid: 84545af7dfaf8e64990c1ce55af3114f, type: 2}
+    ValueClip: {fileID: 7400000, guid: 746946e8ed20ea249a342d0760699df5, type: 2}
   - KeyName: enemy_walk
-    ValueClip: {fileID: 7400000, guid: 2e2b6fdb332704249a81511f6a317c6c, type: 2}
+    ValueClip: {fileID: 7400000, guid: 7f06d28c63372aa46bec0cefcd59f7c5, type: 2}
 --- !u!114 &448351407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,6 +669,22 @@ PrefabInstance:
       propertyPath: _animationClips.Array.size
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1180742079, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
+      propertyPath: _animationClips.Array.data[0].KeyName
+      value: player_idle_anim
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180742079, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
+      propertyPath: _animationClips.Array.data[1].KeyName
+      value: player_run_anim
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180742079, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
+      propertyPath: _animationClips.Array.data[0].ValueClip
+      value: 
+      objectReference: {fileID: 7400000, guid: a24c7477611504546ad10623fb40d939, type: 2}
+    - target: {fileID: 1180742079, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
+      propertyPath: _animationClips.Array.data[1].ValueClip
+      value: 
+      objectReference: {fileID: 7400000, guid: e2114194de826b742af9a4e197f3abfe, type: 2}
     - target: {fileID: 2229989052069778830, guid: 7bf421c9be4134343a34b40eeecfa340, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -869,9 +885,9 @@ MonoBehaviour:
   _animatorController: {fileID: 9100000, guid: 78946f3517c4afd4eb18660cb6a4778a, type: 2}
   _animationClips:
   - KeyName: enemy_idle
-    ValueClip: {fileID: 7400000, guid: 84545af7dfaf8e64990c1ce55af3114f, type: 2}
+    ValueClip: {fileID: 7400000, guid: 746946e8ed20ea249a342d0760699df5, type: 2}
   - KeyName: enemy_walk
-    ValueClip: {fileID: 7400000, guid: 2e2b6fdb332704249a81511f6a317c6c, type: 2}
+    ValueClip: {fileID: 7400000, guid: 7f06d28c63372aa46bec0cefcd59f7c5, type: 2}
 --- !u!114 &788574897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1099,9 +1115,9 @@ MonoBehaviour:
   _animatorController: {fileID: 9100000, guid: 78946f3517c4afd4eb18660cb6a4778a, type: 2}
   _animationClips:
   - KeyName: enemy_idle
-    ValueClip: {fileID: 7400000, guid: 84545af7dfaf8e64990c1ce55af3114f, type: 2}
+    ValueClip: {fileID: 7400000, guid: 746946e8ed20ea249a342d0760699df5, type: 2}
   - KeyName: enemy_walk
-    ValueClip: {fileID: 7400000, guid: 2e2b6fdb332704249a81511f6a317c6c, type: 2}
+    ValueClip: {fileID: 7400000, guid: 7f06d28c63372aa46bec0cefcd59f7c5, type: 2}
 --- !u!114 &1028261832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1528,9 +1544,9 @@ MonoBehaviour:
   _animatorController: {fileID: 9100000, guid: 78946f3517c4afd4eb18660cb6a4778a, type: 2}
   _animationClips:
   - KeyName: enemy_idle
-    ValueClip: {fileID: 7400000, guid: 84545af7dfaf8e64990c1ce55af3114f, type: 2}
+    ValueClip: {fileID: 7400000, guid: 2d0e6193f2a4f8343bb2e3baeea90114, type: 2}
   - KeyName: enemy_walk
-    ValueClip: {fileID: 7400000, guid: 2e2b6fdb332704249a81511f6a317c6c, type: 2}
+    ValueClip: {fileID: 7400000, guid: e1bd36e6c8aeb234f9070019bbdc8888, type: 2}
 --- !u!114 &1604703217
 MonoBehaviour:
   m_ObjectHideFlags: 0
