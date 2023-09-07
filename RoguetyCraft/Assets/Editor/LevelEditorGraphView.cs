@@ -1,19 +1,21 @@
-using RoguetyCraft.Map.Generic;
+using NUnit.Framework.Interfaces;
+using RoguetyCraft.Map.Data;
 using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.EventSystems.StandaloneInputModule;
 
 namespace RoguetyCraft.Map.Editor.LevelGraph
 {
     public class LevelEditorGraphView : GraphView
     {
+        public List<LevelNode> NodesList { get; set; } = new List<LevelNode>();
+
         private LevelEditorWindow _editorWindow;
         private LevelSearchWindow _searchWindow;
-
-        private List<LevelNode> _nodesList = new List<LevelNode>();
 
         public LevelEditorGraphView(LevelEditorWindow editorWindow)
         {
@@ -76,7 +78,18 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
                     if (selectedElement.GetType() == edgeType)
                     {
                         Edge edge = (Edge)selectedElement;
+
+                        LevelNode inputNode = (LevelNode)edge.input.node;
+                        LevelNode outputNode = (LevelNode)edge.output.node;
+
+                        inputNode.InputRooms.Remove(outputNode.RoomIndex);
+                        outputNode.OutputRooms.Remove(inputNode.RoomIndex);
+
+                        inputNode.AddNodeConnection();
+                        outputNode.AddNodeConnection();
+
                         edgesToDelete.Add(edge);
+
                         continue;
                     }
                 }
@@ -85,12 +98,22 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
 
                 foreach (LevelNode nodeToDelete in nodesToDelete)
                 {
-                    _nodesList.Remove(nodeToDelete);
-                    foreach (LevelNode nodeInList in _nodesList)
+                    foreach (int inputNodes in nodeToDelete.InputRooms)
                     {
-                        int index = _nodesList.IndexOf(nodeInList); 
+                        NodesList.Find(x => x.RoomIndex == inputNodes).DeleteNode(nodeToDelete.RoomIndex);
+                    }
+                    foreach (int outputNodes in nodeToDelete.OutputRooms)
+                    {
+                        NodesList.Find(x => x.RoomIndex == outputNodes).DeleteNode(nodeToDelete.RoomIndex);
+                    }
+
+                    NodesList.Remove(nodeToDelete);
+
+                    foreach (LevelNode nodeInList in NodesList)
+                    {
+                        int index = NodesList.IndexOf(nodeInList); 
                         nodeInList.RoomIndex = index;
-                        nodeInList.Redraw();
+                        nodeInList.OnNodeChange();
                     }
 
                     nodeToDelete.DeleteAllPorts();
@@ -107,18 +130,22 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
                 {
                     foreach (Edge edge in changes.edgesToCreate)
                     {
+                        LevelNode inputNode = (LevelNode)edge.input.node;
+                        LevelNode outputNode = (LevelNode)edge.output.node;
+
+                        if (inputNode.InputRooms.Exists(node => node == outputNode.RoomIndex))
+                        {
+                            changes.edgesToCreate.Remove(edge);
+                            return changes;
+                        }
+
+                        inputNode.InputRooms.Add(outputNode.RoomIndex);
+                        outputNode.OutputRooms.Add(inputNode.RoomIndex);
+
+                        inputNode.AddNodeConnection();
+                        outputNode.AddNodeConnection();
                     }
                 }
-
-                if (changes.elementsToRemove != null)
-                {
-                    Type edgeType = typeof(Edge);
-
-                    foreach (GraphElement element in changes.elementsToRemove)
-                    {
-                    }
-                }
-
                 return changes;
             };
         }
@@ -166,15 +193,25 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
             return contextualMenuManipulator;
         }
 
-        public LevelNode CreateNode(Vector2 position, RoomType type = RoomType.NORMAL)
+        public LevelNode CreateNode(Vector2 position, RoomType type = RoomType.NORMAL, int nodeIndex = -1)
         {
-            LevelNode node = new();
+            Type nodeType = Type.GetType("RoguetyCraft.Map.Editor.LevelGraph.LevelNode");
+            LevelNode node = (LevelNode)Activator.CreateInstance(nodeType);
 
-            node.Init(_nodesList.Count, this, type, position);
-            _nodesList.Add(node);
+            if (nodeIndex == -1) nodeIndex = NodesList.Count;
+
+            node.Init(nodeIndex, this, type, position);
+            NodesList.Add(node);
             node.Draw();
 
             return node;
+        }
+
+        public void ClearGraph()
+        {
+            graphElements.ForEach(graphElement => RemoveElement(graphElement));
+
+            NodesList.Clear();
         }
     }
 }

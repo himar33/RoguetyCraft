@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MyBox;
-using RoguetyCraft.Map.Generic;
+using RoguetyCraft.Map.Data;
 
 namespace RoguetyCraft.Map.Manager
 {

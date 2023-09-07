@@ -1,4 +1,4 @@
-using RoguetyCraft.Map.Generic;
+using RoguetyCraft.Map.Data;
 using System;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;

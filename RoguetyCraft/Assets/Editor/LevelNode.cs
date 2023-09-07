@@ -1,9 +1,6 @@
-using NUnit.Framework.Interfaces;
-using RoguetyCraft.Map.Generic;
-using System;
+using RoguetyCraft.Map.Data;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
+using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -13,16 +10,19 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
 {
     public class LevelNode : Node
     {
-        public string RoomName;
-        public int RoomIndex;
+        public string RoomName { get; set; }
+        public int RoomIndex { get; set; }
         public RoomType Type { get; set; }
-        public List<RoomType> LastRooms = new();
-        public List<RoomType> NextRooms = new();
+
+        public List<int> InputRooms { get; set; } = new();
+        public List<int> OutputRooms { get; set; } = new();
 
         private LevelEditorGraphView _graphView;
-        private TextElement IndexField;
-        private Port inputPort;
-        private Port outputPort;
+        private TextElement _indexField;
+        private TextElement _inputNodeInfo;
+        private TextElement _outputNodeInfo;
+        private Port _inputPort;
+        private Port _outputPort;
 
         public void Init(int index, LevelEditorGraphView graphView, RoomType type, Vector2 position)
         {
@@ -41,29 +41,58 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
             };
             titleContainer.Insert(0, titleField);
 
-            IndexField = new()
+            _indexField = new()
             {
                 text = $"Index: {RoomIndex}"
             };
-            contentContainer.Add(IndexField);
+            contentContainer.Add(_indexField);
 
             EnumField typeField = new("Room type: ", Type);
             contentContainer.Add(typeField);
 
-            inputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(bool));
-            inputPort.portName = "Room From";
-            inputContainer.Add(inputPort);
+            _inputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(bool));
+            _inputPort.portName = "Room From";
+            inputContainer.Add(_inputPort);
 
-            outputPort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool));
-            outputPort.portName = "Room To";
-            outputContainer.Add(outputPort);
+            _outputPort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool));
+            _outputPort.portName = "Room To";
+            outputContainer.Add(_outputPort);
+
+            _inputNodeInfo = new()
+            {
+                text = "Last Rooms ID:"
+            };
+            contentContainer.Add(_inputNodeInfo);
+
+            _outputNodeInfo = new()
+            {
+                text = "Next Rooms ID:"
+            };
+            contentContainer.Add(_outputNodeInfo);
 
             RefreshExpandedState();
         }
 
-        public void Redraw()
+        public void OnNodeChange()
         {
-            IndexField.text = $"Index: {RoomIndex}";
+            _indexField.text = $"Index: {RoomIndex}";
+        }
+
+        public void AddNodeConnection()
+        {
+            string inputTextID = "Last Rooms ID:";
+            foreach (int inputRoom in InputRooms)
+            {
+                inputTextID += $" [{inputRoom}]";
+            }
+            _inputNodeInfo.text = inputTextID;
+
+            string outputTextID = "Next Rooms ID:";
+            foreach (int outputRoom in OutputRooms)
+            {
+                outputTextID += $" [{outputRoom}]";
+            }
+            _outputNodeInfo.text = outputTextID;
         }
 
         public void DeleteAllPorts()
@@ -90,6 +119,13 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
 
                 _graphView.DeleteElements(port.connections);
             }
+        }
+
+        public void DeleteNode(int nodeToDelete)
+        {
+            if (InputRooms.Exists(x => x == nodeToDelete)) InputRooms.Remove(nodeToDelete);
+            else if (OutputRooms.Exists(x => x == nodeToDelete)) OutputRooms.Remove(nodeToDelete);
+            AddNodeConnection();
         }
     }
 }

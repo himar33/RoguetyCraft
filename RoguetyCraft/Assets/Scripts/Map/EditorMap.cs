@@ -2,9 +2,9 @@ using MyBox;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using RoguetyCraft.Map.Generic;
 using System.Collections.Generic;
 using System.Reflection;
+using RoguetyCraft.Map.Data;
 
 namespace RoguetyCraft.Map.Editor.Generic
 {

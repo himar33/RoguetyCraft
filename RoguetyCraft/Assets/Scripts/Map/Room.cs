@@ -5,7 +5,7 @@ using System;
 using UnityEditor;
 using RoguetyCraft.Map.Editor.Generic;
 
-namespace RoguetyCraft.Map.Generic
+namespace RoguetyCraft.Map.Data
 {
     [Serializable]
     public enum RoomType
