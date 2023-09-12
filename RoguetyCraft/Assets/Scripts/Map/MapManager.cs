@@ -9,6 +9,7 @@ namespace RoguetyCraft.Map.Manager
     public class MapManager : DesignPatterns.Singleton.RCSingleton<MapManager>
     {
         [Separator("Map settings")]
+        [SerializeField] private LevelData _levelData;
         [SerializeField] private List<Room> _roomList = new();
 
         private List<GameObject> _currGameObjectList = new();

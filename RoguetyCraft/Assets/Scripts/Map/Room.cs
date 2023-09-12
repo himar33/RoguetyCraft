@@ -22,7 +22,7 @@ namespace RoguetyCraft.Map.Data
     {
         [Foldout("Room Data", true)]
         [Layer] public int RoomLayer;
-        [ReadOnly] public RoomType RoomType;
+        public RoomType RoomType;
         [ReadOnly] public Vector3Int Origin;
         [ReadOnly] public Vector3Int Size;
 
