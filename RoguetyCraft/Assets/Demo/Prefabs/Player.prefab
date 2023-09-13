@@ -166,7 +166,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -686293009, guid: a1767b72147881043ac445effa12b8e1, type: 3}
+  m_Sprite: {fileID: -774380481, guid: a1767b72147881043ac445effa12b8e1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animatorController: {fileID: 9100000, guid: eb35b07d0e5cf5e40b5a7ead07a79019, type: 2}
-  _clips:
+  _animationClips:
   - KeyName: player_idle_anim
     ValueClip: {fileID: 7400000, guid: a24c7477611504546ad10623fb40d939, type: 2}
   - KeyName: player_run_anim
@@ -331,6 +331,7 @@ MonoBehaviour:
   _onEndShooting:
     m_PersistentCalls:
       m_Calls: []
+  _attackDamage: 0
 --- !u!114 &7823404664614029869
 MonoBehaviour:
   m_ObjectHideFlags: 0
