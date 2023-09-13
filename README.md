@@ -1,4 +1,4 @@
-/<img height="235" src="resources/logo_banner.png" alt="RoguetyCraft Banner" />
+/<img height="235" src="Resources/logo_banner.png" alt="RoguetyCraft Banner" />
 
 [![GitHub](https://img.shields.io/github/license/himar33/RoguetyCraft)](https://github.com/himar33/RoguetyCraft/blob/main/LICENSE)
 
