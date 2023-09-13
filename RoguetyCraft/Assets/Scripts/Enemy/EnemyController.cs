@@ -12,19 +12,65 @@ using RoguetyCraft.Generic.Animation;
 
 namespace RoguetyCraft.Enemies.Controller
 {
+    /// <summary>
+    /// Manages the behavior and state of an enemy entity in the game.
+    /// </summary>
+    [RequireComponent(typeof(EnemyMovement))]
+    [RequireComponent(typeof(EnemyAnimator))]
     [RequireLayer("Enemy")]
     public class EnemyController : MonoBehaviour, IDamageable
     {
+        #region Public Properties
+
+        /// <summary>
+        /// Gets the EnemyMovement component associated with this enemy.
+        /// </summary>
+        public EnemyMovement EMovement => _enemyMovement;
+
+        /// <summary>
+        /// Gets the EnemyAnimator component associated with this enemy.
+        /// </summary>
+        public EnemyAnimator EAnimator => _enemyAnimator;
+
+        /// <summary>
+        /// Gets the state machine managing this enemy's states.
+        /// </summary>
+        public EnemyStateMachine EStateMachine { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the current health of the enemy.
+        /// </summary>
+        public float Health { get => _health; set => _health = value; }
+
+        /// <summary>
+        /// Gets or sets the hit time for the enemy.
+        /// </summary>
+        public float HitTime { get => _hitTime; set => _hitTime = value; }
+
+        /// <summary>
+        /// Gets or sets the color mask when the enemy is hit.
+        /// </summary>
+        public Color HitColorMask { get => _hitColorMask; set => _hitColorMask = value; }
+
+        /// <summary>
+        /// Gets or sets the initial color mask of the enemy.
+        /// </summary>
+        public Color InitialColorMask { get => _initialColorMask; set => _initialColorMask = value; }
+
+        /// <summary>
+        /// Gets or sets the last recorded velocity of the enemy.
+        /// </summary>
+        public float LastVelocity { get => _lastVelocity; set => _lastVelocity = value; }
+
+        #endregion
+
+        #region Serialized Fields
+
         [SerializeField] private Enemy _enemyData;
 
-        public EnemyMovement EMovement => _enemyMovement;
-        public EnemyAnimator EAnimator => _enemyAnimator;
-        public EnemyStateMachine EStateMachine { get; private set; }
-        public float Health { get => _health; set => _health = value; }
-        public float HitTime { get => _hitTime; set => _hitTime = value; }
-        public Color HitColorMask { get => _hitColorMask; set => _hitColorMask = value; }
-        public Color InitialColorMask { get => _initialColorMask; set => _initialColorMask = value; }
-        public float LastVelocity { get => _lastVelocity; set => _lastVelocity = value; }
+        #endregion
+
+        #region Private Fields
 
         private float _health;
         private float _hitTime;
@@ -35,6 +81,10 @@ namespace RoguetyCraft.Enemies.Controller
         private EnemyMovement _enemyMovement;
         private EnemyAnimator _enemyAnimator;
         private SpriteRenderer _spriteRenderer;
+
+        #endregion
+
+        #region Unity Lifecycle Methods
 
         private void Awake()
         {
@@ -74,6 +124,10 @@ namespace RoguetyCraft.Enemies.Controller
             TakeDamage(other.GetComponentInParent<IDamager>().AttackDamage);
         }
 
+        #endregion
+
+        #region Validation and Utility Methods
+
         private void OnValidate()
         {
             if (_enemyData != null)
@@ -81,51 +135,31 @@ namespace RoguetyCraft.Enemies.Controller
                 _health = _enemyData.Health;
                 _hitTime = _enemyData.HitTime;
                 _hitColorMask = _enemyData.HitColorMask;
-
-                if (RoguetyUtilities.GetComponent(gameObject, out EnemyMovement movement))
-                {
-                    movement.UpdateMovementData(_enemyData);
-                }
-                if (RoguetyUtilities.GetComponent(gameObject, out EnemyAnimator animator))
-                {
-                    animator.AnimatorController = _enemyData.AnimatorController;
-
-                    List<AnimationClipVisual> animationClipVisuals = new();
-                    for (int i = 0; i < _enemyData.Clips.Count; i++)
-                    {
-                        AnimationClipVisual animationClipVisual = new(_enemyData.Clips[i].KeyName, _enemyData.Clips[i].ValueClip);
-                        animationClipVisuals.Add(animationClipVisual);
-                    }
-                    animator.Animations = animationClipVisuals;
-
-                    if (RoguetyUtilities.GetComponent(gameObject, out SpriteRenderer spriteR))
-                    {
-                        spriteR.sprite = RoguetyUtilities.GetSpritesFromClip(_enemyData.Clips[0].ValueClip)[0];
-                        if (RoguetyUtilities.GetComponent(gameObject, out BoxCollider2D collider))
-                        {
-                            Vector2 S = spriteR.bounds.size;
-                            collider.size = S;
-                        }
-                    }
-                }
             }
         }
 
+        #endregion
+
+        #region IDamageable Implementation
+
+        /// <summary>
+        /// Applies damage to the enemy and updates its state accordingly.
+        /// </summary>
         public void TakeDamage(float amount)
         {
             Health -= amount;
-            if (Health <= 0)
-            {
-                EStateMachine.Set(EnemyStates.DEAD);
-            }
-            else EStateMachine.Set(EnemyStates.HIT);
+            EStateMachine.Set(Health <= 0 ? EnemyStates.DEAD : EnemyStates.HIT);
         }
+
+        #endregion
+
+        #region Editor Utilities
 
         [MenuItem("GameObject/RoguetyCraft/EnemyController", priority = 1)]
         static void Create()
         {
             GameObject root = new GameObject("EnemyController");
-            root.transform.position = new Vector3(0, 0, 0);
+            root.transform.position = Vector3.zero;
 
             root.AddComponent<EnemyController>();
             root.AddComponent<EnemyMovement>();
@@ -137,5 +171,7 @@ namespace RoguetyCraft.Enemies.Controller
             GameObject colliderGO = new GameObject("Collider", typeof(BoxCollider2D));
             colliderGO.transform.parent = root.transform;
         }
+
+        #endregion
     }
 }

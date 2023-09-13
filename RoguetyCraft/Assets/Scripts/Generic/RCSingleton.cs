@@ -2,8 +2,17 @@ using UnityEngine;
 
 namespace RoguetyCraft.DesignPatterns.Singleton
 {
+    /// <summary>
+    /// Singleton pattern implementation for MonoBehaviour classes.
+    /// </summary>
+    /// <typeparam name="T">Type of the singleton.</typeparam>
     public class RCSingleton<T> : MonoBehaviour where T : Component
     {
+        #region Singleton Logic
+
+        /// <summary>
+        /// Gets the singleton instance of type T.
+        /// </summary>
         public static T Instance
         {
             get
@@ -21,10 +30,21 @@ namespace RoguetyCraft.DesignPatterns.Singleton
         }
         private static T instance;
 
+        #endregion
+
+        #region Unity Callbacks
+
+        /// <summary>
+        /// Awake is called when the script instance is being loaded.
+        /// </summary>
         public virtual void Awake()
         {
             RemoveDuplicates();
         }
+
+        #endregion
+
+        #region Helper Methods
 
         private static void SetupInstance()
         {
@@ -51,5 +71,7 @@ namespace RoguetyCraft.DesignPatterns.Singleton
                 Destroy(gameObject);
             }
         }
+
+        #endregion
     }
 }

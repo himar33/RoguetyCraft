@@ -12,16 +12,32 @@ namespace RoguetyCraft.Generic.Animation
     {
         [ReadOnly] public string KeyName;
         public AnimationClip ValueClip;
+
+        /// <summary>
+        /// Constructs an AnimationClipVisual object with the given name and clip.
+        /// </summary>
+        /// <param name="name">The key name for the animation clip.</param>
+        /// <param name="clip">The animation clip.</param>
         public AnimationClipVisual(string name, AnimationClip clip)
         {
             KeyName = name;
             ValueClip = clip;
         }
     }
+
     public class AnimationClipOverrides : List<KeyValuePair<AnimationClip, AnimationClip>>
     {
+        /// <summary>
+        /// Initializes the AnimationClipOverrides list with the given capacity.
+        /// </summary>
+        /// <param name="capacity">The initial capacity of the list.</param>
         public AnimationClipOverrides(int capacity) : base(capacity) { }
 
+        /// <summary>
+        /// Accessor for animation clip by name.
+        /// </summary>
+        /// <param name="name">The name of the animation clip.</param>
+        /// <returns>The animation clip with the specified name.</returns>
         public AnimationClip this[string name]
         {
             get { return this.Find(x => x.Key.name.Equals(name)).Value; }
@@ -33,11 +49,19 @@ namespace RoguetyCraft.Generic.Animation
             }
         }
     }
+
     public class SpriteAnimator : MonoBehaviour
     {
-        public AnimatorController AnimatorController { get { return _animatorController; } set { _animatorController = value; } }
-        
-        public List<AnimationClipVisual> Animations { get { return _animationClips; } set { _animationClips = value; } }
+        public AnimatorController AnimatorController
+        {
+            get { return _animatorController; }
+            set { _animatorController = value; }
+        }
+        public List<AnimationClipVisual> Animations
+        {
+            get { return _animationClips; }
+            set { _animationClips = value; }
+        }
 
         [SerializeField] protected AnimatorController _animatorController;
         [SerializeField] protected List<AnimationClipVisual> _animationClips = new();
@@ -46,6 +70,9 @@ namespace RoguetyCraft.Generic.Animation
         protected AnimatorOverrideController _animatorOverride;
         protected AnimationClipOverrides _animatorClips;
 
+        /// <summary>
+        /// Initializes the sprite animator and applies animation overrides if specified.
+        /// </summary>
         protected virtual void Awake()
         {
             if (!RoguetyUtilities.GetComponent(gameObject, out _animator))

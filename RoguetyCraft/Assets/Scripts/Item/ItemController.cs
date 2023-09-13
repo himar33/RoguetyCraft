@@ -7,8 +7,16 @@ using UnityEditor;
 
 namespace RoguetyCraft.Items.Controller
 {
+    /// <summary>
+    /// Controller class to manage item behavior in the game.
+    /// </summary>
     public class ItemController : MonoBehaviour
     {
+        #region Fields and Properties
+
+        /// <summary>
+        /// Gets the Item associated with this controller.
+        /// </summary>
         public Item Item => _item;
 
         [Separator("Item settings")]
@@ -20,7 +28,7 @@ namespace RoguetyCraft.Items.Controller
         [SerializeField] private LayerMask _colLayer;
         [SerializeField] private Color _gizmosColor = Color.red;
 
-        [Separator("Item settings")]
+        [Separator("Sprite settings")]
         [SerializeField] private Color _spriteColor = Color.white;
         [SerializeField, SpriteLayer] private int _spriteLayer = 0;
         [SerializeField] private int _orderLayer = 0;
@@ -35,6 +43,10 @@ namespace RoguetyCraft.Items.Controller
         private SpriteRenderer _spriteRenderer;
         private Vector3 _startPos;
 
+        #endregion
+
+        #region Unity Lifecycle Methods
+
         private void OnDrawGizmos()
         {
             Gizmos.color = _gizmosColor;
@@ -42,6 +54,23 @@ namespace RoguetyCraft.Items.Controller
         }
 
         private void Start()
+        {
+            InitializeComponents();
+            _startPos = transform.position;
+        }
+
+        private void Update()
+        {
+            UpdateAnimation();
+            CheckInteraction();
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        /// Initializes necessary components like Collider2D and SpriteRenderer.
+        private void InitializeComponents()
         {
             bool hasCollider = TryGetComponent(out _collider);
             if (!hasCollider)
@@ -65,16 +94,9 @@ namespace RoguetyCraft.Items.Controller
 
                 _spriteRenderer = spr;
             }
-
-            _startPos = transform.position;
         }
 
-        private void Update()
-        {
-            UpdateAnimation();
-            CheckInteraction();
-        }
-
+        /// Updates the animation of the item based on time and settings.
         private void UpdateAnimation()
         {
             float t = Mathf.Sin(Time.time * _animFreq);
@@ -82,6 +104,7 @@ namespace RoguetyCraft.Items.Controller
             transform.position = _startPos + _animDirection * _animCurve.Evaluate(normalizedT) * _animAmp;
         }
 
+        /// Checks for interactions with the player and triggers the item's effect if applicable.
         private void CheckInteraction()
         {
             Collider2D col = Physics2D.OverlapCircle(_collider.bounds.center, _colRadius, _colLayer);
@@ -91,6 +114,13 @@ namespace RoguetyCraft.Items.Controller
             }
         }
 
+        #endregion
+
+        #region Static Methods
+
+        /// <summary>
+        /// Editor utility for creating a new ItemController GameObject.
+        /// </summary>
         [MenuItem("GameObject/RoguetyCraft/ItemController", priority = 1)]
         static void Create()
         {
@@ -99,5 +129,8 @@ namespace RoguetyCraft.Items.Controller
 
             go.AddComponent<ItemController>();
         }
+
+        #endregion
     }
+
 }

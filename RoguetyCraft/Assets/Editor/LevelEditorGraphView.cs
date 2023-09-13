@@ -1,4 +1,3 @@
-using NUnit.Framework.Interfaces;
 using RoguetyCraft.Map.Data;
 using System;
 using System.Collections.Generic;
@@ -6,7 +5,6 @@ using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEngine.EventSystems.StandaloneInputModule;
 
 namespace RoguetyCraft.Map.Editor.LevelGraph
 {

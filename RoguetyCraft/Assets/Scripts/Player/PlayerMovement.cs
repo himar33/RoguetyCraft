@@ -6,20 +6,67 @@ using UnityEngine.Events;
 
 namespace RoguetyCraft.Player.Movement
 {
+    /// <summary>
+    /// Manages player movement and input for a 2D platformer character.
+    /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour
     {
+        #region Public Properties
+
+        /// <summary>
+        /// Gets the player's current velocity.
+        /// </summary>
         public Vector3 PVelocity => _rb.velocity;
+
+        /// <summary>
+        /// Gets the player's horizontal raw input.
+        /// </summary>
         public float PHorizontalRawInput { get; private set; }
+
+        /// <summary>
+        /// Gets the player's horizontal smoothed input.
+        /// </summary>
         public float PHorizontalInput { get; private set; }
+
+        /// <summary>
+        /// Gets if the jump button was pressed down.
+        /// </summary>
         public bool PJumpDown { get; private set; }
+
+        /// <summary>
+        /// Gets if the jump button was released.
+        /// </summary>
         public bool PJumpUp { get; private set; }
+
+        /// <summary>
+        /// Gets the player's collider.
+        /// </summary>
         public Collider2D PCollider { get; private set; }
+
+        /// <summary>
+        /// Gets the player's direction.
+        /// </summary>
         public Vector2 PDirection { get; private set; }
 
+        /// <summary>
+        /// Gets if the player is jumping.
+        /// </summary>
         public bool IsJumping { get; private set; }
+
+        /// <summary>
+        /// Gets if the player is running.
+        /// </summary>
         public bool IsRunning => (_colDown && _rb.velocity.x != .0f);
+
+        /// <summary>
+        /// Gets if the player is grounded.
+        /// </summary>
         public bool IsGrounded => _colDown;
+
+        #endregion
+
+        #region Serialized Fields
 
         [Separator("Collision")]
         [SerializeField] private LayerMask _groundLayer;
@@ -43,12 +90,14 @@ namespace RoguetyCraft.Player.Movement
         [SerializeField] private UnityEvent _onJump;
         [SerializeField] private UnityEvent _onLand;
 
+        #endregion
+
+        #region Private Variables
+
         private Rigidbody2D _rb;
         private float _currHorizontalSpeed, _currVerticalSpeed;
-
         private Vector3 _colSize, _colCenter, _colMin, _colMax;
         private bool _colUp, _colDown, _colLeft, _colRight;
-
         private float _timeGrounded;
         private float _lastJumpPressed;
         private bool _pendingToJump;
@@ -57,33 +106,40 @@ namespace RoguetyCraft.Player.Movement
         private bool CanUseCoyote => _coyoteActive && !_colDown && _timeGrounded + _coyoteTimeLimit > Time.time;
         private bool HasBufferedJump => _colDown && _lastJumpPressed + _jumpBuffer > Time.time;
 
+        #endregion
+
+        #region Unity Lifecycle Methods
+
         private void Awake()
         {
+            // Initialize required components and properties
             PCollider = GetComponentInChildren<Collider2D>();
-
             _rb = GetComponentInChildren<Rigidbody2D>();
             _rb.gravityScale = _gravityModifier;
         }
 
         private void Update()
         {
+            // Gather player inputs and check for collisions
             GatherInput();
             CheckCollisions();
 
+            // Calculate player movement and jump mechanics
             CalculateMovement();
             CalculateJump();
         }
 
         private void FixedUpdate()
         {
+            // Execute the pending movements
             CheckMovesToDo();
             Move();
         }
 
         private void OnDrawGizmos()
         {
+            // Draw collision boxes for debugging
             Bounds pBounds = GetComponentInChildren<Collider2D>().bounds;
-
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(new(pBounds.center.x, pBounds.min.y), new(pBounds.size.x, _collisionOffset));
             Gizmos.DrawWireCube(new(pBounds.center.x, pBounds.max.y), new(pBounds.size.x, _collisionOffset));
@@ -91,6 +147,13 @@ namespace RoguetyCraft.Player.Movement
             Gizmos.DrawWireCube(new(pBounds.max.x, pBounds.center.y), new(_collisionOffset, pBounds.size.y));
         }
 
+        #endregion
+
+        #region Helper Methods
+
+        /// <summary>
+        /// Gathers user inputs.
+        /// </summary>
         private void GatherInput()
         {
             PJumpDown = Input.GetKeyDown(KeyCode.Space);
@@ -98,24 +161,25 @@ namespace RoguetyCraft.Player.Movement
             PHorizontalRawInput = Input.GetAxisRaw("Horizontal");
             PHorizontalInput = Input.GetAxis("Horizontal");
 
+            // Update player direction
             Vector2 lastDirection = PDirection;
-
             if (PHorizontalRawInput != 0)
             {
                 PDirection = (PHorizontalRawInput > 0) ? Vector2.right : Vector2.left;
             }
-
             if (PDirection != lastDirection && IsGrounded)
             {
                 _onFlip.Invoke();
             }
-
             if (PJumpDown)
             {
                 _lastJumpPressed = Time.time;
             }
         }
 
+        /// <summary>
+        /// Checks for collisions with ground and walls.
+        /// </summary>
         private void CheckCollisions()
         {
             _colSize = PCollider.bounds.size;
@@ -137,6 +201,9 @@ namespace RoguetyCraft.Player.Movement
             _colRight = Physics2D.BoxCast(new(_colMax.x, _colCenter.y), new(_collisionOffset, _colSize.y), 0, Vector2.right, _collisionOffset, _groundLayer);
         }
 
+        /// <summary>
+        /// Calculates the current movement state of the player.
+        /// </summary>
         private void CalculateMovement()
         {
             if (PHorizontalRawInput != 0)
@@ -155,6 +222,9 @@ namespace RoguetyCraft.Player.Movement
             if (_currVerticalSpeed < _maxFallingSpeed) _currVerticalSpeed = _maxFallingSpeed;
         }
 
+        /// <summary>
+        /// Calculates jump mechanics and states.
+        /// </summary>
         private void CalculateJump()
         {
             if (PJumpDown && CanUseCoyote || HasBufferedJump)
@@ -176,6 +246,9 @@ namespace RoguetyCraft.Player.Movement
             }
         }
 
+        /// <summary>
+        /// Checks for pending moves like jump.
+        /// </summary>
         private void CheckMovesToDo()
         {
             if (_pendingToJump)
@@ -186,10 +259,15 @@ namespace RoguetyCraft.Player.Movement
             }
         }
 
+        /// <summary>
+        /// Applies movement to the Rigidbody2D.
+        /// </summary>
         private void Move()
         {
             Vector2 currVelocity = new(_currHorizontalSpeed, _currVerticalSpeed);
             _rb.velocity = currVelocity;
         }
+
+        #endregion
     }
 }

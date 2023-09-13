@@ -7,6 +7,9 @@ using RoguetyCraft.Map.Editor.Generic;
 
 namespace RoguetyCraft.Map.Data
 {
+    /// <summary>
+    /// Enumeration representing the different types of rooms in the game.
+    /// </summary>
     [Serializable]
     public enum RoomType
     {
@@ -18,20 +21,49 @@ namespace RoguetyCraft.Map.Data
         TELEPORT,
         EXIT
     }
+
+    /// <summary>
+    /// Scriptable object that holds data for a specific room type and layout.
+    /// </summary>
     public class Room : ScriptableObject
     {
+        #region Public Variables
+
         [Foldout("Room Data", true)]
         [Layer] public int RoomLayer;
+
+        /// <summary>
+        /// The type of this room.
+        /// </summary>
         public RoomType RoomType;
+
+        /// <summary>
+        /// The origin of this room in the tilemap.
+        /// </summary>
         [ReadOnly] public Vector3Int Origin;
+
+        /// <summary>
+        /// The size of this room in the tilemap.
+        /// </summary>
         [ReadOnly] public Vector3Int Size;
 
         [Foldout("Room Tiles", true)]
         [ReadOnly] public TileBase[] TileArray;
         [ReadOnly] public Vector3Int[] TilePositionArray;
 
+        #endregion
+
+        #region Private Variables
+
         private int _refID;
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Reloads the tilemap array for this room from a GameObject reference.
+        /// </summary>
         [ButtonMethod]
         public void ReloadTileMapArray()
         {
@@ -59,6 +91,10 @@ namespace RoguetyCraft.Map.Data
                     "Ok");
             }
         }
+
+        /// <summary>
+        /// Sets the room parameters.
+        /// </summary>
         public void SetRoom(Vector3Int _origin, Vector3Int _size, Editor.Generic.TileData[] _tiles, int objID)
         {
             Origin = _origin;
@@ -75,6 +111,10 @@ namespace RoguetyCraft.Map.Data
 
             _refID = objID;
         }
+
+        /// <summary>
+        /// Instantiates a room GameObject based on this room's data.
+        /// </summary>
         public GameObject InstantiateRoom(Vector3Int offset, Transform parent)
         {
             GameObject room;
@@ -112,5 +152,7 @@ namespace RoguetyCraft.Map.Data
 
             return room;
         }
+
+        #endregion
     }
 }
