@@ -1,6 +1,5 @@
-using System;
+#if UNITY_EDITOR
 using System.IO;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -139,3 +138,4 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
         }
     }
 }
+#endif

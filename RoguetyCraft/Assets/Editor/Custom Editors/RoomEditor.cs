@@ -1,4 +1,4 @@
-using RoguetyCraft.Items.Weapon;
+#if UNITY_EDITOR
 using RoguetyCraft.Map.Data;
 using UnityEditor;
 using UnityEngine;
@@ -35,3 +35,4 @@ namespace RoguetyCraft.Generic.CustomEditors
         }
     }
 }
+#endif

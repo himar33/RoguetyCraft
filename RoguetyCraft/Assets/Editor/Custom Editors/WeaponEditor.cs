@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using MyBox;
 using RoguetyCraft.Items.Weapon;
 using UnityEditor;
@@ -51,3 +52,4 @@ namespace RoguetyCraft.Generic.CustomEditors
         }
     }
 }
+#endif

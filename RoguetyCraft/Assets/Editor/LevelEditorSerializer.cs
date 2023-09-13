@@ -1,7 +1,5 @@
-using NUnit.Framework.Interfaces;
+#if UNITY_EDITOR
 using RoguetyCraft.Map.Data;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -185,3 +183,4 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
         #endregion
     }
 }
+#endif

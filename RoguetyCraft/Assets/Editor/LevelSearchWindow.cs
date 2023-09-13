@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using RoguetyCraft.Map.Data;
 using System;
 using System.Collections.Generic;
@@ -40,3 +41,4 @@ namespace RoguetyCraft.Map.Editor.LevelGraph
         }
     }
 }
+#endif

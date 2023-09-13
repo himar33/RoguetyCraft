@@ -1,0 +1,7 @@
+apiRules:
+- include:
+    uidRegex: ^RoguetyCraft
+    type: Namespace
+- exclude:
+    uidRegex: .*
+    type: Namespace
