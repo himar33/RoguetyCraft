@@ -1,35 +1,32 @@
-/<img height="235" src="Resources/logo_banner_white.png" alt="RoguetyCraft Banner" />
+<img height="235" src="Resources/logo_banner_white.png" alt="RoguetyCraft Banner">
 
 [![GitHub](https://img.shields.io/github/license/himar33/RoguetyCraft)](https://github.com/himar33/RoguetyCraft/blob/main/LICENSE)
 
-**Itch.io page: <https://himar33.itch.io/roguetycraft>**
+**RoguetyCraft** is a specialized toolkit developed in Unity, designed to facilitate and optimize the creation of roguelike genre video games.
 
-**Forum Thread: <https://forum.unity.com/threads/roguetycraft-adventure-awaits.1465643/>**
+#### Table of Contents
+* [About](#about)  
+* [Features](#features)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Contribution](#contribution)
+* [License](#license)
 
-# ABOUT
-RoguetyCraft is an immersive roguelike game crafted with Unity, offering players a unique blend of strategy, action, and exploration. Dive deep into procedurally generated dungeons, face menacing enemies, and collect rare items to enhance your journey. With its dynamic gameplay mechanics and captivating visuals, RoguetyCraft promises an unforgettable gaming experience.
+## About
+Developed by **Himar Bravo González** as a final degree work for the course **Diseño y Desarrollo de Videojuegos** at CITM, 2021-22. This toolkit aims to provide developers with a robust set of tools to streamline the development of roguelike games in Unity.
 
-<img src="Images/gameplay_screenshot.gif" alt="RoguetyCraft Gameplay" />
+**RoguetyCraft** is an immersive roguelike game crafted with Unity, offering players a unique blend of strategy, action, and exploration. Dive deep into procedurally generated dungeons, face menacing enemies, and collect rare items to enhance your journey. With its dynamic gameplay mechanics and captivating visuals, RoguetyCraft promises an unforgettable gaming experience.
 
-## Why RoguetyCraft?
-RoguetyCraft stands out in the roguelike genre with its intricate design and attention to detail. From the fluid character animations to the intelligent enemy AI, every aspect of the game is meticulously crafted to provide players with a seamless and challenging experience. Whether you're a seasoned gamer or new to the roguelike scene, RoguetyCraft offers something for everyone.
+## Features
+* **Enemy System**: Define and customize enemy behavior, including health, movement, and animations.
+* **Item System**: Create various types of items, from consumables to weapons, with interaction and usage capabilities.
+* **Editor Map**: Utility methods for creating room templates and managing tilemaps directly in Unity's editor.
+* **Player Controller**: Manage player movement, weapons, and animations with ease.
 
-## Core Features
-+ **Dynamic Enemy AI**: Engage with intelligent enemies that adapt to your moves and strategies.
-+ **Item Collection**: Discover and collect a plethora of items to aid you in your quest.
-+ **Procedurally Generated Maps**: Experience a new adventure every time with randomly generated dungeons.
-+ **Customizable Weapons**: Tailor your weapons to suit your playstyle with the in-built weapon editor.
-+ **Level Editor**: Design and share your own levels with the community using the intuitive level editor.
+## Installation
 
-### Sneak Peek into the Unity Editor Features
-Here's a glimpse of the intricate coding that powers RoguetyCraft:
+## Usage
 
-```csharp
-public class Enemy : MonoBehaviour
-{
-    public float health;
-    public float damage;
-    public float speed;
-    // ... More properties and methods related to enemy behavior
-}
-```
+## Contribution
+
+## License
