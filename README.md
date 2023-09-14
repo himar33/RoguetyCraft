@@ -18,6 +18,10 @@ Developed by **Himar Bravo González** as a final degree work for the course **D
 
 **RoguetyCraft** is an immersive roguelike game crafted with Unity, offering players a unique blend of strategy, action, and exploration. Dive deep into procedurally generated dungeons, face menacing enemies, and collect rare items to enhance your journey. With its dynamic gameplay mechanics and captivating visuals, RoguetyCraft promises an unforgettable gaming experience.
 
+| ![](Resources/gameplay.gif) | 
+|:--:| 
+| *Gameplay example* |
+
 ## Features
 * **Enemy System**: Define and customize enemy behavior, including health, movement, and animations.
 * **Item System**: Create various types of items, from consumables to weapons, with interaction and usage capabilities.
@@ -48,22 +52,54 @@ The **RoguetyCraft Toolkit** is designed to be intuitive, allowing both novice a
 ### Crafting Enemies with the Enemy System
 1. **Enemy Creation**: Navigate to the Enemy script. Here, you can define various properties such as health, movement speed, target distance, and more.
 
+| ![](Resources/enemy_crab_inspector.png) | 
+|:--:| 
+| *Enemy Scriptable Object Inspector* |
+
+| ![](Resources/skeleton_moving.gif) | 
+|:--:| 
+| *Skeleton GameObject on scene* |
+
 2. **Animations**: The toolkit supports custom animations for enemies. Assign your animation clips and set up the desired transitions.
 
 ### Designing Items with the Item System
 1. **Item Types**: The toolkit supports various item types, including consumables, weapons, keys, and power-ups. Choose the type that fits your game's needs.
+
+| ![](Resources/item_controller.png) | 
+|:--:| 
+| *Item Controller Inspector* |
+
+| ![](Resources/item_moving.gif) | 
+|:--:| 
+| *Item GameObject on scene* |
 
 2. **Interaction & Usage**: Each item can have custom interactions. Define what happens when a player interacts with or uses an item.
 
 ### Building Levels with the Editor Map
 1. Room Templates: Use the utility methods provided to create room templates directly in Unity's editor. This allows for quick level design and iteration.
 
+| ![](Resources/room_creation.gif) | 
+|:--:| 
+| *Steps to create a room scriptable object* |
+
 2. Tilemaps: Manage and customize tilemaps to design intricate level layouts. The toolkit supports various tiles, allowing for diverse level designs.
+
+| ![](Resources/level_editor_graph.png) | 
+|:--:| 
+| *Level Graph Editor Window* |
 
 ### Controlling the Player with the Player Controller
 1. Movement & Weapons: The Player Controller script allows you to manage player movement and weapons seamlessly. Toggle between different movement types and assign weapons as needed.
 
+| ![](Resources/player_movement_inspector.png) | 
+|:--:| 
+| *Player Movement Inspector* |
+
 2. Animations: Just like with enemies, the toolkit supports custom player animations. Design your player's look and feel with a range of animation options.
+
+| ![](Resources/player_animation.gif) | 
+|:--:| 
+| *Player GameoObject on scene* |
 
 3. Interactions: Players can interact with various game elements, from items to NPCs. Define custom interactions to enrich your game's experience.
 
