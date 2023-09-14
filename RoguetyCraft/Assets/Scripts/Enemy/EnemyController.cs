@@ -15,8 +15,6 @@ namespace RoguetyCraft.Enemies.Controller
     /// <summary>
     /// Manages the behavior and state of an enemy entity in the game.
     /// </summary>
-    [RequireComponent(typeof(EnemyMovement))]
-    [RequireComponent(typeof(EnemyAnimator))]
     [RequireLayer("Enemy")]
     public class EnemyController : MonoBehaviour, IDamageable
     {
