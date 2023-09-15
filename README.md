@@ -8,7 +8,7 @@
 * [About](#about)  
 * [Features](#features)
 * [Installation](#installation)
-* [Usage](#usage)
+* [Manual](#manual)
 * [Contribution](#contribution)
 * [Contact](#contact)
 * [License](#license)
@@ -42,19 +42,17 @@ Developed by **Himar Bravo González** as a final degree work for the course **D
 3. **Drag and drop** the TimerTool source code files and folders into the "Assets" folder of your Unity project.
 4. Unity will import the RoguetyCraft scripts, and you can now start using RoguetyCrafty in your project.
 
-## Usage
+## Manual
 The **RoguetyCraft Toolkit** is designed to be intuitive, allowing both novice and experienced Unity developers to craft roguelike games with ease. Here's how to get the most out of this toolkit:
-### Setting Up Your Scene
-1. **Initialization**: Begin by importing the RoguetyCraft toolkit into your Unity project. Navigate to the main folder to access all the toolkit's features.
-
-2. **Scene Creation**: Create a new scene or use an existing one. Ensure that the main camera is set up to capture the gameplay area effectively.
 
 ### Crafting Enemies with the Enemy System
-1. **Enemy Creation**: Navigate to the Enemy script. Here, you can define various properties such as health, movement speed, target distance, and more.
+1. **Enemy Asset Creation**: Right Click on the Assets Folder -> Create/RoguetyCraft/Enemy. Here, you can define various properties such as health, movement speed, target distance, and more.
 
 | ![](Resources/enemy_crab_inspector.png) | 
 |:--:| 
 | *Enemy Scriptable Object Inspector* |
+
+2. **Enemy Controller Game Object**: Right Click on the hierarchy -> RoguetyCraft/Enemy Controller. Then, add the Enemy Asset to the Enemy Data property on the Enemy Controller component.
 
 | ![](Resources/skeleton_moving.gif) | 
 |:--:| 
