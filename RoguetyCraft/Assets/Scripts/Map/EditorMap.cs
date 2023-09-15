@@ -5,13 +5,16 @@ using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 using System.Reflection;
 using RoguetyCraft.Map.Data;
+using System;
+using System.Linq;
 
 namespace RoguetyCraft.Map.Editor.Generic
 {
     /// <summary>
     /// Struct to hold information about a Tile in a Tilemap.
     /// </summary>
-    public struct TileData
+    [Serializable]
+    public class TileData
     {
         /// <summary>
         /// The position of the Tile.
@@ -66,7 +69,9 @@ namespace RoguetyCraft.Map.Editor.Generic
             {
                 var roomObject = ScriptableObject.CreateInstance<Room>();
                 int localId = GetIDFromObject(tilemap.gameObject);
-                roomObject.SetRoom(tilemap.origin, tilemap.size, GetTiles(tilemap), localId);
+                var (tiles, roomSize) = tilemap.GetTilesAndSize();
+
+                roomObject.SetRoom(roomSize, tiles, localId);
 
                 AssetDatabase.CreateAsset(roomObject, path);
             }
@@ -114,7 +119,7 @@ namespace RoguetyCraft.Map.Editor.Generic
         /// </summary>
         /// <param name="tilemap">The Tilemap to process.</param>
         /// <returns>An array of TileData structs.</returns>
-        public static TileData[] GetTiles(this Tilemap tilemap)
+        public static (TileData[] tiles, Vector3Int size) GetTilesAndSize(this Tilemap tilemap)
         {
             List<TileData> tiles = new List<TileData>();
 
@@ -130,7 +135,42 @@ namespace RoguetyCraft.Map.Editor.Generic
                     }
                 }
             }
-            return tiles.ToArray();
+
+            Vector3Int offset = tiles[0].Pos;
+            foreach (var item in tiles)
+            {
+                item.Pos -= offset;
+            }
+
+            // Calculate room size
+            int minX = tiles.Min(tile => tile.Pos.x);
+            int maxX = tiles.Max(tile => tile.Pos.x);
+
+            int minY = tiles.Min(tile => tile.Pos.y);
+            int maxY = tiles.Max(tile => tile.Pos.y);
+
+            Vector3Int roomSize = new Vector3Int(maxX - minX + 1, maxY - minY + 1, 0);
+
+            return (tiles.ToArray(), roomSize);
+        }
+
+        public static RoomDirection GetOppositeDirection(RoomDirection direction)
+        {
+            switch (direction)
+            {
+                case RoomDirection.NULL:
+                    return RoomDirection.NULL;
+                case RoomDirection.UP:
+                    return RoomDirection.DOWN;
+                case RoomDirection.DOWN:
+                    return RoomDirection.UP;
+                case RoomDirection.LEFT:
+                    return RoomDirection.RIGHT;
+                case RoomDirection.RIGHT:
+                    return RoomDirection.LEFT;
+                default:
+                    return RoomDirection.NULL;
+            }
         }
 
         #endregion

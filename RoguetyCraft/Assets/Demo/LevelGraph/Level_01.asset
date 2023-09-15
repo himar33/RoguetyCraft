@@ -10,32 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9acd1770ab0c384d955ee07afc0a729, type: 3}
-  m_Name: Level1
+  m_Name: Level_01
   m_EditorClassIdentifier: 
-  FileName: Level1
+  FileName: Level_01
   Nodes:
   - NodeID: 0
     Type: 1
-    Position: {x: 487, y: 244}
+    Position: {x: 537, y: 376}
     InputNodesID: 
-    OutputNodesID: 0100000002000000
+    OutputNodesID: 01000000
   - NodeID: 1
-    Type: 3
-    Position: {x: 902, y: 143}
-    InputNodesID: 00000000
-    OutputNodesID: 
-  - NodeID: 2
     Type: 4
-    Position: {x: 902, y: 383}
+    Position: {x: 811, y: 376}
     InputNodesID: 00000000
+    OutputNodesID: 02000000
+  - NodeID: 2
+    Type: 0
+    Position: {x: 1081, y: 376}
+    InputNodesID: 01000000
     OutputNodesID: 03000000
   - NodeID: 3
     Type: 0
-    Position: {x: 1175, y: 383}
+    Position: {x: 1350, y: 376}
     InputNodesID: 02000000
     OutputNodesID: 04000000
   - NodeID: 4
     Type: 6
-    Position: {x: 1461, y: 383}
+    Position: {x: 1606, y: 376}
     InputNodesID: 03000000
     OutputNodesID: 

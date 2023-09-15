@@ -1,5 +1,6 @@
 using MyBox;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace RoguetyCraft.Map.Data
@@ -33,6 +34,11 @@ namespace RoguetyCraft.Map.Data
         {
             FileName = fileName;
             Nodes = new List<NodeData>();
+        }
+
+        public NodeData GetNodeByIndex(int nodeID)
+        {
+            return Nodes[nodeID];
         }
 
         #endregion
