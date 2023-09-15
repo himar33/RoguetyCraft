@@ -18,6 +18,8 @@ Developed by **Himar Bravo González** as a final degree work for the course **D
 
 **RoguetyCraft** is an immersive roguelike game crafted with Unity, offering players a unique blend of strategy, action, and exploration. Dive deep into procedurally generated dungeons, face menacing enemies, and collect rare items to enhance your journey. With its dynamic gameplay mechanics and captivating visuals, RoguetyCraft promises an unforgettable gaming experience.
 
+Artwork created by Luis Zuno [@ansimuz](https://twitter.com/ansimuz)
+
 | ![](Resources/gameplay.gif) | 
 |:--:| 
 | *Gameplay example* |
